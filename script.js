@@ -59,16 +59,15 @@ function hikingAPI() {
     }).then( function(response) {
       console.log(response);
 
-      var trailNames = [];
-      // Data from API
-        $(response.trails[i]).each(function() {
-            trailNames.
+    var trailNames = [];
+    // Data from API
+    for (var i=0; i < response.trails.length; i++) {
+        var name = response.trails[i].name;
+        trailNames.push(name);
+    } 
+    console.log(trailNames);
 
-        });
-
-      
-    
-    })
+    });
 }
 
 
