@@ -1,5 +1,6 @@
 // Testing AirVisual API & Hiking API
-// Documentation: https://api-docs.airvisual.com/?version=latest
+// AirVisual API: https://api-docs.airvisual.com/?version=latest
+// Hiking Project API: https://www.hikingproject.com/data
 
 // Global Variables
 var lon;
@@ -41,7 +42,7 @@ function weatherAPI() {
         // Conditions (sunny/cloudy/rainy/snowy)
     
 
-
+        // AJAX call for the hiking API
         hikingAPI();
     });
 
@@ -57,6 +58,15 @@ function hikingAPI() {
       method: "GET"
     }).then( function(response) {
       console.log(response);
+
+      var trailNames = [];
+      // Data from API
+        $(response.trails[i]).each(function() {
+            trailNames.
+
+        });
+
+      
     
     })
 }
