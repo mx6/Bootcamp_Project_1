@@ -6,30 +6,21 @@
 var lon;
 var lat;
 
-
-
 let city;
 var state = "Oregon";
 
-
-
-$(document).ready(function() {
-    // Retrieve the city input by the user
-    $("#startLocation").keypress(function(event){
-        // console.log(event.keyCode);
-        // Get the city the user input
-        city = $("#startLocation").val().trim();
-        if (event.keyCode === 13){
-            weatherAPI(city); // call weather function w/ city input
-            $("#startLocation").val('');
-        }
-        
-        
-    });
-    
-
+$(document).ready(function () {
+  // Retrieve the city input by the user
+  $("#startLocation").keypress(function (event) {
+    // console.log(event.keyCode);
+    // Get the city the user input
+    city = $("#startLocation").val().trim();
+    if (event.keyCode === 13) {
+      weatherAPI(city); // call weather function w/ city input
+      $("#startLocation").val("");
+    }
+  });
 });
-
 
 function weatherAPI(city) {
     var apiKey = "0146d325-a946-4208-8c5f-c9c2cb554ac6";
@@ -69,6 +60,7 @@ function weatherAPI(city) {
 
         // AJAX call for the hiking API
         hikingAPI(lat,lon);
+        maparea(lat, lon);
     });
 }
 
@@ -98,19 +90,18 @@ function hikingAPI(lat,lon) {
             $(".hikingList").append(newHike);
 
         } 
-    console.log(trailNames);
-
-    });
+      console.log(trailNames);
+     });
 }
 
-
-function maparea() {
+function maparea(lat, lon) {
+  console.log(lat, lon);
   mapboxgl.accessToken =
     "pk.eyJ1Ijoia3BlZ2VkZXIiLCJhIjoiY2tlNXk3ZHJzMTdodjJ1dWxlZ2VrNTA5MCJ9.aHGcdq3jxUrUvysKk66J3Q";
   var map = new mapboxgl.Map({
     container: "map",
-    style: "mapbox://styles/mapbox/streets-v11"
+    center: [lon, lat],
+    style: "mapbox://styles/mapbox/outdoors-v11",
+    zoom: 9
   });
 }
-
-maparea();
