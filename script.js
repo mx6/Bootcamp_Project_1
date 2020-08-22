@@ -7,8 +7,10 @@ var lon;
 var lat;
 
 
+
 let city;
 var state = "Oregon";
+
 
 
 $(document).ready(function() {
@@ -64,7 +66,19 @@ function weatherAPI(city) {
     });
 
 
-}
+
+    // Weather Data we want:
+    // Lat/lon coordinates
+    lon = response.data.location.coordinates[0];
+    lat = response.data.location.coordinates[1];
+    console.log("Lat: " + lat + " Lon: " + lon);
+
+    // Max/min temp in Celsius
+    var minTemp = response.data.current.weather.tp;
+    // var maxTemp =
+    console.log("Min Temp: " + minTemp);
+    // console.log("Max Temp: " + maxTemp);
+
 
 function hikingAPI(lat,lon) {
     const authKey = "200881533-cbba50330892ef7f2dd269f567c7d3dd"
@@ -87,8 +101,19 @@ function hikingAPI(lat,lon) {
     } 
     console.log(trailNames);
 
-    });
+    hikingAPI();
+  });
 }
 
 
 
+function maparea() {
+  mapboxgl.accessToken =
+    "pk.eyJ1Ijoia3BlZ2VkZXIiLCJhIjoiY2tlNXk3ZHJzMTdodjJ1dWxlZ2VrNTA5MCJ9.aHGcdq3jxUrUvysKk66J3Q";
+  var map = new mapboxgl.Map({
+    container: "map",
+    style: "mapbox://styles/mapbox/streets-v11"
+  });
+}
+
+maparea();
