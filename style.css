@@ -1,0 +1,49 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: "Roboto", sans-serif;
+}
+
+body {
+  background-image: url("map_bkgrnd_grey.gif");
+}
+
+/* div {
+    border: 1px solid red;
+} */
+
+.w3-input,
+.w3-border,
+.w3-round {
+  margin: 5px;
+}
+.w3-check {
+  margin: 5px;
+}
+#mySidebar {
+  padding: 10px;
+}
+
+#hikeButton {
+  margin-top: 20px;
+  position: absolute;
+  /* top: 50%; */
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  width: 75%;
+}
+
+#mapTitle {
+  color: white;
+  font-size: 36px;
+}

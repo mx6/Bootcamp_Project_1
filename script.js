@@ -1,5 +1,6 @@
 // Testing AirVisual API & Hiking API
-// Documentation: https://api-docs.airvisual.com/?version=latest
+// AirVisual API: https://api-docs.airvisual.com/?version=latest
+// Hiking Project API: https://www.hikingproject.com/data
 
 // Global Variables
 var lon;
@@ -69,3 +70,14 @@ function hikingAPI() {
     console.log(response);
   });
 }
+
+function maparea() {
+  mapboxgl.accessToken =
+    "pk.eyJ1Ijoia3BlZ2VkZXIiLCJhIjoiY2tlNXk3ZHJzMTdodjJ1dWxlZ2VrNTA5MCJ9.aHGcdq3jxUrUvysKk66J3Q";
+  var map = new mapboxgl.Map({
+    container: "map",
+    style: "mapbox://styles/mapbox/streets-v11"
+  });
+}
+
+maparea();
