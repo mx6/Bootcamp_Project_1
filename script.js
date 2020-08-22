@@ -61,31 +61,43 @@ function weatherAPI(city) {
         // Conditions (sunny/cloudy/rainy/snowy)
     
 
+        // Display weather data
+        $("#weatherData").empty();
+        $("#weatherData").append( $("<h2>").text(response.data.city + ", " + state) );
+        $("#weatherData").append( $("<div>").text("Temperature: " + minTemp).addClass("temp"));
+        $("#weatherData").append( $("<div>").text("Humidity: " + humidity).addClass("humidity"));
+
         // AJAX call for the hiking API
         hikingAPI(lat,lon);
     });
-
+}
 
 
 function hikingAPI(lat,lon) {
-    const authKey = "200881533-cbba50330892ef7f2dd269f567c7d3dd"
+    const authKey = "200881533-cbba50330892ef7f2dd269f567c7d3dd";
     let queryURL = "https://www.hikingproject.com/data/get-trails?lat=" + lat + "&lon=" + lon + "&key=" + authKey;
     
     $.ajax( {
       url: queryURL,
       method: "GET"
     }).then( function(response) {
-      console.log(response);
+        console.log(response);
 
-    var trailNames = [];
-    // Data from API
-    for (var i=0; i < response.trails.length; i++) {
-        var name = response.trails[i].name;
-        trailNames.push(name);
+        var trailNames = [];
+        $(".hikingList").empty(); // clear screen for new info
+        // Data from API
+        for (var i=0; i < response.trails.length; i++) {
+            var name = response.trails[i].name;
+            trailNames.push(name);
 
-        // Display list of 10 trails nearby
-        
-    } 
+            // Display list of 10 trails nearby
+            var newHike = $("<li>").text(trailNames[i]);
+            
+
+            // Append 
+            $(".hikingList").append(newHike);
+
+        } 
     console.log(trailNames);
 
     });
