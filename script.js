@@ -7,14 +7,31 @@ var lon;
 var lat;
 
 
-var cityInput = "Portland";
+let city;
 var state = "Oregon";
 
-weatherAPI(); // call functions
 
-function weatherAPI() {
+$(document).ready(function() {
+    // Retrieve the city input by the user
+    $("#startLocation").keypress(function(event){
+        // console.log(event.keyCode);
+        // Get the city the user input
+        city = $("#startLocation").val().trim();
+        if (event.keyCode === 13){
+            weatherAPI(city); // call weather function w/ city input
+            $("#startLocation").val('');
+        }
+        
+        
+    });
+    
+
+});
+
+
+function weatherAPI(city) {
     var apiKey = "0146d325-a946-4208-8c5f-c9c2cb554ac6";
-    var queryURL = "http://api.airvisual.com/v2/city?city=" + cityInput + "&state=" + state + "&country=USA&key=" + apiKey;
+    var queryURL = "http://api.airvisual.com/v2/city?city=" + city + "&state=" + state + "&country=USA&key=" + apiKey;
     
     
     $.ajax({
@@ -43,13 +60,13 @@ function weatherAPI() {
     
 
         // AJAX call for the hiking API
-        hikingAPI();
+        hikingAPI(lat,lon);
     });
 
 
 }
 
-function hikingAPI() {
+function hikingAPI(lat,lon) {
     const authKey = "200881533-cbba50330892ef7f2dd269f567c7d3dd"
     let queryURL = "https://www.hikingproject.com/data/get-trails?lat=" + lat + "&lon=" + lon + "&key=" + authKey;
     
@@ -64,6 +81,9 @@ function hikingAPI() {
     for (var i=0; i < response.trails.length; i++) {
         var name = response.trails[i].name;
         trailNames.push(name);
+
+        // Display list of 10 trails nearby
+        $()
     } 
     console.log(trailNames);
 
