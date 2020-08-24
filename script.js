@@ -50,15 +50,14 @@ function weatherAPI(city) {
       humidity: response.data.current.weather.hu, // %
       windSpeed: response.data.current.weather.ws, // m/s
       pollution: response.data.current.pollution.mainus,
-      weatherIcon: response.data.current.weather.ic,
+      weatherIcon: response.data.current.weather.ic
     };
-    
 
     // Display weather data
     $("#weatherData").empty();
     $("#weatherData").append($("<h2>").text(response.data.city + ", " + state));
     // $("#weatherData").append(
-    //   $("<img>").attr("src", "icon url goes here...") 
+    //   $("<img>").attr("src", "icon url goes here...")
     // );
     $("#weatherData").append(
       $("<p>")
@@ -71,12 +70,11 @@ function weatherAPI(city) {
         .addClass("humidity")
     );
     $("#weatherData").append(
-      $("<p>").text("Wind Speed: " + weatherInfo.windSpeed + " m/s") 
+      $("<p>").text("Wind Speed: " + weatherInfo.windSpeed + " m/s")
     );
     $("#weatherData").append(
-      $("<p>").text("Pollution Level: " + weatherInfo.pollution) 
+      $("<p>").text("Pollution Level: " + weatherInfo.pollution)
     );
-
 
     // AJAX call for the hiking API
     hikingAPI(lat, lon);
@@ -117,8 +115,8 @@ function hikingAPI(
   }).then(function (response) {
     console.log(response);
 
-    // var trailNames = [];
     $(".hikingList").empty(); // clear screen for new info
+    trails = []; // clear trail list
     // Data from API
     for (var i = 0; i < response.trails.length; i++) {
       // Trail info objects
@@ -132,17 +130,17 @@ function hikingAPI(
         difficulty: response.trails[i].difficulty
       };
 
-      // var name = response.trails[i].name;
-      // trailNames.push(name);
-
       // Display list of 10 trails nearby w/ info
-      var newHike = $("<li>").text(trailInfo.name);
-        newHike.css("border",  "1px solid black");
+      var newHike = $("<li>")
+        .attr("id", "trail-number-" + i)
+        .text(trailInfo.name);
+      newHike.css("border", "1px solid black");
       var hikeSummary = $("<p>").text(trailInfo.summary);
       var hikeLength = $("<p>").text("Length: " + trailInfo.length + " miles");
-      var hikeElevation = $("<p>").text("Elevation Gain: " + trailInfo.elevation + " feet ???");
+      var hikeElevation = $("<p>").text(
+        "Elevation Gain: " + trailInfo.elevation + " feet ???"
+      );
       var hikeDifficulty = $("<p>").text("Difficulty: " + trailInfo.difficulty);
-
 
       // Append
       $("#hikingList").append(newHike);
@@ -170,11 +168,15 @@ function maparea(lat, lon, trails) {
   for (let i = 0; i < trails.length; i++) {
     let lng = trails[i].longitude;
     let lat = trails[i].latitude;
+    let trailLink =
+      '<a href="#trail-number-' + i + '">' + trails[i].name + "<a>";
+
+    let trailPopup = new mapboxgl.Popup().setHTML(trailLink);
 
     // Create markers with popup
     var marker = new mapboxgl.Marker()
       .setLngLat([lng, lat])
-      .setPopup(new mapboxgl.Popup().setHTML(trails[i].name))
+      .setPopup(trailPopup)
       .addTo(map);
   }
 }
