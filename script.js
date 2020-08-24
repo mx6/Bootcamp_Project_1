@@ -45,31 +45,38 @@ function weatherAPI(city) {
     lat = response.data.location.coordinates[1];
     console.log("Lat: " + lat + " Lon: " + lon);
 
-    // Max/min temp in Celsius
-    var minTemp = response.data.current.weather.tp;
-    // var maxTemp =
-    console.log("Min Temp: " + minTemp);
-    // console.log("Max Temp: " + maxTemp);
-
-    // Humidity
-    var humidity = response.data.current.weather.hu;
-    console.log(humidity + "%");
-
-    // Conditions (sunny/cloudy/rainy/snowy)
+    let weatherInfo = {
+      minTemp: response.data.current.weather.tp, // C
+      humidity: response.data.current.weather.hu, // %
+      windSpeed: response.data.current.weather.ws, // m/s
+      pollution: response.data.current.pollution.mainus,
+      weatherIcon: response.data.current.weather.ic,
+    };
+    
 
     // Display weather data
     $("#weatherData").empty();
     $("#weatherData").append($("<h2>").text(response.data.city + ", " + state));
+    // $("#weatherData").append(
+    //   $("<img>").attr("src", "icon url goes here...") 
+    // );
     $("#weatherData").append(
-      $("<div>")
-        .text("Temperature: " + minTemp)
+      $("<p>")
+        .text("Temperature: " + weatherInfo.minTemp + " C")
         .addClass("temp")
     );
     $("#weatherData").append(
-      $("<div>")
-        .text("Humidity: " + humidity)
+      $("<p>")
+        .text("Humidity: " + weatherInfo.humidity + "%")
         .addClass("humidity")
     );
+    $("#weatherData").append(
+      $("<p>").text("Wind Speed: " + weatherInfo.windSpeed + " m/s") 
+    );
+    $("#weatherData").append(
+      $("<p>").text("Pollution Level: " + weatherInfo.pollution) 
+    );
+
 
     // AJAX call for the hiking API
     hikingAPI(lat, lon);
@@ -118,17 +125,32 @@ function hikingAPI(
       let trailInfo = {
         name: response.trails[i].name,
         latitude: response.trails[i].latitude,
-        longitude: response.trails[i].longitude
+        longitude: response.trails[i].longitude,
+        summary: response.trails[i].summary,
+        length: response.trails[i].length,
+        elevation: response.trails[i].ascent,
+        difficulty: response.trails[i].difficulty
       };
 
       // var name = response.trails[i].name;
       // trailNames.push(name);
 
-      // Display list of 10 trails nearby
+      // Display list of 10 trails nearby w/ info
       var newHike = $("<li>").text(trailInfo.name);
+        newHike.css("border",  "1px solid black");
+      var hikeSummary = $("<p>").text(trailInfo.summary);
+      var hikeLength = $("<p>").text("Length: " + trailInfo.length + " miles");
+      var hikeElevation = $("<p>").text("Elevation Gain: " + trailInfo.elevation + " feet ???");
+      var hikeDifficulty = $("<p>").text("Difficulty: " + trailInfo.difficulty);
+
 
       // Append
-      $(".hikingList").append(newHike);
+      $("#hikingList").append(newHike);
+      newHike.append(hikeSummary);
+      newHike.append(hikeLength);
+      newHike.append(hikeElevation);
+      newHike.append(hikeDifficulty);
+
       trails.push(trailInfo);
     }
     // console.log(trailNames);
