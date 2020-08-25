@@ -7,19 +7,41 @@
 var lon;
 var lat;
 let trails = [];
-let city;
 var state = "Oregon";
 
 $(document).ready(function () {
   // Retrieve the city input by the user
-  $("#startLocation").keypress(function (event) {
+  $("#hikeButton").on("click", function(event) {
     // console.log(event.keyCode);
     // Get the city the user input
-    city = $("#startLocation").val().trim();
-    if (event.keyCode === 13) {
-      weatherAPI(city); // call weather function w/ city input
-      $("#startLocation").val("");
-    }
+    // city = $("#startLocation").val().trim();
+    // if (event.keyCode === 13) {
+    //   weatherAPI(city); // call weather function w/ city input
+    //   $("#startLocation").val("");
+    // }
+
+    // Store all input data in an object:
+    let userInputs = {
+      city: $("#startLocation").val().trim(), 
+      minDistance: $("#hikeMin").val().trim(),
+      maxDistance: $("#hikeMax").val().trim(),
+      minElevation: $("#elevationMin").val().trim(),
+      maxElevation: $("#elevationMax").val().trim(),
+      // difficulty: $("#diffifulty"). ,
+      minTemp: $("#tempMin").val().trim(),
+      maxTemp: $("#tempMax").val().trim(),
+      // weatherConditions: 
+    };
+    
+    // call functions based on user inputs
+    weatherAPI(userInputs.city); 
+
+    // clear all input fields
+    $(".w3-input").val("");
+    $(".w3-check").val("");
+    $(".w3-select").val("");
+
+
   });
 });
 
