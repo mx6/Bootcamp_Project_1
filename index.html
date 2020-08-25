@@ -42,7 +42,7 @@
 
     <!-- Sidebar/menu -->
     <nav
-      class="w3-sidebar w3-collapse w3-white w3-animate-left"
+      class="w3-sidebar w3-collapse w3-light-grey w3-animate-left"
       style="z-index: 3; width: 300px;"
       id="mySidebar"
     >
@@ -74,6 +74,7 @@
         />
 
         <select class="w3-select w3-border" id="state">
+          <option value="" disabled selected hidden>Select Your State</option>
           <option value="Alabama">Alabama</option>
           <option value="Alaska">Alaska</option>
           <option value="Arizona">Arizona</option>
@@ -198,7 +199,7 @@
           placeholder="Max"
         />
 
-        <p>
+        <p class="checkbox">
           <input
             class="w3-check"
             type="checkbox"
@@ -206,7 +207,7 @@
             data-type="sunnyBox"
           /><label>Sunny</label>
         </p>
-        <p>
+        <p class="checkbox">
           <input
             class="w3-check"
             type="checkbox"
@@ -214,7 +215,7 @@
             data-type="cloudyBox"
           /><label>Cloudy</label>
         </p>
-        <p>
+        <p class="checkbox">
           <input
             class="w3-check"
             type="checkbox"
@@ -222,7 +223,7 @@
             data-type="rainyBox"
           /><label>Rainy</label>
         </p>
-        <p>
+        <p class="checkbox">
           <input
             class="w3-check"
             type="checkbox"
@@ -233,7 +234,7 @@
         <br />
         <p>
           <button
-            class="w3-button w3-blue w3-round-large"
+            class="w3-button w3-blue-grey w3-hover-blue w3-round-large"
             class="center"
             id="hikeButton"
             data-type="hikeButton"
@@ -275,7 +276,8 @@
       </header>
 
       <div class="w3-container" id="mapData" data-type="mapData">
-        MAP DATA GOES HERE
+        <!-- MAP DATA GOES HERE marker removed; map data is populating correctly -->
+        Please choose from the options in the Dashboard on the left and get started on your next adventure!
       </div>
 
       <!-- Map -->
@@ -293,7 +295,7 @@
 
       <!-- Footer -->
 
-      <footer class="w3-container w3-padding-16 w3-light-grey">
+      <!-- <footer class="w3-container w3-padding-16 w3-light-grey">
         <h4>FOOTER</h4>
         <p>
           Powered by
@@ -301,7 +303,7 @@
             >w3.css</a
           >
         </p>
-      </footer>
+      </footer> -->
 
       <!-- End page content -->
     </div>
