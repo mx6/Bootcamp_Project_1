@@ -11,7 +11,7 @@ var state = "Oregon";
 
 $(document).ready(function () {
   // Retrieve the city input by the user
-  $("#hikeButton").on("click", function(event) {
+  $("#hikeButton").on("click", function (event) {
     // console.log(event.keyCode);
     // Get the city the user input
     // city = $("#startLocation").val().trim();
@@ -22,30 +22,29 @@ $(document).ready(function () {
 
     // Store all input data in an object:
     let userInputs = {
-      city: $("#startLocation").val().trim(), 
+      city: $("#startLocation").val().trim(),
+      state: $("#state").val(),
       minDistance: $("#hikeMin").val().trim(),
       maxDistance: $("#hikeMax").val().trim(),
       minElevation: $("#elevationMin").val().trim(),
       maxElevation: $("#elevationMax").val().trim(),
-      // difficulty: $("#diffifulty"). ,
+      difficulty: $("#difficulty").val(),
       minTemp: $("#tempMin").val().trim(),
-      maxTemp: $("#tempMax").val().trim(),
-      // weatherConditions: 
+      maxTemp: $("#tempMax").val().trim()
+      // weatherConditions:
     };
-    
+    console.log(userInputs.state);
     // call functions based on user inputs
-    weatherAPI(userInputs.city); 
+    weatherAPI(userInputs.city, userInputs.state);
 
     // clear all input fields
     $(".w3-input").val("");
     $(".w3-check").val("");
     $(".w3-select").val("");
-
-
   });
 });
 
-function weatherAPI(city) {
+function weatherAPI(city, state) {
   var apiKey = "0146d325-a946-4208-8c5f-c9c2cb554ac6";
   var queryURL =
     "http://api.airvisual.com/v2/city?city=" +
