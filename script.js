@@ -7,7 +7,7 @@
 var lon;
 var lat;
 let trails = [];
-var state = "Oregon";
+// let state = "Oregon";
 
 $(document).ready(function () {
   // Retrieve the city input by the user
@@ -23,18 +23,21 @@ $(document).ready(function () {
     // Store all input data in an object:
     let userInputs = {
       city: $("#startLocation").val().trim(), 
+      state: $("#state").val(),
       minDistance: $("#hikeMin").val().trim(),
       maxDistance: $("#hikeMax").val().trim(),
       minElevation: $("#elevationMin").val().trim(),
       maxElevation: $("#elevationMax").val().trim(),
-      // difficulty: $("#diffifulty"). ,
+      difficulty: $("#diffifulty").val(),
       minTemp: $("#tempMin").val().trim(),
       maxTemp: $("#tempMax").val().trim(),
-      // weatherConditions: 
+      // weatherConditions: $().val(),
     };
+
+    // console.log(userInputs.state);
     
     // call functions based on user inputs
-    weatherAPI(userInputs.city); 
+    weatherAPI(userInputs.city, userInputs.state); 
 
     // clear all input fields
     $(".w3-input").val("");
@@ -45,7 +48,7 @@ $(document).ready(function () {
   });
 });
 
-function weatherAPI(city) {
+function weatherAPI(city, state) {
   var apiKey = "0146d325-a946-4208-8c5f-c9c2cb554ac6";
   var queryURL =
     "http://api.airvisual.com/v2/city?city=" +
@@ -65,7 +68,6 @@ function weatherAPI(city) {
     // Lat/lon coordinates
     lon = response.data.location.coordinates[0];
     lat = response.data.location.coordinates[1];
-    console.log("Lat: " + lat + " Lon: " + lon);
 
     let weatherInfo = {
       minTemp: response.data.current.weather.tp, // C
@@ -74,6 +76,7 @@ function weatherAPI(city) {
       pollution: response.data.current.pollution.mainus,
       weatherIcon: response.data.current.weather.ic
     };
+
 
     // Display weather data
     $("#weatherData").empty();
@@ -97,6 +100,72 @@ function weatherAPI(city) {
     $("#weatherData").append(
       $("<p>").text("Pollution Level: " + weatherInfo.pollution)
     );
+
+    // weather conditions based on icon:
+    console.log(weatherInfo.weatherIcon);
+    if (weatherInfo.weatherIcon === "01d") {
+      $("#weatherData").append(
+        $("<p>").text("Weather Conditions: Clear Skies (day)")
+      );
+    }
+    else if (weatherInfo.weatherIcon === "01n"){
+      $("#weatherData").append(
+        $("<p>").text("Weather Conditions: Clear Skies (night)")
+      );
+    }
+    else if (weatherInfo.weatherIcon === "02d"){
+      $("#weatherData").append(
+        $("<p>").text("Weather Conditions: Few Clouds (day)")
+      );
+    }
+    else if (weatherInfo.weatherIcon === "02n"){
+      $("#weatherData").append(
+        $("<p>").text("Weather Conditions: Few Clouds (night)")
+      );
+    }
+    else if (weatherInfo.weatherIcon === "03d"){
+      $("#weatherData").append(
+        $("<p>").text("Weather Conditions: Scattered Clouds")
+      );
+    }
+    else if (weatherInfo.weatherIcon === "04d"){
+      $("#weatherData").append(
+        $("<p>").text("Weather Conditions: Broken Clouds")
+      );
+    }
+    else if (weatherInfo.weatherIcon === "09d"){
+      $("#weatherData").append(
+        $("<p>").text("Weather Conditions: Rain Showers")
+      );
+    }
+    else if (weatherInfo.weatherIcon === "10d"){
+      $("#weatherData").append(
+        $("<p>").text("Weather Conditions: Rain (day)")
+      );
+    }
+    else if (weatherInfo.weatherIcon === "10n"){
+      $("#weatherData").append(
+        $("<p>").text("Weather Conditions: Rain (night)")
+      );
+    }
+    else if (weatherInfo.weatherIcon === "11d"){
+      $("#weatherData").append(
+        $("<p>").text("Weather Conditions: Thunderstorms")
+      );
+    }
+    else if (weatherInfo.weatherIcon === "13d"){
+      $("#weatherData").append(
+        $("<p>").text("Weather Conditions: Snow")
+      );
+    }
+    else if (weatherInfo.weatherIcon === "50d"){
+      $("#weatherData").append(
+        $("<p>").text("Weather Conditions: Mist")
+      );
+    }
+    else {
+
+    }
 
     // AJAX call for the hiking API
     hikingAPI(lat, lon);
@@ -135,7 +204,7 @@ function hikingAPI(
     url: queryURL,
     method: "GET"
   }).then(function (response) {
-    console.log(response);
+    // console.log(response);
 
     $(".hikingList").empty(); // clear screen for new info
     trails = []; // clear trail list
@@ -161,7 +230,7 @@ function hikingAPI(
       var hikeSummary = $("<p>").text(trailInfo.summary);
       var hikeLength = $("<p>").text("Length: " + trailInfo.length + " miles");
       var hikeElevation = $("<p>").text(
-        "Elevation Gain: " + trailInfo.elevation + " feet ???"
+        "Elevation Gain: " + trailInfo.elevation + " feet"
       );
       var hikeDifficulty = $("<p>").text("Difficulty: " + trailInfo.difficulty);
       let hikePic = $("<img>").attr({
@@ -211,3 +280,4 @@ function maparea(lat, lon, trails) {
       .addTo(map);
   }
 }
+
