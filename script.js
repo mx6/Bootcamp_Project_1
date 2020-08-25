@@ -11,7 +11,7 @@ let trails = [];
 
 $(document).ready(function () {
   // Retrieve the city input by the user
-  $("#hikeButton").on("click", function(event) {
+  $("#hikeButton").on("click", function (event) {
     // console.log(event.keyCode);
     // Get the city the user input
     // city = $("#startLocation").val().trim();
@@ -22,7 +22,7 @@ $(document).ready(function () {
 
     // Store all input data in an object:
     let userInputs = {
-      city: $("#startLocation").val().trim(), 
+      city: $("#startLocation").val().trim(),
       state: $("#state").val(),
       minDistance: $("#hikeMin").val().trim(),
       maxDistance: $("#hikeMax").val().trim(),
@@ -30,21 +30,19 @@ $(document).ready(function () {
       maxElevation: $("#elevationMax").val().trim(),
       difficulty: $("#diffifulty").val(),
       minTemp: $("#tempMin").val().trim(),
-      maxTemp: $("#tempMax").val().trim(),
+      maxTemp: $("#tempMax").val().trim()
       // weatherConditions: $().val(),
     };
 
     // console.log(userInputs.state);
-    
+
     // call functions based on user inputs
-    weatherAPI(userInputs.city, userInputs.state); 
+    weatherAPI(userInputs.city, userInputs.state);
 
     // clear all input fields
     $(".w3-input").val("");
     $(".w3-check").val("");
     $(".w3-select").val("");
-
-
   });
 });
 
@@ -77,7 +75,6 @@ function weatherAPI(city, state) {
       weatherIcon: response.data.current.weather.ic
     };
 
-
     // Display weather data
     $("#weatherData").empty();
     $("#weatherData").append($("<h2>").text(response.data.city + ", " + state));
@@ -107,64 +104,45 @@ function weatherAPI(city, state) {
       $("#weatherData").append(
         $("<p>").text("Weather Conditions: Clear Skies (day)")
       );
-    }
-    else if (weatherInfo.weatherIcon === "01n"){
+    } else if (weatherInfo.weatherIcon === "01n") {
       $("#weatherData").append(
         $("<p>").text("Weather Conditions: Clear Skies (night)")
       );
-    }
-    else if (weatherInfo.weatherIcon === "02d"){
+    } else if (weatherInfo.weatherIcon === "02d") {
       $("#weatherData").append(
         $("<p>").text("Weather Conditions: Few Clouds (day)")
       );
-    }
-    else if (weatherInfo.weatherIcon === "02n"){
+    } else if (weatherInfo.weatherIcon === "02n") {
       $("#weatherData").append(
         $("<p>").text("Weather Conditions: Few Clouds (night)")
       );
-    }
-    else if (weatherInfo.weatherIcon === "03d"){
+    } else if (weatherInfo.weatherIcon === "03d") {
       $("#weatherData").append(
         $("<p>").text("Weather Conditions: Scattered Clouds")
       );
-    }
-    else if (weatherInfo.weatherIcon === "04d"){
+    } else if (weatherInfo.weatherIcon === "04d") {
       $("#weatherData").append(
         $("<p>").text("Weather Conditions: Broken Clouds")
       );
-    }
-    else if (weatherInfo.weatherIcon === "09d"){
+    } else if (weatherInfo.weatherIcon === "09d") {
       $("#weatherData").append(
         $("<p>").text("Weather Conditions: Rain Showers")
       );
-    }
-    else if (weatherInfo.weatherIcon === "10d"){
-      $("#weatherData").append(
-        $("<p>").text("Weather Conditions: Rain (day)")
-      );
-    }
-    else if (weatherInfo.weatherIcon === "10n"){
+    } else if (weatherInfo.weatherIcon === "10d") {
+      $("#weatherData").append($("<p>").text("Weather Conditions: Rain (day)"));
+    } else if (weatherInfo.weatherIcon === "10n") {
       $("#weatherData").append(
         $("<p>").text("Weather Conditions: Rain (night)")
       );
-    }
-    else if (weatherInfo.weatherIcon === "11d"){
+    } else if (weatherInfo.weatherIcon === "11d") {
       $("#weatherData").append(
         $("<p>").text("Weather Conditions: Thunderstorms")
       );
-    }
-    else if (weatherInfo.weatherIcon === "13d"){
-      $("#weatherData").append(
-        $("<p>").text("Weather Conditions: Snow")
-      );
-    }
-    else if (weatherInfo.weatherIcon === "50d"){
-      $("#weatherData").append(
-        $("<p>").text("Weather Conditions: Mist")
-      );
-    }
-    else {
-
+    } else if (weatherInfo.weatherIcon === "13d") {
+      $("#weatherData").append($("<p>").text("Weather Conditions: Snow"));
+    } else if (weatherInfo.weatherIcon === "50d") {
+      $("#weatherData").append($("<p>").text("Weather Conditions: Mist"));
+    } else {
     }
 
     // AJAX call for the hiking API
@@ -280,4 +258,3 @@ function maparea(lat, lon, trails) {
       .addTo(map);
   }
 }
-
