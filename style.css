@@ -47,3 +47,13 @@ body {
   color: white;
   font-size: 36px;
 }
+
+#map {
+  width: 600px;
+  height: 450px;
+}
+
+#trail-picture {
+  width: 100px;
+  height: 100px;
+}

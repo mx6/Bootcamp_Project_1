@@ -127,7 +127,8 @@ function hikingAPI(
         summary: response.trails[i].summary,
         length: response.trails[i].length,
         elevation: response.trails[i].ascent,
-        difficulty: response.trails[i].difficulty
+        difficulty: response.trails[i].difficulty,
+        picture: response.trails[i].imgSqSmall
       };
 
       // Display list of 10 trails nearby w/ info
@@ -141,17 +142,23 @@ function hikingAPI(
         "Elevation Gain: " + trailInfo.elevation + " feet ???"
       );
       var hikeDifficulty = $("<p>").text("Difficulty: " + trailInfo.difficulty);
+      let hikePic = $("<img>").attr({
+        src: trailInfo.picture,
+        id: "trail-picture"
+      });
 
       // Append
       $("#hikingList").append(newHike);
-      newHike.append(hikeSummary);
-      newHike.append(hikeLength);
-      newHike.append(hikeElevation);
-      newHike.append(hikeDifficulty);
+      newHike.append(
+        hikeSummary,
+        hikeLength,
+        hikeElevation,
+        hikeDifficulty,
+        hikePic
+      );
 
       trails.push(trailInfo);
     }
-    // console.log(trailNames);
     maparea(lat, lon, trails);
   });
 }
@@ -165,6 +172,8 @@ function maparea(lat, lon, trails) {
     style: "mapbox://styles/mapbox/outdoors-v11",
     zoom: 8
   });
+
+  // Add markers
   for (let i = 0; i < trails.length; i++) {
     let lng = trails[i].longitude;
     let lat = trails[i].latitude;
