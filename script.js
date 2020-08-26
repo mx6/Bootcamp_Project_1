@@ -7,6 +7,8 @@
 var lon;
 var lat;
 let trails = [];
+let userInputs;
+let weatherInfo;
 // let state = "Oregon";
 
 $(document).ready(function () {
@@ -21,7 +23,7 @@ $(document).ready(function () {
     // }
 
     // Store all input data in an object:
-    let userInputs = {
+    userInputs = {
       city: $("#startLocation").val().trim(),
       state: $("#state").val(),
       minDistance: $("#hikeMin").val().trim(),
@@ -34,7 +36,13 @@ $(document).ready(function () {
       // weatherConditions: $().val(),
     };
 
-    // console.log(userInputs.state);
+    // Checking if a city and state were entered
+    if (userInputs.city == "") {
+      alert("Please enter a city");
+    }
+    if (userInputs.state == null) {
+      alert("Please select a state");
+    }
 
     // call functions based on user inputs
     weatherAPI(userInputs.city, userInputs.state);
@@ -67,7 +75,7 @@ function weatherAPI(city, state) {
     lon = response.data.location.coordinates[0];
     lat = response.data.location.coordinates[1];
 
-    let weatherInfo = {
+    weatherInfo = {
       minTemp: response.data.current.weather.tp, // C
       humidity: response.data.current.weather.hu, // %
       windSpeed: response.data.current.weather.ws, // m/s
@@ -184,7 +192,7 @@ function hikingAPI(
   }).then(function (response) {
     // console.log(response);
 
-    $(".hikingList").empty(); // clear screen for new info
+    $("#hikingList").empty(); // clear screen for new info
     trails = []; // clear trail list
     // Data from API
     for (var i = 0; i < response.trails.length; i++) {
@@ -218,16 +226,15 @@ function hikingAPI(
 
       // Append
       $("#hikingList").append(newHike);
-      newHike.append(
-        hikeSummary,
-        hikeLength,
-        hikeElevation,
-        hikeDifficulty,
-        hikePic
-      );
+      newHike.append(hikeSummary, hikeLength, hikeElevation, hikeDifficulty);
+
+      if (trailInfo.picture != "") {
+        newHike.append(hikePic);
+      }
 
       trails.push(trailInfo);
     }
+    sortHikes(trails, userInputs, weatherInfo);
     maparea(lat, lon, trails);
   });
 }
@@ -257,4 +264,9 @@ function maparea(lat, lon, trails) {
       .setPopup(trailPopup)
       .addTo(map);
   }
+}
+
+// Sort output based on user input
+function sortHikes(trails, user, weather) {
+  console.log(trails, user, weather);
 }
