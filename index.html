@@ -170,24 +170,49 @@
           id="difficulty"
           data-type="difficulty"
         >
-          <option value="" selected disabled>Difficulty</option>
-          <option value="1" id="difficultyEasy" data-type="difficultyEasy">
-            Easy
+        <option value="" disabled selected hidden>Difficulty</option>
+
+          <option value="1" 
+          id="difficultyGreen" 
+          data-type="difficultyGreen">
+            Green
           </option>
+
           <option
             value="2"
-            id="difficultyModerate"
-            data-type="difficultyModerate"
-          >
-            Moderate
+            id="difficultyGreenBlue"
+            data-type="difficultyGreenBlue">
+            Green Blue
           </option>
+
           <option
             value="3"
-            id="difficultyChallenging"
-            data-type="difficultyChallenging"
-          >
-            Challenging
+            id="difficultyBlue"
+            data-type="difficultyBlue">
+            Blue
           </option>
+
+          <option value="4" 
+          id="difficultyBlueBlack" 
+          data-type="difficultyBlueBlack">
+            Blue Black
+          </option>
+
+          <option
+            value="5"
+            id="difficultyBlack"
+            data-type="difficultyBlack">
+            Black
+          </option>
+
+          <option
+            value="6"
+            id="difficultyDoubleBlack"
+            data-type="difficultyDoubleBlack">
+            Double Black
+          </option>
+
+
         </select>
 
         <h5>Temperature</h5>
@@ -296,7 +321,7 @@
       </div>
 
       <!-- Map -->
-      <div id="map"></div>
+      <div id="map" class="w3-image"></div>
 
       <!-- Weather Information Here -->
       <div id="weatherData"></div>
