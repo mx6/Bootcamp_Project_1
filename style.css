@@ -17,6 +17,10 @@ body {
   background-image: url("map_bkgrnd_grey.gif");
 }
 
+p {
+  color: white;
+}
+
 /* div {
     border: 1px solid red;
 } */
@@ -26,9 +30,21 @@ body {
 .w3-round {
   margin: 5px;
 }
+
+.w3-main {
+ padding-left: 30px;
+ padding-bottom: 50px;
+}
+
+
 .w3-check {
   margin: 5px;
 }
+
+.checkbox {
+  color: black;
+}
+
 #mySidebar {
   padding: 10px;
 }
@@ -49,7 +65,7 @@ body {
 }
 
 #map {
-  width: 600px;
+  width: 800px;
   height: 450px;
 }
 

@@ -7,11 +7,13 @@
 var lon;
 var lat;
 let trails = [];
+let userInputs;
+let weatherInfo;
 // let state = "Oregon";
 
 $(document).ready(function () {
   // Retrieve the city input by the user
-  $("#hikeButton").on("click", function(event) {
+  $("#hikeButton").on("click", function (event) {
     // console.log(event.keyCode);
     // Get the city the user input
     // city = $("#startLocation").val().trim();
@@ -21,8 +23,8 @@ $(document).ready(function () {
     // }
 
     // Store all input data in an object:
-    let userInputs = {
-      city: $("#startLocation").val().trim(), 
+    userInputs = {
+      city: $("#startLocation").val().trim(),
       state: $("#state").val(),
       minDistance: $("#hikeMin").val().trim(),
       maxDistance: $("#hikeMax").val().trim(),
@@ -30,21 +32,25 @@ $(document).ready(function () {
       maxElevation: $("#elevationMax").val().trim(),
       difficulty: $("#diffifulty").val(),
       minTemp: $("#tempMin").val().trim(),
-      maxTemp: $("#tempMax").val().trim(),
+      maxTemp: $("#tempMax").val().trim()
       // weatherConditions: $().val(),
     };
 
-    // console.log(userInputs.state);
-    
+    // Checking if a city and state were entered
+    if (userInputs.city == "") {
+      alert("Please enter a city");
+    }
+    if (userInputs.state == null) {
+      alert("Please select a state");
+    }
+
     // call functions based on user inputs
-    weatherAPI(userInputs.city, userInputs.state); 
+    weatherAPI(userInputs.city, userInputs.state);
 
     // clear all input fields
     $(".w3-input").val("");
     $(".w3-check").val("");
     $(".w3-select").val("");
-
-
   });
 });
 
@@ -69,14 +75,13 @@ function weatherAPI(city, state) {
     lon = response.data.location.coordinates[0];
     lat = response.data.location.coordinates[1];
 
-    let weatherInfo = {
+    weatherInfo = {
       minTemp: response.data.current.weather.tp, // C
       humidity: response.data.current.weather.hu, // %
       windSpeed: response.data.current.weather.ws, // m/s
       pollution: response.data.current.pollution.mainus,
       weatherIcon: response.data.current.weather.ic
     };
-
 
     // Display weather data
     $("#weatherData").empty();
@@ -107,64 +112,45 @@ function weatherAPI(city, state) {
       $("#weatherData").append(
         $("<p>").text("Weather Conditions: Clear Skies (day)")
       );
-    }
-    else if (weatherInfo.weatherIcon === "01n"){
+    } else if (weatherInfo.weatherIcon === "01n") {
       $("#weatherData").append(
         $("<p>").text("Weather Conditions: Clear Skies (night)")
       );
-    }
-    else if (weatherInfo.weatherIcon === "02d"){
+    } else if (weatherInfo.weatherIcon === "02d") {
       $("#weatherData").append(
         $("<p>").text("Weather Conditions: Few Clouds (day)")
       );
-    }
-    else if (weatherInfo.weatherIcon === "02n"){
+    } else if (weatherInfo.weatherIcon === "02n") {
       $("#weatherData").append(
         $("<p>").text("Weather Conditions: Few Clouds (night)")
       );
-    }
-    else if (weatherInfo.weatherIcon === "03d"){
+    } else if (weatherInfo.weatherIcon === "03d") {
       $("#weatherData").append(
         $("<p>").text("Weather Conditions: Scattered Clouds")
       );
-    }
-    else if (weatherInfo.weatherIcon === "04d"){
+    } else if (weatherInfo.weatherIcon === "04d") {
       $("#weatherData").append(
         $("<p>").text("Weather Conditions: Broken Clouds")
       );
-    }
-    else if (weatherInfo.weatherIcon === "09d"){
+    } else if (weatherInfo.weatherIcon === "09d") {
       $("#weatherData").append(
         $("<p>").text("Weather Conditions: Rain Showers")
       );
-    }
-    else if (weatherInfo.weatherIcon === "10d"){
-      $("#weatherData").append(
-        $("<p>").text("Weather Conditions: Rain (day)")
-      );
-    }
-    else if (weatherInfo.weatherIcon === "10n"){
+    } else if (weatherInfo.weatherIcon === "10d") {
+      $("#weatherData").append($("<p>").text("Weather Conditions: Rain (day)"));
+    } else if (weatherInfo.weatherIcon === "10n") {
       $("#weatherData").append(
         $("<p>").text("Weather Conditions: Rain (night)")
       );
-    }
-    else if (weatherInfo.weatherIcon === "11d"){
+    } else if (weatherInfo.weatherIcon === "11d") {
       $("#weatherData").append(
         $("<p>").text("Weather Conditions: Thunderstorms")
       );
-    }
-    else if (weatherInfo.weatherIcon === "13d"){
-      $("#weatherData").append(
-        $("<p>").text("Weather Conditions: Snow")
-      );
-    }
-    else if (weatherInfo.weatherIcon === "50d"){
-      $("#weatherData").append(
-        $("<p>").text("Weather Conditions: Mist")
-      );
-    }
-    else {
-
+    } else if (weatherInfo.weatherIcon === "13d") {
+      $("#weatherData").append($("<p>").text("Weather Conditions: Snow"));
+    } else if (weatherInfo.weatherIcon === "50d") {
+      $("#weatherData").append($("<p>").text("Weather Conditions: Mist"));
+    } else {
     }
 
     // AJAX call for the hiking API
@@ -206,7 +192,7 @@ function hikingAPI(
   }).then(function (response) {
     // console.log(response);
 
-    $(".hikingList").empty(); // clear screen for new info
+    $("#hikingList").empty(); // clear screen for new info
     trails = []; // clear trail list
     // Data from API
     for (var i = 0; i < response.trails.length; i++) {
@@ -240,16 +226,15 @@ function hikingAPI(
 
       // Append
       $("#hikingList").append(newHike);
-      newHike.append(
-        hikeSummary,
-        hikeLength,
-        hikeElevation,
-        hikeDifficulty,
-        hikePic
-      );
+      newHike.append(hikeSummary, hikeLength, hikeElevation, hikeDifficulty);
+
+      if (trailInfo.picture != "") {
+        newHike.append(hikePic);
+      }
 
       trails.push(trailInfo);
     }
+    sortHikes(trails, userInputs, weatherInfo);
     maparea(lat, lon, trails);
   });
 }
@@ -281,3 +266,7 @@ function maparea(lat, lon, trails) {
   }
 }
 
+// Sort output based on user input
+function sortHikes(trails, user, weather) {
+  console.log(trails, user, weather);
+}
