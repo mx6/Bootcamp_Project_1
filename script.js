@@ -24,8 +24,10 @@ $(document).ready(function () {
 
     // Store all input data in an object:
     userInputs = {
-      city: $("#startLocation").val().trim(),
-      state: $("#state").val(),
+      city: "Bend",
+      state: "Oregon",
+      // city: $("#startLocation").val().trim(),
+      // state: $("#state").val(),
       minDistance: $("#hikeMin").val().trim(),
       maxDistance: $("#hikeMax").val().trim(),
       minElevation: $("#elevationMin").val().trim(),
@@ -234,8 +236,7 @@ function hikingAPI(
 
       trails.push(trailInfo);
     }
-    sortHikes(trails, userInputs, weatherInfo);
-    maparea(lat, lon, trails);
+    maparea(lat, lon, sortHikes(trails, userInputs, weatherInfo));
   });
 }
 
@@ -268,5 +269,36 @@ function maparea(lat, lon, trails) {
 
 // Sort output based on user input
 function sortHikes(trails, user, weather) {
-  console.log(trails, user, weather);
+  // console.log(trails.length);
+  for (let i = 0; i < trails.length; i++) {
+    let minDist = parseFloat(user.minDistance);
+    let maxDist = parseFloat(user.maxDistance);
+    let trailDist = trails[i].length;
+    let minElev = parseFloat(user.minElevation);
+    let maxElev = parseFloat(user.maxElevation);
+    let trailElevation = trails[i].elevation;
+
+    // console.log(minElev, maxElev, trailElevation);
+    // Sort by hiking distance
+    if (minDist < trailDist && trailDist < maxDist) {
+      console.log(trails[i].name + " show hike");
+    }
+
+    // Sort by elevation change
+    if (minElev < trailDist && trailDist < maxElev) {
+      console.log(trails[i].name + "lets hike");
+    }
+  }
+
+  return trails.filter(function (thisTrail) {
+    if (
+      thisTrail.length > parseFloat(user.minDistance) &&
+      thisTrail.length < parseFloat(user.maxDistance) &&
+      parseFloat(user.minElevation) < thisTrail.elevation &&
+      thisTrail.elevation < parseFloat(user.maxElevation)
+    ) {
+      return true;
+    }
+  });
+  // console.log(trails);
 }
