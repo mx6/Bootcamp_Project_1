@@ -79,7 +79,7 @@ function weatherAPI(city, state) {
       minTemp: response.data.current.weather.tp, // C
       humidity: response.data.current.weather.hu, // %
       windSpeed: response.data.current.weather.ws, // m/s
-      pollution: response.data.current.pollution.mainus,
+      pollution: response.data.current.pollution.aqius,
       weatherIcon: response.data.current.weather.ic
     };
 
@@ -102,9 +102,49 @@ function weatherAPI(city, state) {
     $("#weatherData").append(
       $("<p>").text("Wind Speed: " + weatherInfo.windSpeed + " m/s")
     );
-    $("#weatherData").append(
-      $("<p>").text("Pollution Level: " + weatherInfo.pollution)
+
+    $("#weatherData").append( 
+      $("<p>").text("Air Quality Index: ")
+      .append( $("<span>")
+        .text(weatherInfo.pollution)
+        .addClass("aqi")  
+      )
     );
+
+
+
+    // $text("Air Quality Index: " + pollutionSpan)
+    // AQI level
+    if (weatherInfo.pollution <= 50) {
+      // Good (0-50)
+      $(".aqi").css("background-color", "green");
+
+    }
+    else if (weatherInfo.pollution >= 51 || weatherInfo.pollution <= 100) {
+      // Moderate (51-100)
+      $(".aqi").css("background-color", "yellow");
+    }
+    else if(weatherInfo.pollution >= 101 || weatherInfo.pollution <= 150) {
+      // Unhealthy for Sensitive Groups (101-150)
+      $(".aqi").css("background-color", "orange");
+
+    }
+    else if(weatherInfo.pollution >= 151 || weatherInfo.pollution <= 200) {
+      // Unhealthy (151-200)
+      $(".aqi").css("background-color", "red");
+
+    }
+    else if(weatherInfo.pollution >= 201 || weatherInfo.pollution <= 300) {
+      // Very Unhealthy (201-300)
+      $(".aqi").css("background-color", "purple");
+
+    }
+    else {
+      // Hazardous (301-500)
+      $(".aqi").css("background-color", "maroon");
+
+    }
+    
 
     // weather conditions based on icon:
     console.log(weatherInfo.weatherIcon);
