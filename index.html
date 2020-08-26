@@ -26,7 +26,7 @@
   <body class="w3-light-grey">
     <!-- TOP CONTAINER -->
 
-    <div class="w3-bar w3-top w3-black w3-large" style="z-index: 4;">
+    <div class="w3-bar w3-top w3-black w3-large" style="z-index: 4">
       <button
         class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey"
         onclick="w3_open();"
@@ -43,7 +43,7 @@
     <!-- Sidebar/menu -->
     <nav
       class="w3-sidebar w3-collapse w3-light-grey w3-animate-left"
-      style="z-index: 3; width: 300px;"
+      style="z-index: 3; width: 300px"
       id="mySidebar"
     >
       <br />
@@ -166,21 +166,23 @@
           data-type="difficulty"
         >
           <option value="" selected disabled>Difficulty</option>
-          <option value="1" id="difficultyEasy" data-type="difficultyEasy"
-            >Easy</option
-          >
+          <option value="1" id="difficultyEasy" data-type="difficultyEasy">
+            Easy
+          </option>
           <option
             value="2"
             id="difficultyModerate"
             data-type="difficultyModerate"
-            >Moderate</option
           >
+            Moderate
+          </option>
           <option
             value="3"
             id="difficultyChallenging"
             data-type="difficultyChallenging"
-            >Challenging</option
           >
+            Challenging
+          </option>
         </select>
 
         <h5>Temperature</h5>
@@ -242,7 +244,7 @@
             Let's Hike
           </button>
         </p>
-        <br><br><br><br><br><br><br><br>
+        <br /><br /><br /><br /><br /><br /><br /><br />
 
         <!-- <a href="#" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-users fa-fw"></i>  Overview</a>
             <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-eye fa-fw"></i>  Views</a>
@@ -260,7 +262,7 @@
     <div
       class="w3-overlay w3-hide-large w3-animate-opacity"
       onclick="w3_close()"
-      style="cursor: pointer;"
+      style="cursor: pointer"
       title="close side menu"
       id="myOverlay"
     ></div>
@@ -268,9 +270,9 @@
     <!-- RIGHT COLUMN DATA -->
 
     <!-- !PAGE CONTENT! -->
-    <div class="w3-main" style="margin-left: 300px; margin-top: 43px;">
+    <div class="w3-main" style="margin-left: 300px; margin-top: 43px">
       <!-- Header -->
-      <header class="w3-container w3-footer" style="padding-top: 22px;">
+      <header class="w3-container w3-footer" style="padding-top: 22px">
         <h5 id="mapTitle">
           <b><i class="fa fa-map"></i> Your Hike Map</b>
         </h5>
@@ -278,7 +280,8 @@
 
       <div class="w3-container" id="mapData" data-type="mapData">
         <!-- MAP DATA GOES HERE marker removed; map data is populating correctly -->
-        Please choose from the options in the Dashboard on the left and get started on your next adventure!
+        Please choose from the options in the Dashboard on the left and get
+        started on your next adventure!
       </div>
 
       <!-- Map -->
