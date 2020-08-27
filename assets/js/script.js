@@ -34,7 +34,7 @@ $(document).ready(function () {
       maxElevation: $("#elevationMax").val().trim(),
       difficulty: $("#difficulty").val(),
       minTemp: $("#tempMin").val().trim(),
-      maxTemp: $("#tempMax").val().trim()
+      maxTemp: $("#tempMax").val().trim(),
       // weatherConditions: $().val(),
     };
     // console.log(userInputs.difficulty);
@@ -62,12 +62,11 @@ function unitsConverter(t, ws) {
   t = math.unit(t, "degC").value; // converts Celsius to Kelvin
   tempF = math.format(t * (9 / 5) - 459.67, { precision: 14 }); // converts Kelvin to Fahrenheit
 
-  // ws = math.unit(ws, 'm/s').value; 
-  mph =  math.format(ws * 2.237, { precision: 4 }); // convert m/s to mph
+  // ws = math.unit(ws, 'm/s').value;
+  mph = math.format(ws * 2.237, { notation: "fixed", precision: 2 }); // convert m/s to mph
   var arr1 = [tempF, mph];
 
   return arr1;
-  // return windSpeed;
 }
 
 function weatherAPI(city, state) {
@@ -82,9 +81,9 @@ function weatherAPI(city, state) {
 
   $.ajax({
     url: queryURL,
-    method: "GET"
+    method: "GET",
   }).then(function (response) {
-    // console.log(response); // JSON return for Oregon, USA
+    console.log(response); // JSON return for Oregon, USA
 
     // Weather Data we want:
     // Lat/lon coordinates
@@ -101,17 +100,12 @@ function weatherAPI(city, state) {
       humidity: response.data.current.weather.hu, // %
       windSpeed: arr1[1], // mph
       pollution: response.data.current.pollution.aqius,
-      weatherIcon: response.data.current.weather.ic
+      weatherIcon: response.data.current.weather.ic,
     };
-
-
 
     // Display weather data
     $("#weatherData").empty();
     $("#weatherData").append($("<h2>").text(response.data.city + ", " + state));
-    // $("#weatherData").append(
-    //   $("<img>").attr("src", "icon url goes here...")
-    // );
     $("#weatherData").append(
       $("<p>")
         .text("Temperature: " + weatherInfo.minTemp + " °F")
@@ -156,52 +150,137 @@ function weatherAPI(city, state) {
     // weather conditions based on icon:
     if (weatherInfo.weatherIcon === "01d") {
       $("#weatherData").append(
-        $("<p>").text("Weather Conditions: Clear Skies (day)")
+        $("<p>")
+          .text("Weather Conditions: Clear Skies (day)")
+          .append(
+            $("<img>")
+              .attr("src", "./assets/images/01d.png")
+              .addClass("weatherIcon")
+          )
       );
     } else if (weatherInfo.weatherIcon === "01n") {
       $("#weatherData").append(
-        $("<p>").text("Weather Conditions: Clear Skies (night)")
+        $("<p>")
+          .text("Weather Conditions: Clear Skies (night)")
+          .append(
+            $("<img>")
+              .attr("src", "./assets/images/01n.png")
+              .addClass("weatherIcon")
+          )
       );
     } else if (weatherInfo.weatherIcon === "02d") {
       $("#weatherData").append(
-        $("<p>").text("Weather Conditions: Few Clouds (day)")
+        $("<p>")
+          .text("Weather Conditions: Few Clouds (day)")
+          .append(
+            $("<img>")
+              .attr("src", "./assets/images/02d.png")
+              .addClass("weatherIcon")
+          )
       );
     } else if (weatherInfo.weatherIcon === "02n") {
       $("#weatherData").append(
-        $("<p>").text("Weather Conditions: Few Clouds (night)")
+        $("<p>")
+          .text("Weather Conditions: Few Clouds (night)")
+          .append(
+            $("<img>")
+              .attr("src", "./assets/images/02n.png")
+              .addClass("weatherIcon")
+          )
       );
     } else if (weatherInfo.weatherIcon === "03d") {
       $("#weatherData").append(
-        $("<p>").text("Weather Conditions: Scattered Clouds")
+        $("<p>")
+          .text("Weather Conditions: Scattered Clouds")
+          .append(
+            $("<img>")
+              .attr("src", "./assets/images/03d.png")
+              .addClass("weatherIcon")
+          )
       );
     } else if (weatherInfo.weatherIcon === "04d") {
       $("#weatherData").append(
-        $("<p>").text("Weather Conditions: Broken Clouds")
+        $("<p>")
+          .text("Weather Conditions: Broken Clouds")
+          .append(
+            $("<img>")
+              .attr("src", "./assets/images/04d.png")
+              .addClass("weatherIcon")
+          )
       );
     } else if (weatherInfo.weatherIcon === "09d") {
       $("#weatherData").append(
-        $("<p>").text("Weather Conditions: Rain Showers")
+        $("<p>")
+          .text("Weather Conditions: Rain Showers")
+          .append(
+            $("<img>")
+              .attr("src", "./assets/images/09d.png")
+              .addClass("weatherIcon")
+          )
       );
     } else if (weatherInfo.weatherIcon === "10d") {
-      $("#weatherData").append($("<p>").text("Weather Conditions: Rain (day)"));
+      $("#weatherData").append(
+        $("<p>")
+          .text("Weather Conditions: Rain (day)")
+          .append(
+            $("<img>")
+              .attr("src", "./assets/images/10d.png")
+              .addClass("weatherIcon")
+          )
+      );
     } else if (weatherInfo.weatherIcon === "10n") {
       $("#weatherData").append(
-        $("<p>").text("Weather Conditions: Rain (night)")
+        $("<p>")
+          .text("Weather Conditions: Rain (night)")
+          .append(
+            $("<img>")
+              .attr("src", "./assets/images/10n.png")
+              .addClass("weatherIcon")
+          )
       );
     } else if (weatherInfo.weatherIcon === "11d") {
       $("#weatherData").append(
-        $("<p>").text("Weather Conditions: Thunderstorms")
+        $("<p>")
+          .text("Weather Conditions: Thunderstorms")
+          .append(
+            $("<img>")
+              .attr("src", "./assets/images/11d.png")
+              .addClass("weatherIcon")
+          )
       );
     } else if (weatherInfo.weatherIcon === "13d") {
-      $("#weatherData").append($("<p>").text("Weather Conditions: Snow"));
+      $("#weatherData").append(
+        $("<p>")
+          .text("Weather Conditions: Snow")
+          .append(
+            $("<img>")
+              .attr("src", "./assets/images/13d.png")
+              .addClass("weatherIcon")
+          )
+      );
     } else if (weatherInfo.weatherIcon === "50d") {
-      $("#weatherData").append($("<p>").text("Weather Conditions: Mist"));
+      $("#weatherData").append(
+        $("<p>")
+          .text("Weather Conditions: Mist")
+          .append(
+            $("<img>")
+              .attr("src", "./assets/images/50d.png")
+              .addClass("weatherIcon")
+          )
+      );
     } else {
     }
+
+    // call function for weather forecast
+    forecast();
 
     // AJAX call for the hiking API
     hikingAPI(lat, lon);
   });
+}
+
+function forecast() {
+  // Get the 7 day forecast
 }
 
 function hikingAPI(
@@ -234,7 +313,7 @@ function hikingAPI(
 
   $.ajax({
     url: queryURL,
-    method: "GET"
+    method: "GET",
   }).then(function (response) {
     // console.log(response);
 
@@ -251,7 +330,7 @@ function hikingAPI(
         length: response.trails[i].length,
         elevation: response.trails[i].ascent,
         difficulty: response.trails[i].difficulty,
-        picture: response.trails[i].imgSqSmall
+        picture: response.trails[i].imgSqSmall,
       };
 
       // Display list of 10 trails nearby w/ info
@@ -267,7 +346,7 @@ function hikingAPI(
       var hikeDifficulty = $("<p>").text("Difficulty: " + trailInfo.difficulty);
       let hikePic = $("<img>").attr({
         src: trailInfo.picture,
-        id: "trail-picture"
+        id: "trail-picture",
       });
 
       // Append
@@ -292,7 +371,7 @@ function maparea(lat, lon, trails) {
     container: "map",
     center: [lon, lat],
     style: "mapbox://styles/mapbox/outdoors-v11",
-    zoom: 8
+    zoom: 8,
   });
 
   // Add markers
@@ -315,91 +394,99 @@ function maparea(lat, lon, trails) {
 // Sort output based on user input
 function sortHikes(trails, user, weather) {
   // Making input into a value
-  // let minDist = parseFloat(user.minDistance);
-  // let maxDist = parseFloat(user.maxDistance);
-  // let minElev = parseFloat(user.minElevation);
-  // let maxElev = parseFloat(user.maxElevation);
-  // let minTemp = parseFloat(user.minTemp);
-  // let maxTemp = parseFloat(user.maxTemp);
-  // let temp = weather.minTemp;
+  let minDist = parseFloat(user.minDistance);
+  let maxDist = parseFloat(user.maxDistance);
+  let minElev = parseFloat(user.minElevation);
+  let maxElev = parseFloat(user.maxElevation);
+  let minTemp = parseFloat(user.minTemp);
+  let maxTemp = parseFloat(user.maxTemp);
+  let temp = weather.minTemp;
 
-  // // Checking if input is a number
-  // if (isNaN(minDist) === true) {
-  //   minDist = 0;
-  // }
-  // if (isNaN(maxDist) === true) {
-  //   maxDist = 200;
-  // }
-  // if (isNaN(maxElev) === true) {
-  //   maxElev = 20000;
-  // }
-  // if (isNaN(minElev) === true) {
-  //   minElev = 0;
-  // }
+  // Checking if input is a number
+  if (isNaN(minDist) === true) {
+    minDist = 0;
+  }
+  if (isNaN(maxDist) === true) {
+    maxDist = 200;
+  }
+  if (isNaN(maxElev) === true) {
+    maxElev = 20000;
+  }
+  if (isNaN(minElev) === true) {
+    minElev = 0;
+  }
+  if (isNaN(minTemp) === true) {
+    minTemp = 0;
+  }
+  if (isNaN(maxTemp) === true) {
+    maxTemp = 125;
+  }
   // console.log(minElev, " + ", maxElev);
 
-  for (let i = 0; i < trails.length; i++) {
-    let minDist = parseFloat(user.minDistance);
-    let maxDist = parseFloat(user.maxDistance);
-    let trailDist = trails[i].length;
-    let minElev = parseFloat(user.minElevation);
-    let maxElev = parseFloat(user.maxElevation);
-    let trailElevation = trails[i].elevation;
-    let trailDiff = trails[i].difficulty;
-    let userDiff = parseInt(user.difficulty);
-    let minTemp = parseFloat(user.minTemp);
-    let maxTemp = parseFloat(user.maxTemp);
-    let temp = weather.minTemp;
+  // for (let i = 0; i < trails.length; i++) {
+  //   let minDist = parseFloat(user.minDistance);
+  //   let maxDist = parseFloat(user.maxDistance);
+  //   let trailDist = trails[i].length;
+  //   let minElev = parseFloat(user.minElevation);
+  //   let maxElev = parseFloat(user.maxElevation);
+  //   let trailElevation = trails[i].elevation;
+  //   let trailDiff = trails[i].difficulty;
+  //   let userDiff = parseInt(user.difficulty);
+  //   let minTemp = parseFloat(user.minTemp);
+  //   let maxTemp = parseFloat(user.maxTemp);
+  //   let temp = weather.minTemp;
 
-    console.log(minTemp, maxTemp, temp);
+  //   console.log(minTemp, maxTemp, temp);
 
-    // console.log(minElev, maxElev, trailElevation);
-    // Sort by hiking distance
-    if (minDist < trailDist && trailDist < maxDist) {
-      console.log(trails[i].name + " show hike");
-    }
-
-    // Sort by elevation change
-    if (minElev < trailDist && trailDist < maxElev) {
-      console.log(trails[i].name + "lets hike");
-    }
-    console.log(i);
-
-    if (userDiff == null) {
-      console.log(trailDiff);
-      console.log("all trails");
-    } else if (userDiff == 6 && trailDiff == "dblack") {
-      console.log(trailDiff);
-      console.log("show up to double black");
-    } else if (userDiff == 5 && trailDiff == "black") {
-      console.log(trailDiff);
-      console.log("show up to black");
-    } else if (userDiff == 4 && trailDiff == "blueBlack") {
-      console.log(trailDiff);
-      console.log("show up to blue black");
-    } else if (userDiff == 3 && trailDiff == "blue") {
-      console.log(trailDiff);
-      console.log("show only blue");
-    } else if (userDiff == 2 && trailDiff == "greenBlue") {
-      console.log(trailDiff);
-      console.log("show up to greenBlue");
-    } else {
-      console.log(trailDiff);
-      console.log("show green");
-    }
-  }
-  return trails;
-  // Filter out trails based on user input
-  // return trails.filter(function (thisTrail) {
-  //   if (
-  //     thisTrail.length > minDist &&
-  //     thisTrail.length < maxDist &&
-  //     minElev < thisTrail.elevation &&
-  //     thisTrail.elevation < maxElev
-  //   ) {
-  //     return true;
+  //   // console.log(minElev, maxElev, trailElevation);
+  //   // Sort by hiking distance
+  //   if (minDist < trailDist && trailDist < maxDist) {
+  //     console.log(trails[i].name + " show hike");
   //   }
-  // });
+
+  //   // Sort by elevation change
+  //   if (minElev < trailDist && trailDist < maxElev) {
+  //     console.log(trails[i].name + "lets hike");
+  //   }
+  //   // console.log(i);
+
+  //   if (userDiff == null) {
+  //     console.log(trailDiff);
+  //     console.log("all trails");
+  //   } else if (userDiff == 6 && trailDiff == "dblack") {
+  //     console.log(trailDiff);
+  //     console.log("show up to double black");
+  //   } else if (userDiff == 5 && trailDiff == "black") {
+  //     console.log(trailDiff);
+  //     console.log("show up to black");
+  //   } else if (userDiff == 4 && trailDiff == "blueBlack") {
+  //     console.log(trailDiff);
+  //     console.log("show up to blue black");
+  //   } else if (userDiff == 3 && trailDiff == "blue") {
+  //     console.log(trailDiff);
+  //     console.log("show only blue");
+  //   } else if (userDiff == 2 && trailDiff == "greenBlue") {
+  //     console.log(trailDiff);
+  //     console.log("show up to greenBlue");
+  //   } else {
+  //     console.log(trailDiff);
+  //     console.log("show green");
+  //   }
+  // }
+  // return trails;
+  // Filter out trails based on user input
+  return trails.filter(function (thisTrail) {
+    if (
+      thisTrail.length > minDist &&
+      thisTrail.length < maxDist &&
+      minElev < thisTrail.elevation &&
+      thisTrail.elevation < maxElev &&
+      minTemp < temp &&
+      temp < maxTemp
+    ) {
+      return true;
+    }
+  });
   // console.log(trails);
 }
 

@@ -69,6 +69,11 @@ p {
   height: 450px;
 }
 
+.weatherIcon {
+  width: 30px;
+  height: 30px;
+}
+
 #trail-picture {
   width: 100px;
   height: 100px;
