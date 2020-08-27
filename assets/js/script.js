@@ -447,6 +447,7 @@ function sortHikes(trails, user, weather) {
   //   // Sort by elevation change
   //   if (minElev < trailDist && trailDist < maxElev) {
   //     console.log(trails[i].name + "lets hike");
+
   //   }
   //   // console.log(i);
 
@@ -472,10 +473,12 @@ function sortHikes(trails, user, weather) {
   //     console.log(trailDiff);
   //     console.log("show green");
   //   }
+
   // }
   // return trails;
   // Filter out trails based on user input
   return trails.filter(function (thisTrail) {
+
     if (
       thisTrail.length > minDist &&
       thisTrail.length < maxDist &&
@@ -484,10 +487,10 @@ function sortHikes(trails, user, weather) {
       minTemp < temp &&
       temp < maxTemp
     ) {
+      
       return true;
     }
   });
-  // console.log(trails);
 }
 
 // scroll button
