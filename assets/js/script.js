@@ -57,6 +57,18 @@ $(document).ready(function () {
   });
 });
 
+function unitsConverter(t, ws) {
+  // Use math.js to convert metric units to imperial
+  t = math.unit(t, "degC").value; // converts Celsius to Kelvin
+  tempF = math.format(t * (9 / 5) - 459.67, { precision: 14 }); // converts Kelvin to Fahrenheit
+
+  // ws = math.unit(ws, 'm/s'); // convert m/s to mph
+  // console.log( math.evaluate('90 km/h to km/h').value );
+
+  return tempF;
+  // return windSpeed;
+}
+
 function weatherAPI(city, state) {
   var apiKey = "0146d325-a946-4208-8c5f-c9c2cb554ac6";
   var queryURL =
@@ -71,7 +83,7 @@ function weatherAPI(city, state) {
     url: queryURL,
     method: "GET"
   }).then(function (response) {
-    console.log(response); // JSON return for Oregon, USA
+    // console.log(response); // JSON return for Oregon, USA
 
     // Weather Data we want:
     // Lat/lon coordinates
@@ -86,6 +98,11 @@ function weatherAPI(city, state) {
       weatherIcon: response.data.current.weather.ic
     };
 
+    // Call function to convert units from Metric to Imperial
+    const t = weatherInfo.minTemp;
+    const ws = weatherInfo.windSpeed;
+    // console.log(unitsConverter(t, ws));
+
     // Display weather data
     $("#weatherData").empty();
     $("#weatherData").append($("<h2>").text(response.data.city + ", " + state));
@@ -94,7 +111,7 @@ function weatherAPI(city, state) {
     // );
     $("#weatherData").append(
       $("<p>")
-        .text("Temperature: " + weatherInfo.minTemp + " C")
+        .text("Temperature: " + unitsConverter(t, ws) + " °F")
         .addClass("temp")
     );
     $("#weatherData").append(
@@ -105,7 +122,6 @@ function weatherAPI(city, state) {
     $("#weatherData").append(
       $("<p>").text("Wind Speed: " + weatherInfo.windSpeed + " m/s")
     );
-
     $("#weatherData").append(
       $("<p>")
         .text("Air Quality Index: ")
@@ -135,7 +151,6 @@ function weatherAPI(city, state) {
     }
 
     // weather conditions based on icon:
-    console.log(weatherInfo.weatherIcon);
     if (weatherInfo.weatherIcon === "01d") {
       $("#weatherData").append(
         $("<p>").text("Weather Conditions: Clear Skies (day)")
@@ -305,6 +320,8 @@ function sortHikes(trails, user, weather) {
   // Checking if input is a number
   if (isNaN(minDist) === true) {
     minDist = 0;
+
+    // console.log(trails.length);
   }
   if (isNaN(maxDist) === true) {
     maxDist = 200;
