@@ -14,7 +14,6 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
 
-    <!--      Map API -->
     <script src="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js"></script>
     <link
       href="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css"
@@ -167,12 +166,16 @@
         >
           <option value="" disabled hidden>Difficulty</option>
 
-          <option value="1" id="difficultyGreen" data-type="difficultyGreen">
+          <option
+            value="green"
+            id="difficultyGreen"
+            data-type="difficultyGreen"
+          >
             Green
           </option>
 
           <option
-            value="2"
+            value="greenBlue"
             id="difficultyGreenBlue"
             data-type="difficultyGreenBlue"
           >
@@ -180,7 +183,7 @@
           </option>
 
           <option
-            value="3"
+            value="blue"
             id="difficultyBlue"
             data-type="difficultyBlue"
             selected
@@ -189,24 +192,28 @@
           </option>
 
           <option
-            value="4"
+            value="blueBlack"
             id="difficultyBlueBlack"
             data-type="difficultyBlueBlack"
           >
             Blue Black
           </option>
 
-          <option value="5" id="difficultyBlack" data-type="difficultyBlack">
+          <option
+            value="black"
+            id="difficultyBlack"
+            data-type="difficultyBlack"
+          >
             Black
           </option>
 
-          <option
-            value="6"
+          <opition
+            value="dblack"
             id="difficultyDoubleBlack"
             data-type="difficultyDoubleBlack"
           >
             Double Black
-          </option>
+          </opition>
         </select>
 
         <h5>Temperature</h5>
