@@ -21,7 +21,7 @@
       rel="stylesheet"
     />
 
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
   </head>
   <body class="w3-light-grey">
     <!-- TOP CONTAINER -->
@@ -34,9 +34,8 @@
         <i class="fa fa-bars"></i> Menu
       </button>
       <span class="w3-bar-item w3-right"
-        >Team Awesome Group Project 1, August 2020</span>
-
-
+        >Team Awesome Group Project 1, August 2020</span
+      >
     </div>
 
     <!-- LEFT COLUMN DATA -->
@@ -66,7 +65,6 @@
           title="close menu"
           ><i class="fa fa-remove fa-fw"></i> Close Menu</a
         >
-
         <input
           class="w3-input w3-border w3-round"
           type="text"
@@ -167,49 +165,48 @@
           id="difficulty"
           data-type="difficulty"
         >
-        <option value="" disabled selected hidden>Difficulty</option>
+          <option value="" disabled hidden>Difficulty</option>
 
-          <option value="1" 
-          id="difficultyGreen" 
-          data-type="difficultyGreen">
+          <option value="1" id="difficultyGreen" data-type="difficultyGreen">
             Green
           </option>
 
           <option
             value="2"
             id="difficultyGreenBlue"
-            data-type="difficultyGreenBlue">
+            data-type="difficultyGreenBlue"
+          >
             Green Blue
           </option>
 
           <option
             value="3"
             id="difficultyBlue"
-            data-type="difficultyBlue">
+            data-type="difficultyBlue"
+            selected
+          >
             Blue
           </option>
 
-          <option value="4" 
-          id="difficultyBlueBlack" 
-          data-type="difficultyBlueBlack">
+          <option
+            value="4"
+            id="difficultyBlueBlack"
+            data-type="difficultyBlueBlack"
+          >
             Blue Black
           </option>
 
-          <option
-            value="5"
-            id="difficultyBlack"
-            data-type="difficultyBlack">
+          <option value="5" id="difficultyBlack" data-type="difficultyBlack">
             Black
           </option>
 
           <option
             value="6"
             id="difficultyDoubleBlack"
-            data-type="difficultyDoubleBlack">
+            data-type="difficultyDoubleBlack"
+          >
             Double Black
           </option>
-
-
         </select>
 
         <h5>Temperature</h5>
@@ -294,11 +291,15 @@
       id="myOverlay"
     ></div>
 
-
     <!-- scroll to the top button  -->
-    <button onclick="topFunction()" class="w3-button w3-amber w3-hover-yellow w3-round-large" id="myBtn" title="to-the-map">Back to the Map</button>
-
-
+    <button
+      onclick="topFunction()"
+      class="w3-button w3-amber w3-hover-yellow w3-round-large"
+      id="myBtn"
+      title="to-the-map"
+    >
+      Back to the Map
+    </button>
 
     <!-- RIGHT COLUMN DATA -->
 
@@ -380,6 +381,6 @@
       src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/7.2.0/math.min.js"
       type="text/javascript"
     ></script>
-    <script src="script.js"></script>
+    <script src="assets/js/script.js"></script>
   </body>
 </html>

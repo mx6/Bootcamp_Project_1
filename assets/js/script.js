@@ -1,7 +1,7 @@
 // Testing AirVisual API & Hiking API
 // AirVisual API: https://api-docs.airvisual.com/?version=latest
 // Hiking Project API: https://www.hikingproject.com/data
-// MapBox API
+// MapBox API: https://docs.mapbox.com/mapbox-gl-js/api/
 
 // Global Variables
 var lon;
@@ -32,11 +32,12 @@ $(document).ready(function () {
       maxDistance: $("#hikeMax").val().trim(),
       minElevation: $("#elevationMin").val().trim(),
       maxElevation: $("#elevationMax").val().trim(),
-      difficulty: $("#diffifulty").val(),
+      difficulty: $("#difficulty").val(),
       minTemp: $("#tempMin").val().trim(),
       maxTemp: $("#tempMax").val().trim()
       // weatherConditions: $().val(),
     };
+    console.log(userInputs.difficulty);
 
     // Checking if a city and state were entered
     if (userInputs.city == "") {
@@ -56,13 +57,13 @@ $(document).ready(function () {
   });
 });
 
-function unitsConverter(t, ws){
+function unitsConverter(t, ws) {
   // Use math.js to convert metric units to imperial
-  t = math.unit(t, 'degC').value; // converts Celsius to Kelvin
-  tempF = math.format( (t * (9/5) - 459.67), {precision: 14} ); // converts Kelvin to Fahrenheit
+  t = math.unit(t, "degC").value; // converts Celsius to Kelvin
+  tempF = math.format(t * (9 / 5) - 459.67, { precision: 14 }); // converts Kelvin to Fahrenheit
 
   // ws = math.unit(ws, 'm/s'); // convert m/s to mph
-  // console.log( math.evaluate('90 km/h to km/h').value ); 
+  // console.log( math.evaluate('90 km/h to km/h').value );
 
   return tempF;
   // return windSpeed;
@@ -121,45 +122,33 @@ function weatherAPI(city, state) {
     $("#weatherData").append(
       $("<p>").text("Wind Speed: " + weatherInfo.windSpeed + " m/s")
     );
-    $("#weatherData").append( 
-      $("<p>").text("Air Quality Index: ")
-      .append( $("<span>")
-        .text(weatherInfo.pollution)
-        .addClass("aqi")  
-      )
+    $("#weatherData").append(
+      $("<p>")
+        .text("Air Quality Index: ")
+        .append($("<span>").text(weatherInfo.pollution).addClass("aqi"))
     );
 
     // $text("Air Quality Index: " + pollutionSpan)
     // AQI level
     if (weatherInfo.pollution <= 50) {
       // Good (0-50)
-      $(".aqi").css("background-color", "green");
-
-    }
-    else if (weatherInfo.pollution >= 51 || weatherInfo.pollution <= 100) {
+      $(".aqi").css("background-color", "#9cd94e");
+    } else if (weatherInfo.pollution >= 51 || weatherInfo.pollution <= 100) {
       // Moderate (51-100)
-      $(".aqi").css("background-color", "yellow");
-    }
-    else if(weatherInfo.pollution >= 101 || weatherInfo.pollution <= 150) {
+      $(".aqi").css("background-color", "#facf3a");
+    } else if (weatherInfo.pollution >= 101 || weatherInfo.pollution <= 150) {
       // Unhealthy for Sensitive Groups (101-150)
-      $(".aqi").css("background-color", "orange");
-
-    }
-    else if(weatherInfo.pollution >= 151 || weatherInfo.pollution <= 200) {
+      $(".aqi").css("background-color", "#f99049");
+    } else if (weatherInfo.pollution >= 151 || weatherInfo.pollution <= 200) {
       // Unhealthy (151-200)
-      $(".aqi").css("background-color", "red");
-
-    }
-    else if(weatherInfo.pollution >= 201 || weatherInfo.pollution <= 300) {
+      $(".aqi").css("background-color", "#f65e5f");
+    } else if (weatherInfo.pollution >= 201 || weatherInfo.pollution <= 300) {
       // Very Unhealthy (201-300)
-      $(".aqi").css("background-color", "purple");
-
-    }
-    else {
+      $(".aqi").css("background-color", "#a070b7");
+    } else {
       // Hazardous (301-500)
-      $(".aqi").css("background-color", "maroon");
+      $(".aqi").css("background-color", "#a06a7b");
     }
-    
 
     // weather conditions based on icon:
     if (weatherInfo.weatherIcon === "01d") {
@@ -288,6 +277,7 @@ function hikingAPI(
 
       trails.push(trailInfo);
     }
+    // sortHikes(trails, userInputs, weatherInfo);
     maparea(lat, lon, sortHikes(trails, userInputs, weatherInfo));
   });
 }
@@ -321,34 +311,87 @@ function maparea(lat, lon, trails) {
 
 // Sort output based on user input
 function sortHikes(trails, user, weather) {
+  // Making input into a value
+  let minDist = parseFloat(user.minDistance);
+  let maxDist = parseFloat(user.maxDistance);
+  let minElev = parseFloat(user.minElevation);
+  let maxElev = parseFloat(user.maxElevation);
 
-  // console.log(trails.length);
-  for (let i = 0; i < trails.length; i++) {
-    let minDist = parseFloat(user.minDistance);
-    let maxDist = parseFloat(user.maxDistance);
-    let trailDist = trails[i].length;
-    let minElev = parseFloat(user.minElevation);
-    let maxElev = parseFloat(user.maxElevation);
-    let trailElevation = trails[i].elevation;
+  // Checking if input is a number
+  if (isNaN(minDist) === true) {
+    minDist = 0;
 
-    // console.log(minElev, maxElev, trailElevation);
-    // Sort by hiking distance
-    if (minDist < trailDist && trailDist < maxDist) {
-      console.log(trails[i].name + " show hike");
-    }
-
-    // Sort by elevation change
-    if (minElev < trailDist && trailDist < maxElev) {
-      console.log(trails[i].name + "lets hike");
-    }
+    // console.log(trails.length);
   }
+  if (isNaN(maxDist) === true) {
+    maxDist = 200;
+  }
+  if (isNaN(maxElev) === true) {
+    maxElev = 20000;
+  }
+  if (isNaN(minElev) === true) {
+    minElev = 0;
+  }
+  // console.log(minElev, " + ", maxElev);
 
+  // for (let i = 0; i < trails.length; i++) {
+  //   let minDist = parseFloat(user.minDistance);
+  //   let maxDist = parseFloat(user.maxDistance);
+  //   let trailDist = trails[i].length;
+  //   let minElev = parseFloat(user.minElevation);
+  //   let maxElev = parseFloat(user.maxElevation);
+  //   let trailElevation = trails[i].elevation;
+  //   let trailDiff = trails[i].difficulty;
+  //   let userDiff = parseInt(user.difficulty);
+  //   let minTemp = parseFloat(user.minTemp);
+  //   let maxTemp = parseFloat(user.maxTemp);
+  //   let temp = weather.minTemp;
+
+  //   console.log(minTemp, maxTemp, temp);
+
+  //   // console.log(minElev, maxElev, trailElevation);
+  //   // Sort by hiking distance
+  //   if (minDist < trailDist && trailDist < maxDist) {
+  //     console.log(trails[i].name + " show hike");
+  //   }
+
+  //   // Sort by elevation change
+  //   if (minElev < trailDist && trailDist < maxElev) {
+  //     console.log(trails[i].name + "lets hike");
+  //   }
+  //   console.log(i);
+
+  //   if (userDiff == null) {
+  //     console.log(trailDiff);
+  //     console.log("all trails");
+  //   } else if (userDiff <= 6 && trailDiff == "dblack") {
+  //     console.log(trailDiff);
+  //     console.log("show up to double black");
+  //   } else if (userDiff <= 5 && trailDiff == "black") {
+  //     console.log(trailDiff);
+  //     console.log("show up to black");
+  //   } else if (userDiff == 4) {
+  //     console.log(trailDiff);
+  //     console.log("show up to blue black");
+  //   } else if (userDiff <= 3) {
+  //     console.log(trailDiff);
+  //     console.log("show only blue");
+  //   } else if (userDiff == 2) {
+  //     console.log(trailDiff);
+  //     console.log("show up to green blue");
+  //   } else {
+  //     console.log(trailDiff);
+  //     console.log("show green");
+  //   }
+  // }
+  // return trails;
+  // Filter out trails based on user input
   return trails.filter(function (thisTrail) {
     if (
-      thisTrail.length > parseFloat(user.minDistance) &&
-      thisTrail.length < parseFloat(user.maxDistance) &&
-      parseFloat(user.minElevation) < thisTrail.elevation &&
-      thisTrail.elevation < parseFloat(user.maxElevation)
+      thisTrail.length > minDist &&
+      thisTrail.length < maxDist &&
+      minElev < thisTrail.elevation &&
+      thisTrail.elevation < maxElev
     ) {
       return true;
     }
@@ -356,16 +399,15 @@ function sortHikes(trails, user, weather) {
   // console.log(trails);
 }
 
+// scroll button
 
-
-
-// scroll button 
-
-//Get the button
+// Get the button
 var mybutton = document.getElementById("myBtn");
 
 // When the user scrolls down 20px from the top of the document, show the button
-window.onscroll = function() {scrollFunction()};
+window.onscroll = function () {
+  scrollFunction();
+};
 
 function scrollFunction() {
   if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
@@ -380,3 +422,31 @@ function topFunction() {
   document.body.scrollTop = 0;
   document.documentElement.scrollTop = 0;
 }
+
+// Append hiking info to page
+// Will try to make it work after sort function is done
+// function hikingTrails(trails) {
+//   console.log(trails);
+//   var newHike = $("<li>")
+//     .attr("id", "trail-number-" + i)
+//     .text(trailInfo.name);
+//   newHike.css("border", "1px solid black");
+//   var hikeSummary = $("<p>").text(trailInfo.summary);
+//   var hikeLength = $("<p>").text("Length: " + trailInfo.length + " miles");
+//   var hikeElevation = $("<p>").text(
+//     "Elevation Gain: " + trailInfo.elevation + " feet"
+//   );
+//   var hikeDifficulty = $("<p>").text("Difficulty: " + trailInfo.difficulty);
+//   let hikePic = $("<img>").attr({
+//     src: trailInfo.picture,
+//     id: "trail-picture"
+//   });
+
+//   // Append
+//   $("#hikingList").append(newHike);
+//   newHike.append(hikeSummary, hikeLength, hikeElevation, hikeDifficulty);
+
+//   if (trailInfo.picture != "") {
+//     newHike.append(hikePic);
+//   }
+// }
