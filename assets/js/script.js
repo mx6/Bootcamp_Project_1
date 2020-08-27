@@ -407,6 +407,7 @@ function topFunction() {
 }
 
 // Append hiking info to page
+// Will try to make it work after sort function is done
 // function hikingTrails(trails) {
 //   console.log(trails);
 //   var newHike = $("<li>")
