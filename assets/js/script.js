@@ -62,8 +62,8 @@ function unitsConverter(t, ws) {
   t = math.unit(t, "degC").value; // converts Celsius to Kelvin
   tempF = math.format(t * (9 / 5) - 459.67, { precision: 14 }); // converts Kelvin to Fahrenheit
 
-  // ws = math.unit(ws, 'm/s').value; 
-  mph =  math.format(ws * 2.237, { precision: 4 }); // convert m/s to mph
+  // ws = math.unit(ws, 'm/s').value;
+  mph = math.format(ws * 2.237, { precision: 4 }); // convert m/s to mph
   var arr1 = [tempF, mph];
 
   return arr1;
@@ -103,8 +103,6 @@ function weatherAPI(city, state) {
       pollution: response.data.current.pollution.aqius,
       weatherIcon: response.data.current.weather.ic
     };
-
-
 
     // Display weather data
     $("#weatherData").empty();
@@ -315,92 +313,105 @@ function maparea(lat, lon, trails) {
 // Sort output based on user input
 function sortHikes(trails, user, weather) {
   // Making input into a value
-  // let minDist = parseFloat(user.minDistance);
-  // let maxDist = parseFloat(user.maxDistance);
-  // let minElev = parseFloat(user.minElevation);
-  // let maxElev = parseFloat(user.maxElevation);
-  // let minTemp = parseFloat(user.minTemp);
-  // let maxTemp = parseFloat(user.maxTemp);
-  // let temp = weather.minTemp;
+  let minDist = parseFloat(user.minDistance);
+  let maxDist = parseFloat(user.maxDistance);
+  let minElev = parseFloat(user.minElevation);
+  let maxElev = parseFloat(user.maxElevation);
+  let minTemp = parseFloat(user.minTemp);
+  let maxTemp = parseFloat(user.maxTemp);
+  let temp = weather.minTemp;
 
-  // // Checking if input is a number
-  // if (isNaN(minDist) === true) {
-  //   minDist = 0;
-  // }
-  // if (isNaN(maxDist) === true) {
-  //   maxDist = 200;
-  // }
-  // if (isNaN(maxElev) === true) {
-  //   maxElev = 20000;
-  // }
-  // if (isNaN(minElev) === true) {
-  //   minElev = 0;
-  // }
+  // Checking if input is a number
+  if (isNaN(minDist) === true) {
+    minDist = 0;
+  }
+  if (isNaN(maxDist) === true) {
+    maxDist = 200;
+  }
+  if (isNaN(maxElev) === true) {
+    maxElev = 20000;
+  }
+  if (isNaN(minElev) === true) {
+    minElev = 0;
+  }
+  if (isNaN(minTemp) === true) {
+    minTemp = 0;
+  }
+  if (isNaN(maxTemp) === true) {
+    maxTemp = 125;
+  }
   // console.log(minElev, " + ", maxElev);
 
-  for (let i = 0; i < trails.length; i++) {
-    let minDist = parseFloat(user.minDistance);
-    let maxDist = parseFloat(user.maxDistance);
-    let trailDist = trails[i].length;
-    let minElev = parseFloat(user.minElevation);
-    let maxElev = parseFloat(user.maxElevation);
-    let trailElevation = trails[i].elevation;
-    let trailDiff = trails[i].difficulty;
-    let userDiff = parseInt(user.difficulty);
-    let minTemp = parseFloat(user.minTemp);
-    let maxTemp = parseFloat(user.maxTemp);
-    let temp = weather.minTemp;
+  // for (let i = 0; i < trails.length; i++) {
+  //   let minDist = parseFloat(user.minDistance);
+  //   let maxDist = parseFloat(user.maxDistance);
+  //   let trailDist = trails[i].length;
+  //   let minElev = parseFloat(user.minElevation);
+  //   let maxElev = parseFloat(user.maxElevation);
+  //   let trailElevation = trails[i].elevation;
+  //   let trailDiff = trails[i].difficulty;
+  //   let userDiff = parseInt(user.difficulty);
+  //   let minTemp = parseFloat(user.minTemp);
+  //   let maxTemp = parseFloat(user.maxTemp);
+  //   let temp = weather.minTemp;
 
-    console.log(minTemp, maxTemp, temp);
+  //   console.log(minTemp, maxTemp, temp);
 
-    // console.log(minElev, maxElev, trailElevation);
-    // Sort by hiking distance
-    if (minDist < trailDist && trailDist < maxDist) {
-      console.log(trails[i].name + " show hike");
-    }
-
-    // Sort by elevation change
-    if (minElev < trailDist && trailDist < maxElev) {
-      console.log(trails[i].name + "lets hike");
-    }
-    console.log(i);
-
-    if (userDiff == null) {
-      console.log(trailDiff);
-      console.log("all trails");
-    } else if (userDiff == 6 && trailDiff == "dblack") {
-      console.log(trailDiff);
-      console.log("show up to double black");
-    } else if (userDiff == 5 && trailDiff == "black") {
-      console.log(trailDiff);
-      console.log("show up to black");
-    } else if (userDiff == 4 && trailDiff == "blueBlack") {
-      console.log(trailDiff);
-      console.log("show up to blue black");
-    } else if (userDiff == 3 && trailDiff == "blue") {
-      console.log(trailDiff);
-      console.log("show only blue");
-    } else if (userDiff == 2 && trailDiff == "greenBlue") {
-      console.log(trailDiff);
-      console.log("show up to greenBlue");
-    } else {
-      console.log(trailDiff);
-      console.log("show green");
-    }
-  }
-  return trails;
-  // Filter out trails based on user input
-  // return trails.filter(function (thisTrail) {
-  //   if (
-  //     thisTrail.length > minDist &&
-  //     thisTrail.length < maxDist &&
-  //     minElev < thisTrail.elevation &&
-  //     thisTrail.elevation < maxElev
-  //   ) {
-  //     return true;
+  //   // console.log(minElev, maxElev, trailElevation);
+  //   // Sort by hiking distance
+  //   if (minDist < trailDist && trailDist < maxDist) {
+  //     console.log(trails[i].name + " show hike");
   //   }
-  // });
-  // console.log(trails);
+
+  //   // Sort by elevation change
+  //   if (minElev < trailDist && trailDist < maxElev) {
+  //     console.log(trails[i].name + "lets hike");
+  //   }
+  //   console.log(i);
+
+  //   if (minTemp < temp && temp < maxTemp) {
+  //     console.log("we can go hike");
+  //   }
+  //   // if (userDiff == null) {
+  //   //   console.log(trailDiff);
+  //   //   console.log("all trails");
+  //   // } else if (userDiff == 6 && trailDiff == "dblack") {
+  //   //   console.log(trailDiff);
+  //   //   console.log("show up to double black");
+  //   // } else if (userDiff == 5 && trailDiff == "black") {
+  //   //   console.log(trailDiff);
+  //   //   console.log("show up to black");
+  //   // } else if (userDiff == 4 && trailDiff == "blueBlack") {
+  //   //   console.log(trailDiff);
+  //   //   console.log("show up to blue black");
+  //   // } else if (userDiff == 3 && trailDiff == "blue") {
+  //   //   console.log(trailDiff);
+  //   //   console.log("show only blue");
+  //   // } else if (userDiff == 2 && trailDiff == "greenBlue") {
+  //   //   console.log(trailDiff);
+  //   //   console.log("show up to greenBlue");
+  //   // } else {
+  //   //   console.log(trailDiff);
+  //   //   console.log("show green");
+  //   // }
+  // }
+  // return trails;
+  // Filter out trails based on user input
+  return trails.filter(function (thisTrail) {
+    // console.log(temp);
+    if (
+      thisTrail.length > minDist &&
+      thisTrail.length < maxDist &&
+      minElev < thisTrail.elevation &&
+      thisTrail.elevation < maxElev &&
+      minTemp < temp &&
+      temp < maxTemp
+    ) {
+      console.log(trails);
+      return true;
+    }
+  });
+  console.log(trails);
 }
 
 // scroll button
