@@ -37,7 +37,7 @@ $(document).ready(function () {
       maxTemp: $("#tempMax").val().trim()
       // weatherConditions: $().val(),
     };
-    console.log(userInputs.difficulty);
+    // console.log(userInputs.difficulty);
 
     // Checking if a city and state were entered
     if (userInputs.city == "") {
@@ -62,10 +62,11 @@ function unitsConverter(t, ws) {
   t = math.unit(t, "degC").value; // converts Celsius to Kelvin
   tempF = math.format(t * (9 / 5) - 459.67, { precision: 14 }); // converts Kelvin to Fahrenheit
 
-  // ws = math.unit(ws, 'm/s'); // convert m/s to mph
-  // console.log( math.evaluate('90 km/h to km/h').value );
+  // ws = math.unit(ws, 'm/s').value; 
+  mph =  math.format(ws * 2.237, { precision: 4 }); // convert m/s to mph
+  var arr1 = [tempF, mph];
 
-  return tempF;
+  return arr1;
   // return windSpeed;
 }
 
@@ -90,18 +91,20 @@ function weatherAPI(city, state) {
     lon = response.data.location.coordinates[0];
     lat = response.data.location.coordinates[1];
 
+    // Call function to convert units from Metric to Imperial
+    const t = response.data.current.weather.tp;
+    const ws = response.data.current.weather.ws;
+    var arr1 = unitsConverter(t, ws);
+
     weatherInfo = {
-      minTemp: response.data.current.weather.tp, // C
+      minTemp: arr1[0], // F
       humidity: response.data.current.weather.hu, // %
-      windSpeed: response.data.current.weather.ws, // m/s
+      windSpeed: arr1[1], // mph
       pollution: response.data.current.pollution.aqius,
       weatherIcon: response.data.current.weather.ic
     };
 
-    // Call function to convert units from Metric to Imperial
-    const t = weatherInfo.minTemp;
-    const ws = weatherInfo.windSpeed;
-    // console.log(unitsConverter(t, ws));
+
 
     // Display weather data
     $("#weatherData").empty();
@@ -111,7 +114,7 @@ function weatherAPI(city, state) {
     // );
     $("#weatherData").append(
       $("<p>")
-        .text("Temperature: " + unitsConverter(t, ws) + " °F")
+        .text("Temperature: " + weatherInfo.minTemp + " °F")
         .addClass("temp")
     );
     $("#weatherData").append(
