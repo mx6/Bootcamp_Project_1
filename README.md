@@ -11,7 +11,8 @@
 
 
  A Map will display hikes within the given parameters.   
- >![](assets/images/map.PNG)    
+ >![](./assets/images/map.PNG)    
+
    
 
 
@@ -21,7 +22,7 @@ Below map will be listed
 > - Temperature 
 > - Humidity 
 > - Wind Speed 
-> - Air Quality   
+> - Air Quality  
 
 >![](./assets/images/dayList.PNG)    
   
@@ -33,7 +34,7 @@ Hikes will be listed in rows below with a picture and scenic description. Also l
 > - Length (miles)
 > - Elevation (feet)
 > - Difficulty 
->![](assets/images/hikeList.PNG)  
+>![](./assets/images/hikeList.PNG)  
 
 
 
@@ -55,7 +56,7 @@ As Americans everyday are becoming more environmentally and health aware, we are
 
 
 **How To Use/ Instruction**
-Is this needed??? 
+Is this needed??
 1. input text here 
 2. input text here 
 3. input text here
