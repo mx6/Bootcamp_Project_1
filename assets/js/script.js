@@ -83,7 +83,7 @@ function weatherAPI(city, state) {
     url: queryURL,
     method: "GET",
   }).then(function (response) {
-    console.log(response); // JSON return for Oregon, USA
+    // console.log(response); // JSON return for Oregon, USA
 
     // Weather Data we want:
     // Lat/lon coordinates
@@ -272,15 +272,85 @@ function weatherAPI(city, state) {
     }
 
     // call function for weather forecast
-    forecast();
+    forecast(lat, lon);
 
     // AJAX call for the hiking API
     hikingAPI(lat, lon);
   });
 }
 
-function forecast() {
+function forecast(lat, lon) {
   // Get the 7 day forecast
+  // Date, Icon, Temp, Humidity
+    // Second/Main AJAX Call to get weather data
+    var queryURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=hourly,minutely&appid=e68a6c498567148d8870611b117efac1&units=imperial";
+    //https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude=daily&appid=e68a6c498567148d8870611b117efac1&units=imperial
+
+    $.ajax({
+        url: queryURL,
+        method: "GET"
+    }).then(function(response) {
+        console.log(response);
+        
+        $(".forecast").empty();
+        // Get data for 5-day forecast
+        for (var i=1; i < 6; i++) {
+            let day = response.daily[i].dt; // ( date of forecast )
+            let dailyTemp = response.daily[i].temp.day;
+            let dailyHumidity = response.daily[i].humidity;
+            let icon = response.daily[i].weather[0].icon;
+            let iconURL = "http://openweathermap.org/img/wn/" + icon + "@2x.png";
+
+            // Switch statement
+            switch (i) {
+                case 1:
+                    $("#1").append( $("<div>").addClass("forecastDate").text(unixTimestamp(day)) );
+                    $("#1").append( $("<img>").attr("src", iconURL) );
+                    $("#1").append( $("<div>").text("Temp: " + dailyTemp + "F") );
+                    $("#1").append( $("<div>").text("Humidity: " + dailyHumidity + "%") );
+                    break;
+
+                case 2:
+                    $("#2").append( $("<div>").addClass("forecastDate").text(unixTimestamp(day)) );
+                    $("#2").append( $("<img>").attr("src", iconURL) );
+                    $("#2").append( $("<div>").text("Temp: " + dailyTemp + "F") );
+                    $("#2").append( $("<div>").text("Humidity: " + dailyHumidity + "%") );
+                    break;
+
+                case 3:
+                    $("#3").append( $("<div>").addClass("forecastDate").text(unixTimestamp(day)) );
+                    $("#3").append( $("<img>").attr("src", iconURL) );
+                    $("#3").append( $("<div>").text("Temp: " + dailyTemp + "F") );
+                    $("#3").append( $("<div>").text("Humidity: " + dailyHumidity + "%") );
+                    break;
+
+                case 4:
+                    $("#4").append( $("<div>").addClass("forecastDate").text(unixTimestamp(day)) );
+                    $("#4").append( $("<img>").attr("src", iconURL) );
+                    $("#4").append( $("<div>").text("Temp: " + dailyTemp + "F") );
+                    $("#4").append( $("<div>").text("Humidity: " + dailyHumidity + "%") );
+                    break;                           
+                    
+                case 5:
+                    $("#5").append( $("<div>").addClass("forecastDate").text(unixTimestamp(day)) );
+                    $("#5").append( $("<img>").attr("src", iconURL) );
+                    $("#5").append( $("<div>").text("Temp: " + dailyTemp + "F") );
+                    $("#5").append( $("<div>").text("Humidity: " + dailyHumidity + "%") );
+                    break; 
+            }
+        }    
+    });
+}
+
+function unixTimestamp(t) {
+  var date = new Date(t*1000);
+  var months_arr = ['1','2','3','4','5','6','7','8','9','10','11','12'];
+  var month = months_arr[date.getMonth()];
+  var year = date.getFullYear();
+  var day = date.getDate();
+  var dateDisplay = month + '/' + day + '/' + year;
+
+  return dateDisplay;
 }
 
 function hikingAPI(
