@@ -296,7 +296,7 @@
             type="checkbox"
             id="sunnyBox"
             val="sunny"
-            data-type="sunny"
+            data-type="sunnyBox"
           /><label>Sunny</label>
         </p>
         <p class="checkbox weatherCondition">
@@ -305,7 +305,7 @@
             type="checkbox"
             id="cloudyBox"
             val="cloudy"
-            data-type="cloudy"
+            data-type="cloudyBox"
           /><label>Cloudy</label>
         </p>
         <p class="checkbox weatherCondition">
@@ -314,7 +314,7 @@
             type="checkbox"
             id="rainyBox"
             val="rainy"
-            data-type="rainy"
+            data-type="rainyBox"
           /><label>Rainy</label>
         </p>
         <p class="checkbox weatherCondition">
@@ -323,7 +323,7 @@
             type="checkbox"
             id="snowyBox"
             val="snowy"
-            data-type="snowy"
+            data-type="snowyBox"
           /><label>Snowy</label>
         </p>
         <br />
@@ -353,7 +353,7 @@
 
     <!-- Overlay effect when opening sidebar on small screens -->
     <div
-      class="w3-overlay w3-hide-large w3-animate-opacity"
+      class="w3-overlay w3-hide-small w3-animate-opacity"
       onclick="w3_close()"
       style="cursor: pointer"
       title="close side menu"
@@ -373,13 +373,13 @@
     <!-- RIGHT COLUMN DATA -->
 
     <!-- !PAGE CONTENT! -->
-    <div class="w3-main" style="margin-left: 300px; margin-top: 43px">
+    <div class="w3-main" style="margin-left: 280px; margin-top: 43px">
       <!-- Header -->
-      <header class="w3-container w3-footer" style="padding-top: 22px">
-        <h1 id="title">AirWalk</h1>
-        <h5 id="mapTitle">
-          <b><i class="fa fa-map"></i> Your Hike Map</b>
-        </h5>
+      <header class="w3-container w3-footer" style="padding-top: 5px">
+        <!-- <h1 id="title">AirWalk</h1> -->
+        <h1 id="mapTitle">
+          <i class="fa fa-map"></i> Air Walk 
+        </h1>
       </header>
 
       <div class="w3-container" id="mapData" data-type="mapData">
@@ -393,13 +393,14 @@
 
       <!-- Weather Information Here -->
       <div id="weatherData"></div>
-      <div class="allForecast">
-        <div id="1" class="forecast col-md-2"> </div>
-        <div id="2" class="forecast col-md-2"> </div>
-        <div id="3" class="forecast col-md-2"> </div>
-        <div id="4" class="forecast col-md-2"> </div>
-        <div id="5" class="forecast col-md-2"> </div> 
-      </div>
+      <div class="allForecast"></div>
+      <br><br><br><br><br><br><br><br><br><br>
+        <div id="1" class="firstForecast forecast col-md-2 w3-image"> </div>
+        <div id="2" class="forecast col-md-2 w3-image"> </div>
+        <div id="3" class="forecast col-md-2 w3-image"> </div>
+        <div id="4" class="forecast col-md-2 w3-image"> </div>
+        <div id="5" class="forecast col-md-2 w3-image"> </div> 
+      
 
       <!-- Trail Information for Top 10 trails-->
       <div id="hikingInfo">
