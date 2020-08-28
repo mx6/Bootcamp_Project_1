@@ -105,7 +105,8 @@ function weatherAPI(city, state) {
     // console.log(weatherInfo.weatherIcon);
     // Display weather data
     $("#weatherData").empty();
-    $("#weatherData").append($("<h2>").text(response.data.city + ", " + state));
+    $("#weatherData").append($("<h1>").text(response.data.city + ", " + state))
+      .css("color", "white");
     $("#weatherData").append(
       $("<p>")
         .text("Temperature: " + weatherInfo.minTemp + " °F")
@@ -514,13 +515,14 @@ function hikingAPI(
       // Display list of 10 trails nearby w/ info
       var newHike = $("<li>")
         .attr("id", "trail-number-" + i)
-        .text(trailInfo.name);
-      var hikeSummary = $("<p>").text(trailInfo.summary);
-      var hikeLength = $("<p>").text("Length: " + trailInfo.length + " miles");
+        .text(trailInfo.name)
+        .css("font-size", "35px");
+      var hikeSummary = $("<p>").text(trailInfo.summary).css("font-size", "20px");;
+      var hikeLength = $("<p>").text("Length: " + trailInfo.length + " miles").css("font-size", "20px");;
       var hikeElevation = $("<p>").text(
         "Elevation Gain: " + trailInfo.elevation + " feet"
-      );
-      var hikeDifficulty = $("<p>").text("Difficulty: " + trailInfo.difficulty);
+      ).css("font-size", "20px");;
+      var hikeDifficulty = $("<p>").text("Difficulty: " + trailInfo.difficulty).css("font-size", "20px");;
       let hikePic = $("<img>").attr({
         src: trailInfo.picture,
         id: "trail-picture"
