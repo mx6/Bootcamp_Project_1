@@ -71,7 +71,7 @@ function unitsConverter(t, ws) {
 function weatherAPI(city, state) {
   var apiKey = "0146d325-a946-4208-8c5f-c9c2cb554ac6";
   var queryURL =
-    "http://api.airvisual.com/v2/city?city=" +
+    "https://api.airvisual.com/v2/city?city=" +
     city +
     "&state=" +
     state +
