@@ -312,91 +312,95 @@ function weatherAPI(city, state) {
 function forecast(lat, lon) {
   // Get the 7 day forecast
   // Date, Icon, Temp, Humidity
-  // Second/Main AJAX Call to get weather data
-  var queryURL =
-    "https://api.openweathermap.org/data/2.5/onecall?lat=" +
-    lat +
-    "&lon=" +
-    lon +
-    "&exclude=hourly,minutely&appid=e68a6c498567148d8870611b117efac1&units=imperial";
-  //https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude=daily&appid=e68a6c498567148d8870611b117efac1&units=imperial
 
-  $.ajax({
-    url: queryURL,
-    method: "GET"
-  }).then(function (response) {
-    console.log(response);
+    // Second/Main AJAX Call to get weather data
+    var queryURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=hourly,minutely&appid=e68a6c498567148d8870611b117efac1&units=imperial";
+    //https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude=daily&appid=e68a6c498567148d8870611b117efac1&units=imperial
 
-    $(".forecast").empty();
-    // Get data for 5-day forecast
-    for (var i = 1; i < 6; i++) {
-      let day = response.daily[i].dt; // ( date of forecast )
-      let dailyTemp = response.daily[i].temp.day;
-      let dailyHumidity = response.daily[i].humidity;
-      let sunrise = response.daily[i].sunrise;
-      let sunset = response.daily[i].sunset;
-      let icon = response.daily[i].weather[0].icon;
-      let iconURL = "http://openweathermap.org/img/wn/" + icon + "@2x.png";
+    $.ajax({
+        url: queryURL,
+        method: "GET"
+    }).then(function(response) {
+        // console.log(response);
+        
+        $(".forecast").empty();
 
-      // Switch statement
-      switch (i) {
-        case 1:
-          $("#1").append(
-            $("<div>").addClass("forecastDate").text(unixTimestamp(day))
-          );
-          $("#1").append($("<img>").attr("src", iconURL));
-          $("#1").append($("<div>").text("Temp: " + dailyTemp + "F"));
-          $("#1").append($("<div>").text("Humidity: " + dailyHumidity + "%"));
-          $("#1").append($("<div>").text("Sunrise: " + unixTimeSun(sunrise)));
-          $("#1").append($("<div>").text("Sunset: " + unixTimeSun(sunset)));
-          break;
+        // See which weather conditons were selected by the user
+        let selectedConditions = [];
+        $('.weatherCondition input:checked').each(function() {
+          selectedConditions.push($(this).data());
+        });
+        // console.log(selectedConditions); //display array of checked boxes for the weather
 
-        case 2:
-          $("#2").append(
-            $("<div>").addClass("forecastDate").text(unixTimestamp(day))
-          );
-          $("#2").append($("<img>").attr("src", iconURL));
-          $("#2").append($("<div>").text("Temp: " + dailyTemp + "F"));
-          $("#2").append($("<div>").text("Humidity: " + dailyHumidity + "%"));
-          $("#2").append($("<div>").text("Sunrise: " + unixTimeSun(sunrise)));
-          $("#2").append($("<div>").text("Sunset: " + unixTimeSun(sunset)));
-          break;
+        // Get data for 5-day forecast
+        for (var i=1; i < 6; i++) {
+            let day = response.daily[i].dt; // ( date of forecast )
+            let dailyTemp = response.daily[i].temp.day;
+            let dailyHumidity = response.daily[i].humidity;
+            let sunrise = response.daily[i].sunrise;
+            let sunset = response.daily[i].sunset;
+            let icon = response.daily[i].weather[0].icon;
+            let iconURL = "http://openweathermap.org/img/wn/" + icon + "@2x.png";
 
-        case 3:
-          $("#3").append(
-            $("<div>").addClass("forecastDate").text(unixTimestamp(day))
-          );
-          $("#3").append($("<img>").attr("src", iconURL));
-          $("#3").append($("<div>").text("Temp: " + dailyTemp + "F"));
-          $("#3").append($("<div>").text("Humidity: " + dailyHumidity + "%"));
-          $("#3").append($("<div>").text("Sunrise: " + unixTimeSun(sunrise)));
-          $("#3").append($("<div>").text("Sunset: " + unixTimeSun(sunset)));
-          break;
+            // Compare forecast conditions to user input condidtions
+            // for (var i=0; i <selectedConditions.length; i++) {
+            //   if (selectedConditions[i] == ) {
+                
+            //   }
+            //   else if() {
 
-        case 4:
-          $("#4").append(
-            $("<div>").addClass("forecastDate").text(unixTimestamp(day))
-          );
-          $("#4").append($("<img>").attr("src", iconURL));
-          $("#4").append($("<div>").text("Temp: " + dailyTemp + "F"));
-          $("#4").append($("<div>").text("Humidity: " + dailyHumidity + "%"));
-          $("#4").append($("<div>").text("Sunrise: " + unixTimeSun(sunrise)));
-          $("#4").append($("<div>").text("Sunset: " + unixTimeSun(sunset)));
-          break;
+            //   }
+            // }
 
-        case 5:
-          $("#5").append(
-            $("<div>").addClass("forecastDate").text(unixTimestamp(day))
-          );
-          $("#5").append($("<img>").attr("src", iconURL));
-          $("#5").append($("<div>").text("Temp: " + dailyTemp + "F"));
-          $("#5").append($("<div>").text("Humidity: " + dailyHumidity + "%"));
-          $("#5").append($("<div>").text("Sunrise: " + unixTimeSun(sunrise)));
-          $("#5").append($("<div>").text("Sunset: " + unixTimeSun(sunset)));
-          break;
-      }
-    }
-  });
+            // Switch statement to display the 5-day forecast
+            switch (i) {
+                case 1:
+                    $("#1").append( $("<div>").addClass("forecastDate").text(unixTimestamp(day)) );
+                    $("#1").append( $("<img>").attr("src", iconURL) );
+                    $("#1").append( $("<div>").text("Temp: " + dailyTemp + " °F") );
+                    $("#1").append( $("<div>").text("Humidity: " + dailyHumidity + "%") );
+                    $("#1").append( $("<div>").text("Sunrise: " + unixTimeSun(sunrise)) );
+                    $("#1").append( $("<div>").text("Sunset: " + unixTimeSun(sunset)) );
+                    break;
+
+                case 2:
+                    $("#2").append( $("<div>").addClass("forecastDate").text(unixTimestamp(day)) );
+                    $("#2").append( $("<img>").attr("src", iconURL) );
+                    $("#2").append( $("<div>").text("Temp: " + dailyTemp + " °F") );
+                    $("#2").append( $("<div>").text("Humidity: " + dailyHumidity + "%") );
+                    $("#2").append( $("<div>").text("Sunrise: " + unixTimeSun(sunrise)) );
+                    $("#2").append( $("<div>").text("Sunset: " + unixTimeSun(sunset)) );
+                    break;
+
+                case 3:
+                    $("#3").append( $("<div>").addClass("forecastDate").text(unixTimestamp(day)) );
+                    $("#3").append( $("<img>").attr("src", iconURL) );
+                    $("#3").append( $("<div>").text("Temp: " + dailyTemp + " °F") );
+                    $("#3").append( $("<div>").text("Humidity: " + dailyHumidity + "%") );
+                    $("#3").append( $("<div>").text("Sunrise: " + unixTimeSun(sunrise)) );
+                    $("#3").append( $("<div>").text("Sunset: " + unixTimeSun(sunset)) );
+                    break;
+
+                case 4:
+                    $("#4").append( $("<div>").addClass("forecastDate").text(unixTimestamp(day)) );
+                    $("#4").append( $("<img>").attr("src", iconURL) );
+                    $("#4").append( $("<div>").text("Temp: " + dailyTemp + " °F") );
+                    $("#4").append( $("<div>").text("Humidity: " + dailyHumidity + "%") );
+                    $("#4").append( $("<div>").text("Sunrise: " + unixTimeSun(sunrise)) );
+                    $("#4").append( $("<div>").text("Sunset: " + unixTimeSun(sunset)) );
+                    break;                           
+                    
+                case 5:
+                    $("#5").append( $("<div>").addClass("forecastDate").text(unixTimestamp(day)) );
+                    $("#5").append( $("<img>").attr("src", iconURL) );
+                    $("#5").append( $("<div>").text("Temp: " + dailyTemp + " °F") );
+                    $("#5").append( $("<div>").text("Humidity: " + dailyHumidity + "%") );
+                    $("#5").append( $("<div>").text("Sunrise: " + unixTimeSun(sunrise)) );
+                    $("#5").append( $("<div>").text("Sunset: " + unixTimeSun(sunset)) );
+                    break; 
+            }
+        }    
+    });
 }
 
 function unixTimestamp(t) {
