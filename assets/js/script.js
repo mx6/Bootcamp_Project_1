@@ -102,7 +102,7 @@ function weatherAPI(city, state) {
       pollution: response.data.current.pollution.aqius,
       weatherIcon: response.data.current.weather.ic
     };
-    console.log(weatherInfo.weatherIcon);
+    // console.log(weatherInfo.weatherIcon);
     // Display weather data
     $("#weatherData").empty();
     $("#weatherData").append($("<h2>").text(response.data.city + ", " + state));
@@ -330,7 +330,27 @@ function forecast(lat, lon) {
         $('.weatherCondition input:checked').each(function() {
           selectedConditions.push($(this).data());
         });
-        // console.log(selectedConditions); //display array of checked boxes for the weather
+        console.log(selectedConditions); //display array of checked boxes for the weather
+        
+        //Correlate Icon # with sunny/cloudy/rainy/snowy
+        // let iconCategory = []; // add each day's conditions to array
+        // if (icon === "01d" || icon === "01n") {
+        //   console.log("sunny category!");
+        //   iconCategory = "sunny";
+        // }
+        // else if (icon === "02d" || icon === "02n" || icon === "03d" || icon === "03n" || icon === "034" || icon === "04n" ) {
+        //   console.log("cloudy category");
+        //   iconCategory = "sunny";
+        // } 
+        // else if (icon === "09d" || icon === "09n" || icon === "10d" || icon === "10n" || icon === "11d" || icon === "11n" || icon === "50d" || icon === "50n") {
+        //   console.log("rainy category");
+        //   iconCategory = "sunny";
+        // } 
+        // else if (icon === "13d" || icon === "13n") {
+        //   console.log("snowy category");
+        //   iconCategory = "sunny";
+        // } 
+
 
         // Get data for 5-day forecast
         for (var i=1; i < 6; i++) {
@@ -342,10 +362,12 @@ function forecast(lat, lon) {
             let icon = response.daily[i].weather[0].icon;
             let iconURL = "http://openweathermap.org/img/wn/" + icon + "@2x.png";
 
+
+
             // Compare forecast conditions to user input condidtions
             // for (var i=0; i <selectedConditions.length; i++) {
-            //   if (selectedConditions[i] == ) {
-                
+            //   if (selectedConditions[i].type == iconCategory) {
+
             //   }
             //   else if() {
 
