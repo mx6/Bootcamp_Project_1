@@ -104,7 +104,8 @@ function weatherAPI(city, state) {
     console.log(weatherInfo.weatherIcon);
     // Display weather data
     $("#weatherData").empty();
-    $("#weatherData").append($("<h1>").text(response.data.city + ", " + state))
+    $("#weatherData")
+      .append($("<h1>").text(response.data.city + ", " + state))
       .css("color", "white");
     $("#weatherData").append(
       $("<p>")
@@ -501,33 +502,33 @@ function hikingAPI(
         length: response.trails[i].length,
         elevation: response.trails[i].ascent,
         difficulty: response.trails[i].difficulty,
-        picture: response.trails[i].imgSqSmall
+        picture: response.trails[i].imgSqSmall,
+        url: response.trails[i].url
       };
-
+      // console.log(trailInfo.url);
       // Display list of 10 trails nearby w/ info
 
-      var newHike = $("<li>")
-        .attr("id", "trail-number-" + i)
-        .text(trailInfo.name);
-      var hikeSummary = $("<p>").text(trailInfo.summary);
-      var hikeLength = $("<p>").text("Length: " + trailInfo.length + " miles");
-      var hikeElevation = $("<p>").text(
-        "Elevation Gain: " + trailInfo.elevation + " feet"
-      );
-      var hikeDifficulty = $("<p>").text("Difficulty: " + trailInfo.difficulty);
-      let hikePic = $("<img>").attr({
-        src: trailInfo.picture,
-        id: "trail-picture"
-      });
+      // var newHike = $("<li>")
+      //   .attr("id", "trail-number-" + i)
+      //   .text(trailInfo.name);
+      // var hikeSummary = $("<p>").text(trailInfo.summary);
+      // var hikeLength = $("<p>").text("Length: " + trailInfo.length + " miles");
+      // var hikeElevation = $("<p>").text(
+      //   "Elevation Gain: " + trailInfo.elevation + " feet"
+      // );
+      // var hikeDifficulty = $("<p>").text("Difficulty: " + trailInfo.difficulty);
+      // let hikePic = $("<img>").attr({
+      //   src: trailInfo.picture,
+      //   id: "trail-picture"
+      // });
 
-      // Append
-      $("#hikingList").append(newHike);
-      newHike.append(hikeSummary, hikeLength, hikeElevation, hikeDifficulty);
+      // // Append
+      // $("#hikingList").append(newHike);
+      // newHike.append(hikeSummary, hikeLength, hikeElevation, hikeDifficulty);
 
-      if (trailInfo.picture != "") {
-        newHike.append(hikePic);
-      }
-
+      // if (trailInfo.picture != "") {
+      //   newHike.append(hikePic);
+      // }
 
       trails.push(trailInfo);
     }
@@ -687,8 +688,12 @@ function topFunction() {
 function hikingTrails(trails) {
   // console.log(trails);
   for (let i = 0; i < trails.length; i++) {
-    let newHike = $("<li>")
-      .attr("id", "trail-number-" + i)
+    let newHike = $("<li>").attr("id", "trail-number-" + i);
+    let hikeName = $("<a>")
+      .attr({
+        href: trails[i].url,
+        target: "_blank"
+      })
       .text(trails[i].name);
     let hikeSummary = $("<p>").text(trails[i].summary);
     let hikeLength = $("<p>").text("Length: " + trails[i].length + " miles");
@@ -702,6 +707,7 @@ function hikingTrails(trails) {
     });
 
     // Append
+    newHike.append(hikeName);
     $("#hikingList").append(newHike);
     newHike.append(hikeSummary, hikeLength, hikeElevation, hikeDifficulty);
 
