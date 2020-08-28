@@ -9,7 +9,6 @@ var lat;
 let trails = [];
 let userInputs;
 let weatherInfo;
-// let state = "Oregon";
 
 $(document).ready(function () {
   // Retrieve the city input by the user
@@ -313,94 +312,109 @@ function forecast(lat, lon) {
   // Get the 7 day forecast
   // Date, Icon, Temp, Humidity
 
-    // Second/Main AJAX Call to get weather data
-    var queryURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=hourly,minutely&appid=e68a6c498567148d8870611b117efac1&units=imperial";
-    //https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude=daily&appid=e68a6c498567148d8870611b117efac1&units=imperial
+  // Second/Main AJAX Call to get weather data
+  var queryURL =
+    "https://api.openweathermap.org/data/2.5/onecall?lat=" +
+    lat +
+    "&lon=" +
+    lon +
+    "&exclude=hourly,minutely&appid=e68a6c498567148d8870611b117efac1&units=imperial";
+  //https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude=daily&appid=e68a6c498567148d8870611b117efac1&units=imperial
 
-    $.ajax({
-        url: queryURL,
-        method: "GET"
-    }).then(function(response) {
-        // console.log(response);
-        
-        $(".forecast").empty();
+  $.ajax({
+    url: queryURL,
+    method: "GET"
+  }).then(function (response) {
+    // console.log(response);
 
-        // See which weather conditons were selected by the user
-        let selectedConditions = [];
-        $('.weatherCondition input:checked').each(function() {
-          selectedConditions.push($(this).data());
-        });
-        // console.log(selectedConditions); //display array of checked boxes for the weather
+    $(".forecast").empty();
 
-        // Get data for 5-day forecast
-        for (var i=1; i < 6; i++) {
-            let day = response.daily[i].dt; // ( date of forecast )
-            let dailyTemp = response.daily[i].temp.day;
-            let dailyHumidity = response.daily[i].humidity;
-            let sunrise = response.daily[i].sunrise;
-            let sunset = response.daily[i].sunset;
-            let icon = response.daily[i].weather[0].icon;
-            let iconURL = "http://openweathermap.org/img/wn/" + icon + "@2x.png";
-
-            // Compare forecast conditions to user input condidtions
-            // for (var i=0; i <selectedConditions.length; i++) {
-            //   if (selectedConditions[i] == ) {
-                
-            //   }
-            //   else if() {
-
-            //   }
-            // }
-
-            // Switch statement to display the 5-day forecast
-            switch (i) {
-                case 1:
-                    $("#1").append( $("<div>").addClass("forecastDate").text(unixTimestamp(day)) );
-                    $("#1").append( $("<img>").attr("src", iconURL) );
-                    $("#1").append( $("<div>").text("Temp: " + dailyTemp + " °F") );
-                    $("#1").append( $("<div>").text("Humidity: " + dailyHumidity + "%") );
-                    $("#1").append( $("<div>").text("Sunrise: " + unixTimeSun(sunrise)) );
-                    $("#1").append( $("<div>").text("Sunset: " + unixTimeSun(sunset)) );
-                    break;
-
-                case 2:
-                    $("#2").append( $("<div>").addClass("forecastDate").text(unixTimestamp(day)) );
-                    $("#2").append( $("<img>").attr("src", iconURL) );
-                    $("#2").append( $("<div>").text("Temp: " + dailyTemp + " °F") );
-                    $("#2").append( $("<div>").text("Humidity: " + dailyHumidity + "%") );
-                    $("#2").append( $("<div>").text("Sunrise: " + unixTimeSun(sunrise)) );
-                    $("#2").append( $("<div>").text("Sunset: " + unixTimeSun(sunset)) );
-                    break;
-
-                case 3:
-                    $("#3").append( $("<div>").addClass("forecastDate").text(unixTimestamp(day)) );
-                    $("#3").append( $("<img>").attr("src", iconURL) );
-                    $("#3").append( $("<div>").text("Temp: " + dailyTemp + " °F") );
-                    $("#3").append( $("<div>").text("Humidity: " + dailyHumidity + "%") );
-                    $("#3").append( $("<div>").text("Sunrise: " + unixTimeSun(sunrise)) );
-                    $("#3").append( $("<div>").text("Sunset: " + unixTimeSun(sunset)) );
-                    break;
-
-                case 4:
-                    $("#4").append( $("<div>").addClass("forecastDate").text(unixTimestamp(day)) );
-                    $("#4").append( $("<img>").attr("src", iconURL) );
-                    $("#4").append( $("<div>").text("Temp: " + dailyTemp + " °F") );
-                    $("#4").append( $("<div>").text("Humidity: " + dailyHumidity + "%") );
-                    $("#4").append( $("<div>").text("Sunrise: " + unixTimeSun(sunrise)) );
-                    $("#4").append( $("<div>").text("Sunset: " + unixTimeSun(sunset)) );
-                    break;                           
-                    
-                case 5:
-                    $("#5").append( $("<div>").addClass("forecastDate").text(unixTimestamp(day)) );
-                    $("#5").append( $("<img>").attr("src", iconURL) );
-                    $("#5").append( $("<div>").text("Temp: " + dailyTemp + " °F") );
-                    $("#5").append( $("<div>").text("Humidity: " + dailyHumidity + "%") );
-                    $("#5").append( $("<div>").text("Sunrise: " + unixTimeSun(sunrise)) );
-                    $("#5").append( $("<div>").text("Sunset: " + unixTimeSun(sunset)) );
-                    break; 
-            }
-        }    
+    // See which weather conditons were selected by the user
+    let selectedConditions = [];
+    $(".weatherCondition input:checked").each(function () {
+      selectedConditions.push($(this).data());
     });
+    // console.log(selectedConditions); //display array of checked boxes for the weather
+
+    // Get data for 5-day forecast
+    for (var i = 1; i < 6; i++) {
+      let day = response.daily[i].dt; // ( date of forecast )
+      let dailyTemp = response.daily[i].temp.day;
+      let dailyHumidity = response.daily[i].humidity;
+      let sunrise = response.daily[i].sunrise;
+      let sunset = response.daily[i].sunset;
+      let icon = response.daily[i].weather[0].icon;
+      let iconURL = "http://openweathermap.org/img/wn/" + icon + "@2x.png";
+
+      // Compare forecast conditions to user input condidtions
+      // for (var i=0; i <selectedConditions.length; i++) {
+      //   if (selectedConditions[i] == ) {
+
+      //   }
+      //   else if() {
+
+      //   }
+      // }
+
+      // Switch statement to display the 5-day forecast
+      switch (i) {
+        case 1:
+          $("#1").append(
+            $("<div>").addClass("forecastDate").text(unixTimestamp(day))
+          );
+          $("#1").append($("<img>").attr("src", iconURL));
+          $("#1").append($("<div>").text("Temp: " + dailyTemp + " °F"));
+          $("#1").append($("<div>").text("Humidity: " + dailyHumidity + "%"));
+          $("#1").append($("<div>").text("Sunrise: " + unixTimeSun(sunrise)));
+          $("#1").append($("<div>").text("Sunset: " + unixTimeSun(sunset)));
+          break;
+
+        case 2:
+          $("#2").append(
+            $("<div>").addClass("forecastDate").text(unixTimestamp(day))
+          );
+          $("#2").append($("<img>").attr("src", iconURL));
+          $("#2").append($("<div>").text("Temp: " + dailyTemp + " °F"));
+          $("#2").append($("<div>").text("Humidity: " + dailyHumidity + "%"));
+          $("#2").append($("<div>").text("Sunrise: " + unixTimeSun(sunrise)));
+          $("#2").append($("<div>").text("Sunset: " + unixTimeSun(sunset)));
+          break;
+
+        case 3:
+          $("#3").append(
+            $("<div>").addClass("forecastDate").text(unixTimestamp(day))
+          );
+          $("#3").append($("<img>").attr("src", iconURL));
+          $("#3").append($("<div>").text("Temp: " + dailyTemp + " °F"));
+          $("#3").append($("<div>").text("Humidity: " + dailyHumidity + "%"));
+          $("#3").append($("<div>").text("Sunrise: " + unixTimeSun(sunrise)));
+          $("#3").append($("<div>").text("Sunset: " + unixTimeSun(sunset)));
+          break;
+
+        case 4:
+          $("#4").append(
+            $("<div>").addClass("forecastDate").text(unixTimestamp(day))
+          );
+          $("#4").append($("<img>").attr("src", iconURL));
+          $("#4").append($("<div>").text("Temp: " + dailyTemp + " °F"));
+          $("#4").append($("<div>").text("Humidity: " + dailyHumidity + "%"));
+          $("#4").append($("<div>").text("Sunrise: " + unixTimeSun(sunrise)));
+          $("#4").append($("<div>").text("Sunset: " + unixTimeSun(sunset)));
+          break;
+
+        case 5:
+          $("#5").append(
+            $("<div>").addClass("forecastDate").text(unixTimestamp(day))
+          );
+          $("#5").append($("<img>").attr("src", iconURL));
+          $("#5").append($("<div>").text("Temp: " + dailyTemp + " °F"));
+          $("#5").append($("<div>").text("Humidity: " + dailyHumidity + "%"));
+          $("#5").append($("<div>").text("Sunrise: " + unixTimeSun(sunrise)));
+          $("#5").append($("<div>").text("Sunset: " + unixTimeSun(sunset)));
+          break;
+      }
+    }
+  });
 }
 
 function unixTimestamp(t) {
@@ -490,30 +504,31 @@ function hikingAPI(
       };
 
       // Display list of 10 trails nearby w/ info
-      var newHike = $("<li>")
-        .attr("id", "trail-number-" + i)
-        .text(trailInfo.name);
-      var hikeSummary = $("<p>").text(trailInfo.summary);
-      var hikeLength = $("<p>").text("Length: " + trailInfo.length + " miles");
-      var hikeElevation = $("<p>").text(
-        "Elevation Gain: " + trailInfo.elevation + " feet"
-      );
-      var hikeDifficulty = $("<p>").text("Difficulty: " + trailInfo.difficulty);
-      let hikePic = $("<img>").attr({
-        src: trailInfo.picture,
-        id: "trail-picture"
-      });
+      // var newHike = $("<li>")
+      //   .attr("id", "trail-number-" + i)
+      //   .text(trailInfo.name);
+      // var hikeSummary = $("<p>").text(trailInfo.summary);
+      // var hikeLength = $("<p>").text("Length: " + trailInfo.length + " miles");
+      // var hikeElevation = $("<p>").text(
+      //   "Elevation Gain: " + trailInfo.elevation + " feet"
+      // );
+      // var hikeDifficulty = $("<p>").text("Difficulty: " + trailInfo.difficulty);
+      // let hikePic = $("<img>").attr({
+      //   src: trailInfo.picture,
+      //   id: "trail-picture"
+      // });
 
-      // Append
-      $("#hikingList").append(newHike);
-      newHike.append(hikeSummary, hikeLength, hikeElevation, hikeDifficulty);
+      // // Append
+      // $("#hikingList").append(newHike);
+      // newHike.append(hikeSummary, hikeLength, hikeElevation, hikeDifficulty);
 
-      if (trailInfo.picture != "") {
-        newHike.append(hikePic);
-      }
+      // if (trailInfo.picture != "") {
+      //   newHike.append(hikePic);
+      // }
 
       trails.push(trailInfo);
     }
+    hikingTrails(sortHikes(trails, userInputs, weatherInfo));
     // sortHikes(trails, userInputs, weatherInfo);
     // console.log(trails);
     maparea(lat, lon, sortHikes(trails, userInputs, weatherInfo));
@@ -613,6 +628,28 @@ function sortHikes(trails, user, weather) {
       minTemp < temp &&
       temp < maxTemp
     ) {
+      // let newHike = $("<li>")
+      //   .attr("id", "trail-number-" + i)
+      //   .text(thisTrail.name);
+      // newHike.css("border", "1px solid black");
+      // let hikeSummary = $("<p>").text(thisTrail.summary);
+      // let hikeLength = $("<p>").text("Length: " + thisTrail.length + " miles");
+      // let hikeElevation = $("<p>").text(
+      //   "Elevation Gain: " + thisTrail.elevation + " feet"
+      // );
+      // let hikeDifficulty = $("<p>").text("Difficulty: " + thisTrail.difficulty);
+      // let hikePic = $("<img>").attr({
+      //   src: thisTrail.picture,
+      //   id: "trail-picture"
+      // });
+
+      // // Append
+      // $("#hikingList").append(newHike);
+      // newHike.append(hikeSummary, hikeLength, hikeElevation, hikeDifficulty);
+
+      // if (thisTrail.picture != "") {
+      //   newHike.append(hikePic);
+      // }
       return true;
     }
   });
@@ -644,28 +681,29 @@ function topFunction() {
 
 // Append hiking info to page
 // Will try to make it work after sort function is done
-// function hikingTrails(trails) {
-//   console.log(trails);
-//   var newHike = $("<li>")
-//     .attr("id", "trail-number-" + i)
-//     .text(trailInfo.name);
-//   newHike.css("border", "1px solid black");
-//   var hikeSummary = $("<p>").text(trailInfo.summary);
-//   var hikeLength = $("<p>").text("Length: " + trailInfo.length + " miles");
-//   var hikeElevation = $("<p>").text(
-//     "Elevation Gain: " + trailInfo.elevation + " feet"
-//   );
-//   var hikeDifficulty = $("<p>").text("Difficulty: " + trailInfo.difficulty);
-//   let hikePic = $("<img>").attr({
-//     src: trailInfo.picture,
-//     id: "trail-picture"
-//   });
+function hikingTrails(trails) {
+  // console.log(trails);
+  for (let i = 0; i < trails.length; i++) {
+    let newHike = $("<li>")
+      .attr("id", "trail-number-" + i)
+      .text(trails[i].name);
+    let hikeSummary = $("<p>").text(trails[i].summary);
+    let hikeLength = $("<p>").text("Length: " + trails[i].length + " miles");
+    let hikeElevation = $("<p>").text(
+      "Elevation Gain: " + trails[i].elevation + " feet"
+    );
+    let hikeDifficulty = $("<p>").text("Difficulty: " + trails[i].difficulty);
+    let hikePic = $("<img>").attr({
+      src: trails[i].picture,
+      id: "trail-picture"
+    });
 
-//   // Append
-//   $("#hikingList").append(newHike);
-//   newHike.append(hikeSummary, hikeLength, hikeElevation, hikeDifficulty);
+    // Append
+    $("#hikingList").append(newHike);
+    newHike.append(hikeSummary, hikeLength, hikeElevation, hikeDifficulty);
 
-//   if (trailInfo.picture != "") {
-//     newHike.append(hikePic);
-//   }
-// }
+    if (trails[i].picture != "") {
+      newHike.append(hikePic);
+    }
+  }
+}
