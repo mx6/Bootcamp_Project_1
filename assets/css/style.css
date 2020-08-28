@@ -78,7 +78,7 @@ p {
 }
 
 #map {
-  width: 90%;
+  width: 800px;
   height: 450px;
   /* margin-left: 50px; */
   /* display: block;  */
@@ -88,20 +88,27 @@ p {
 
 #weatherData {
   margin-left: 50px;
-  font-size: 20px;
+  font-size: 18px;
 }
 
 .weatherIcon {
-  width: 30px;
-  height: 30px;
+  width: 20px;
+  height: 20px;
   margin-left: 10px;
+}
+
+.firstForecast {
+  margin-left: 50px !important;
 }
 
 .forecast {
   float: left;
-  margin: 10px;
-  padding: 10px;
-  font-size: 16px;
+  margin: 5px;
+  margin-bottom: 50px;
+  padding: 5px;
+  /* margin-left: 10px; */
+  font-size: 14px;
+  background-color: rgba(255, 255, 255, 0.3);
 }
 
 .forecastDate {
@@ -120,12 +127,13 @@ p {
 #hikingList {
   margin-left: 50px;
   /* padding-left: 100px;  */
-  margin-left: 100px;
+  /* margin-left: 100px;  */
 }
 
 #trail-picture {
   width: 150px;
   height: 150px;
+  /* float: right; */
 }
 
 #myBtn {

@@ -9,7 +9,6 @@ var lat;
 let trails = [];
 let userInputs;
 let weatherInfo;
-// let state = "Oregon";
 
 $(document).ready(function () {
   // Retrieve the city input by the user
@@ -556,7 +555,7 @@ function maparea(lat, lon, trails) {
     let trailPopup = new mapboxgl.Popup().setHTML(trailLink);
 
     // Create markers with popup
-    var marker = new mapboxgl.Marker({ color: "red" })
+    var marker = new mapboxgl.Marker({ color: "#ad1d40" })
       .setLngLat([lng, lat])
       .setPopup(trailPopup)
       .addTo(map);
