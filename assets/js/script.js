@@ -104,7 +104,8 @@ function weatherAPI(city, state) {
     console.log(weatherInfo.weatherIcon);
     // Display weather data
     $("#weatherData").empty();
-    $("#weatherData").append($("<h2>").text(response.data.city + ", " + state));
+    $("#weatherData").append($("<h1>").text(response.data.city + ", " + state))
+      .css("color", "white");
     $("#weatherData").append(
       $("<p>")
         .text("Temperature: " + weatherInfo.minTemp + " °F")
@@ -504,27 +505,29 @@ function hikingAPI(
       };
 
       // Display list of 10 trails nearby w/ info
-      // var newHike = $("<li>")
-      //   .attr("id", "trail-number-" + i)
-      //   .text(trailInfo.name);
-      // var hikeSummary = $("<p>").text(trailInfo.summary);
-      // var hikeLength = $("<p>").text("Length: " + trailInfo.length + " miles");
-      // var hikeElevation = $("<p>").text(
-      //   "Elevation Gain: " + trailInfo.elevation + " feet"
-      // );
-      // var hikeDifficulty = $("<p>").text("Difficulty: " + trailInfo.difficulty);
-      // let hikePic = $("<img>").attr({
-      //   src: trailInfo.picture,
-      //   id: "trail-picture"
-      // });
 
-      // // Append
-      // $("#hikingList").append(newHike);
-      // newHike.append(hikeSummary, hikeLength, hikeElevation, hikeDifficulty);
+      var newHike = $("<li>")
+        .attr("id", "trail-number-" + i)
+        .text(trailInfo.name);
+      var hikeSummary = $("<p>").text(trailInfo.summary);
+      var hikeLength = $("<p>").text("Length: " + trailInfo.length + " miles");
+      var hikeElevation = $("<p>").text(
+        "Elevation Gain: " + trailInfo.elevation + " feet"
+      );
+      var hikeDifficulty = $("<p>").text("Difficulty: " + trailInfo.difficulty);
+      let hikePic = $("<img>").attr({
+        src: trailInfo.picture,
+        id: "trail-picture"
+      });
 
-      // if (trailInfo.picture != "") {
-      //   newHike.append(hikePic);
-      // }
+      // Append
+      $("#hikingList").append(newHike);
+      newHike.append(hikeSummary, hikeLength, hikeElevation, hikeDifficulty);
+
+      if (trailInfo.picture != "") {
+        newHike.append(hikePic);
+      }
+
 
       trails.push(trailInfo);
     }
