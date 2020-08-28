@@ -293,6 +293,14 @@ function forecast(lat, lon) {
         // console.log(response);
         
         $(".forecast").empty();
+
+        // See which weather conditons were selected by the user
+        let selectedConditions = [];
+        $('.weatherCondition input:checked').each(function() {
+          selectedConditions.push($(this).data());
+        });
+        // console.log(selectedConditions); //display array of checked boxes for the weather
+
         // Get data for 5-day forecast
         for (var i=1; i < 6; i++) {
             let day = response.daily[i].dt; // ( date of forecast )
@@ -303,23 +311,15 @@ function forecast(lat, lon) {
             let icon = response.daily[i].weather[0].icon;
             let iconURL = "http://openweathermap.org/img/wn/" + icon + "@2x.png";
 
-            // Compare forecast conditions to user input condidtions:
-            // use for each..?
-            if ( $("#sunnyBox").prop("checked")) {
-              console.log("sunny conditions desired!");
-            }
-            else if ( $("#cloudyBox").prop("checked")) {
-              console.log("cloudy conditions desired!");
-            }
-            else if ( $("#rainyBox").prop("checked")) {
-              console.log("rainy conditions desired!");
-            }
-            else if ( $("#snowyBox").prop("checked")) {
-              console.log("snowy conditions desired!");
-            }
+            // Compare forecast conditions to user input condidtions
+            // for (var i=0; i <selectedConditions.length; i++) {
+            //   if (selectedConditions[i] == ) {
+                
+            //   }
+            //   else if() {
 
-
-
+            //   }
+            // }
 
             // Switch statement to display the 5-day forecast
             switch (i) {
