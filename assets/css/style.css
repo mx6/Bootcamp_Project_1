@@ -73,8 +73,13 @@ p {
   margin-top: 30px;
 }
 
+#mapData {
+  font-size: 20px;
+  margin-left: 40px; 
+}
+
 #map {
-  width: 80%; 
+  width: 1350px; 
   height: 450px;
   margin-left: 50px;
   /* display: block; 
