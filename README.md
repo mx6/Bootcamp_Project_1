@@ -7,6 +7,7 @@
  >
  ![](assets\images\optionSelection.PNG)
  ![](assets/images/optionSelection.PNG)
+ ![](./assets/images/optionSelection.PNG")
 
  A Map will display hikes within the given parameters. 
  - [x]*insert image of map* 
