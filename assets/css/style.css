@@ -69,9 +69,28 @@ p {
   height: 450px;
 }
 
+#weatherData {
+  float: left;
+  margin-right: 300px;
+}
+
 .weatherIcon {
   width: 30px;
   height: 30px;
+}
+
+
+.forecast {
+  float: left;
+  margin: 10px;
+}
+
+.forecastDate {
+  font-weight: bold;
+}
+
+#hikingInfo {
+  clear: left;
 }
 
 #trail-picture {
