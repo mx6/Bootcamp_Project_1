@@ -77,8 +77,8 @@ p {
 .weatherIcon {
   width: 30px;
   height: 30px;
+  margin-left: 10px;
 }
-
 
 .forecast {
   float: left;
@@ -121,4 +121,8 @@ p {
 .aqi {
   padding: 2px 5px;
   border-radius: 5px;
+}
+
+.marker {
+  color: red;
 }
