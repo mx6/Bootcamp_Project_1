@@ -17,8 +17,16 @@ body {
   background-image: url(../images/map_bkgrnd_grey.gif);
 }
 
+
+#title {
+  text-align: center;
+  font-weight: 800; 
+  font-size: 50px; 
+}
+
 p {
   color: white;
+  font-weight: 500;
 }
 
 /* div {
@@ -40,9 +48,9 @@ p {
   margin: 5px;
 }
 
-.checkbox {
-  color: black;
-}
+ .checkbox {
+   color: black; 
+ }
 
 #mySidebar {
   padding: 10px;
@@ -62,16 +70,23 @@ p {
 #mapTitle {
   color: white;
   font-size: 36px;
+  margin-top: 30px;
 }
 
 #map {
-  width: 800px;
+  width: 80%; 
   height: 450px;
+  margin-left: 50px;
+  /* display: block; 
+  margin-left: auto;
+  margin-right: auto; */
 }
 
 #weatherData {
   float: left;
-  margin-right: 300px;
+  margin-right: 100px;
+  margin-left: 50px;
+  font-size: 20px; 
 }
 
 .weatherIcon {
@@ -83,6 +98,8 @@ p {
 .forecast {
   float: left;
   margin: 10px;
+  padding: 10px; 
+  font-size:20px;
 }
 
 .forecastDate {
@@ -91,11 +108,22 @@ p {
 
 #hikingInfo {
   clear: left;
+  width: 75%; 
+  font-size: 20px; 
+  /* margin: 200px;  */
+  /* border: 200px;  */
+  /* padding: 200px;  */
+}
+
+#hikingList {
+  margin-Left: 50px;
+  /* padding-left: 100px;  */
+  margin-left: 100px; 
 }
 
 #trail-picture {
-  width: 100px;
-  height: 100px;
+  width: 150px;
+  height: 150px; 
 }
 
 #myBtn {
@@ -119,10 +147,9 @@ p {
 } */
 
 .aqi {
-  padding: 2px 5px;
+  padding: 3px 5px;
   border-radius: 5px;
+
 }
 
-.marker {
-  color: red;
-}
+
