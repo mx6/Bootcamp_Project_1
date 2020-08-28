@@ -92,8 +92,8 @@ p {
 .weatherIcon {
   width: 30px;
   height: 30px;
+  margin-left: 10px;
 }
-
 
 .forecast {
   float: left;
@@ -152,13 +152,3 @@ p {
 
 }
 
-li {
-  color:rgb(6, 65, 6); 
-  margin: 20px; 
-  font-weight: 800; 
-}
-
-#mapData {
-  font-size: 20px; 
-  margin-left:40px; 
-}
