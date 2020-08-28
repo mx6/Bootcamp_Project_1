@@ -4,15 +4,17 @@
  An app in which user can choose critera and find corresponding hikes in given area.   
 
 
- User may choose city, distance, elevation, difficulty and temperature to filter what hike they would like 
- >  
- ![](assets\images\optionSelection.PNG)
- ![](assets/images/optionSelection.PNG)
- ![](./assets/images/optionSelection.PNG")  
+ User may choose city, distance, elevation, difficulty and temperature to filter what hike they would like. 
+ >![](./assets/images/optionSelection.PNG)    
+   
+
 
 
  A Map will display hikes within the given parameters.   
- >![](assets\images\map.PNG)  
+ >![](./assets/images/map.PNG)    
+
+   
+
 
 
 Below map will be listed 
@@ -20,8 +22,11 @@ Below map will be listed
 > - Temperature 
 > - Humidity 
 > - Wind Speed 
-> - Air Quality 
->  ![](./assets/images/dayList.PNG)  
+> - Air Quality  
+
+>![](./assets/images/dayList.PNG)    
+  
+
 
 
 
@@ -29,12 +34,13 @@ Hikes will be listed in rows below with a picture and scenic description. Also l
 > - Length (miles)
 > - Elevation (feet)
 > - Difficulty 
->![](assets/images/hikeList.PNG)  
+>![](./assets/images/hikeList.PNG)  
 
 
 
 
-**Motivation**
+**Motivation**  
+
 In August 2020 the US passed the *Great American Outdoors Act*, which will secure permanent funding for the Land & Water Conservation Fund (LWCF). The LWCF funds, protects and expands trails and public hiking areas across America. According to *AmericanHiking.org*, 1 in every 6 people goes hiking every year, with more joining constantly.   
 
 With the increase of hiking popularity and the stable funding of LWCF, we are sure to see a rise in the need for better and more detaild user hiking apps.   
@@ -43,29 +49,29 @@ As Americans everyday are becoming more environmentally and health aware, we are
 
 
 
-##Tech/Framework Used/Tech Stack
+**Tech/Framework Used/Tech Stack**  
+
 - item1 
 - item2 
 
 
-##How To Use/ Instruction  
-
-Is this needed??? 
+**How To Use/ Instruction**
+Is this needed??
 1. input text here 
 2. input text here 
 3. input text here
 
 
-##About the Code  
+**About the Code**
 xxxxxxxxxx
 
 
-##Code Example/How it Works  
+**Code Example/How it Works**
 *insert image of code example here*  
 explain code 
 
 
-##Notes/What could be done differently  
+**Notes/What could be done differently**
 *improvements that can be done*  
 
 
