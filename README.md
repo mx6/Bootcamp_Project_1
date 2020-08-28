@@ -42,27 +42,37 @@ With the increase of hiking popularity and the stable funding of LWCF, we are su
 As Americans everyday are becoming more environmentally and health aware, we are proud to include an air quality index to allow users to consider pollutant amounts during their hike.   
 
 
-**Tech/Framework Used/Tech Stack**
+
+##Tech/Framework Used/Tech Stack
 - item1 
 - item2 
 
 
-**How To Use/ Instruction** 
+##How To Use/ Instruction  
+
 Is this needed??? 
+1. input text here 
+2. input text here 
+3. input text here
 
 
-**About the Code** 
+##About the Code  
+xxxxxxxxxx
 
 
-**Code Example/How it Works** 
+##Code Example/How it Works  
+*insert image of code example here*  
+explain code 
 
 
-**Notes/What could be done differently**
+##Notes/What could be done differently  
+*improvements that can be done*  
+
 
 ***Elevator Speech***  
-The number of hikers in the US has almost doubled from 2005-2020 and with the US having just passed the Great American Outdoors Act, the number will only increase. Trails are getting better funded & expanding. People are becoming more health conscious. 
+The number of hikers in the US has almost doubled from 2005-2020 and with the US having just passed the Great American Outdoors Act, the number will only increase. Trails are getting better funded & expanding. People are becoming more health conscious.  
 
-Hikers want an easy one-in-all app where they can get their trail information, weather information and environment information instead of having to open a separate weather app, a separate pollution app and a separate hike app. 
+Hikers want an easy one-in-all app where they can get their trail information, weather information and environment information instead of having to open a separate weather app, a separate pollution app and a separate hike app.   
 
 Our app allows users to choose what they can choose - length, elevation, difficulty;  and be aware of things they can’t - temperature, humidity, wind speed, air quality. 
 
