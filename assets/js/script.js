@@ -24,8 +24,8 @@ $(document).ready(function () {
 
     // Store all input data in an object:
     userInputs = {
-      city: "Bend",
-      state: "Oregon",
+      city: "Fairfield",
+      state: "Idaho",
       // city: $("#startLocation").val().trim(),
       // state: $("#state").val(),
       minDistance: $("#hikeMin").val().trim(),
@@ -34,7 +34,7 @@ $(document).ready(function () {
       maxElevation: $("#elevationMax").val().trim(),
       difficulty: $("#difficulty").val(),
       minTemp: $("#tempMin").val().trim(),
-      maxTemp: $("#tempMax").val().trim(),
+      maxTemp: $("#tempMax").val().trim()
       // weatherConditions: $().val(),
     };
     // console.log(userInputs.difficulty);
@@ -81,7 +81,7 @@ function weatherAPI(city, state) {
 
   $.ajax({
     url: queryURL,
-    method: "GET",
+    method: "GET"
   }).then(function (response) {
     // console.log(response); // JSON return for Oregon, USA
 
@@ -100,7 +100,7 @@ function weatherAPI(city, state) {
       humidity: response.data.current.weather.hu, // %
       windSpeed: arr1[1], // mph
       pollution: response.data.current.pollution.aqius,
-      weatherIcon: response.data.current.weather.ic,
+      weatherIcon: response.data.current.weather.ic
     };
 
     // Display weather data
@@ -422,7 +422,7 @@ function hikingAPI(
 
   $.ajax({
     url: queryURL,
-    method: "GET",
+    method: "GET"
   }).then(function (response) {
     // console.log(response);
 
@@ -439,7 +439,7 @@ function hikingAPI(
         length: response.trails[i].length,
         elevation: response.trails[i].ascent,
         difficulty: response.trails[i].difficulty,
-        picture: response.trails[i].imgSqSmall,
+        picture: response.trails[i].imgSqSmall
       };
 
       // Display list of 10 trails nearby w/ info
@@ -455,7 +455,7 @@ function hikingAPI(
       var hikeDifficulty = $("<p>").text("Difficulty: " + trailInfo.difficulty);
       let hikePic = $("<img>").attr({
         src: trailInfo.picture,
-        id: "trail-picture",
+        id: "trail-picture"
       });
 
       // Append
@@ -480,7 +480,7 @@ function maparea(lat, lon, trails) {
     container: "map",
     center: [lon, lat],
     style: "mapbox://styles/mapbox/outdoors-v11",
-    zoom: 8,
+    zoom: 8
   });
 
   // Add markers
@@ -502,7 +502,7 @@ function maparea(lat, lon, trails) {
 
 // Sort output based on user input
 function sortHikes(trails, user, weather) {
-  // Making input into a value
+  // // Making input into a value
   let minDist = parseFloat(user.minDistance);
   let maxDist = parseFloat(user.maxDistance);
   let minElev = parseFloat(user.minElevation);
@@ -530,7 +530,6 @@ function sortHikes(trails, user, weather) {
   if (isNaN(maxTemp) === true) {
     maxTemp = 125;
   }
-  // console.log(minElev, " + ", maxElev);
 
   // for (let i = 0; i < trails.length; i++) {
   //   let minDist = parseFloat(user.minDistance);
@@ -545,8 +544,6 @@ function sortHikes(trails, user, weather) {
   //   let maxTemp = parseFloat(user.maxTemp);
   //   let temp = weather.minTemp;
 
-  //   console.log(minTemp, maxTemp, temp);
-
   //   // console.log(minElev, maxElev, trailElevation);
   //   // Sort by hiking distance
   //   if (minDist < trailDist && trailDist < maxDist) {
@@ -556,38 +553,63 @@ function sortHikes(trails, user, weather) {
   //   // Sort by elevation change
   //   if (minElev < trailDist && trailDist < maxElev) {
   //     console.log(trails[i].name + "lets hike");
-
   //   }
   //   // console.log(i);
 
-  //   if (userDiff == null) {
+  //   if ($("#green").prop("checked") && trailDiff == "green") {
   //     console.log(trailDiff);
-  //     console.log("all trails");
-  //   } else if (userDiff == 6 && trailDiff == "dblack") {
-  //     console.log(trailDiff);
-  //     console.log("show up to double black");
-  //   } else if (userDiff == 5 && trailDiff == "black") {
-  //     console.log(trailDiff);
-  //     console.log("show up to black");
-  //   } else if (userDiff == 4 && trailDiff == "blueBlack") {
-  //     console.log(trailDiff);
-  //     console.log("show up to blue black");
-  //   } else if (userDiff == 3 && trailDiff == "blue") {
-  //     console.log(trailDiff);
-  //     console.log("show only blue");
-  //   } else if (userDiff == 2 && trailDiff == "greenBlue") {
-  //     console.log(trailDiff);
-  //     console.log("show up to greenBlue");
-  //   } else {
-  //     console.log(trailDiff);
-  //     console.log("show green");
+  //     console.log(trails[i].name);
   //   }
-
+  //   if ($("#greenBlue").prop("checked") && trailDiff == "greenBlue") {
+  //     console.log(trailDiff);
+  //     console.log(trails[i].name);
+  //   }
+  //   if ($("#blue").prop("checked") && trailDiff == "blue") {
+  //     console.log(trailDiff);
+  //     console.log(trails[i].name);
+  //   }
+  //   if ($("#blueBlack").prop("checked") && trailDiff == "blueBlack") {
+  //     console.log(trailDiff);
+  //     console.log(trails[i].name);
+  //   }
+  //   if ($("#black").prop("checked") && trailDiff == "black") {
+  //     console.log(trailDiff);
+  //     console.log(trails[i].name);
+  //   }
+  //   if ($("#dblack").prop("checked") && trailDiff == "dblack") {
+  //     console.log(trailDiff);
+  //     console.log(trails[i].name);
+  //   }
   // }
+
   // return trails;
   // Filter out trails based on user input
-  return trails.filter(function (thisTrail) {
+  trails = trails.filter(function (thisTrail) {
+    if ($("#green").prop("checked") && thisTrail.difficulty == "green") {
+      return true;
+    } else if (
+      $("#greenBlue").prop("checked") &&
+      thisTrail.difficulty == "greenBlue"
+    ) {
+      return true;
+    } else if ($("#blue").prop("checked") && thisTrail.difficulty == "blue") {
+      return true;
+    } else if (
+      $("#blueBlack").prop("checked") &&
+      thisTrail.difficulty == "blueBlack"
+    ) {
+      return true;
+    } else if ($("#black").prop("checked") && thisTrail.difficulty == "black") {
+      return true;
+    } else if (
+      $("#dblack").prop("checked") &&
+      thisTrail.difficulty == "dblack"
+    ) {
+      return true;
+    }
+  });
 
+  return trails.filter(function (thisTrail) {
     if (
       thisTrail.length > minDist &&
       thisTrail.length < maxDist &&
@@ -596,7 +618,6 @@ function sortHikes(trails, user, weather) {
       minTemp < temp &&
       temp < maxTemp
     ) {
-      
       return true;
     }
   });
