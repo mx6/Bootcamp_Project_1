@@ -4,7 +4,8 @@
  An app in which user can choose critera and find corresponding hikes in given area. 
 
  User may choose city, distance, elevation, difficulty and temperature to filter what hike they would like 
- - [x]*insert image of choices here* 
+ - [x]*insert image of choices here*
+ ![alt text] (assets\images\01n.png) 
 
  A Map will display hikes within the given parameters. 
  - [x]*insert image of map* 
