@@ -78,11 +78,10 @@ p {
 }
 
 #map {
-  width: 800px;
+  width: 95%;
   height: 450px;
-  margin-left: 50px;
+  /* margin-left: 50px; */
   /* display: block;  */
-
 }
 
 #weatherData {
@@ -96,14 +95,15 @@ p {
   margin-left: 10px;
 }
 
-.firstForecast {
+/* .firstForecast {
   margin-left: 50px !important;
-}
+} */
 
 .forecast {
   float: left;
+  text-align: center;
   margin: 5px;
-  margin-bottom: 50px;
+  margin-bottom: 10px;
   padding: 5px;
   /* margin-left: 10px; */
   font-size: 14px;
@@ -163,4 +163,8 @@ p {
 li {
   margin: 30px;
   font-weight: 800;
+}
+
+.w3-top {
+  position: relative !important;
 }
