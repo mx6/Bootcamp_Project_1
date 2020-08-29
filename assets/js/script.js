@@ -111,7 +111,7 @@ function weatherAPI(city, state) {
         .addClass("humidity")
     );
     $("#weatherData").append(
-      $("<p>").text("Wind Speed: " + weatherInfo.windSpeed + " m/s")
+      $("<p>").text("Wind Speed: " + weatherInfo.windSpeed + " mph")
     );
     $("#weatherData").append(
       $("<p>")
