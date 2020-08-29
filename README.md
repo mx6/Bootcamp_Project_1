@@ -32,51 +32,44 @@ Hikes will be listed in rows below with a picture and scenic description. Also l
 
 **Motivation**
 
-In August 2020 the US passed the _Great American Outdoors Act_, which will secure permanent funding for the Land & Water Conservation Fund (LWCF). The LWCF funds, protects and expands trails and public hiking areas across America. According to _AmericanHiking.org_, 1 in every 6 people goes hiking every year, with more joining constantly.
+Earlier this month, Congress passed the Great American Outdoors Act, which fully and permanently funded the Land and Water Conservation Fund and restore our national parks.  The LWCF maintains, protects, and expands trails and public hiking areas across America.    
 
-With the increase of hiking popularity and the stable funding of LWCF, we are sure to see a rise in the need for better and more detaild user hiking apps.
+According to AmericanHiking.org, 1 in every 6 people goes hiking every year, with more joining every day.
 
-As Americans everyday are becoming more environmentally and health aware, we are proud to include an air quality index to allow users to consider pollutant amounts during their hike.
+With the increase of hiking popularity and the stable funding of LWCF, we are sure to see a rise in the need for better and more detailed user hiking apps.
 
-##Tech/Framework Used/Tech Stack
+We created an app that provides a new hiker, or even the most seasoned trekker with all of the information they could need before they hit the trail.  First, we started with the basic information you would need to get started on your adventure: trail head location, the length of the hike, and the degree of difficulty the hiker can expect.  But we also included an elevation guide and weather conditions in the area, to include the temperature, wind speed, and humidity.  Now, adventurers can enjoy the season–any season–and have the confidence that their experience won’t be ruined by unfavorable conditions.
 
-- item1
-- item2
+Also, as Americans everyday are becoming more environmentally and health-aware, we realized we should include the air quality index to allow users to consider pollutant amounts during their hike.      
 
-**How To Use/ Instruction**
-Is this needed??
+With the sport growing in popularity and the ability to enjoy the outdoors year-round, Air Walk is the only resource needed to start your next outdoor adventure.
 
-1. input text here
-2. input text here
-3. input text here
+**How To Use**
 
-4. input text here
-5. input text here
-6. input text here
+1. Input a minimum of City and State into the search bar on the left side of the web page.  
+2. Click on 'Lets Hike' button. 
+3. Right portion of webpage will display interactive map with cursors that point out hikes that meet search parameters. 
+4. Below map, scroll throw current weather forecast and list of hikes. 
+5. Bottom right corner holds an arrow button that will scroll back to the top of webpage.  
 
-**About the Code**
-xxxxxxxxxx
+**Code Example/How it Works**  
+  
+  
+![Code](./assets/images/codeExample.PNG)  
+  
+**Tech/Framework Used/Tech Stack**
 
-**Code Example/How it Works**
-_insert image of code example here_  
-explain code
+- HTML
+- CSS
+- JavaScript
+- Third Party APIs 
+- Web APIs
 
-**Notes/What could be done differently**
-_improvements that can be done_
+**Notes**
 
-**_Elevator Speech_**  
-The number of hikers in the US has almost doubled from 2005-2020 and with the US having just passed the Great American Outdoors Act, the number will only increase. Trails are getting better funded & expanding. People are becoming more health conscious.
+In future versions we hope to add more map information showing directions on how to get to a specified trail with traffic conditions (use a Google Maps API).  Also, be able to filter the “recommended” hiking days by temperature that the user inputs. We would like to add an additional map layer showing current weather systems in the region, and provide links to trail use information such as places to obtain day passes.
 
-Hikers want an easy one-in-all app where they can get their trail information, weather information and environment information instead of having to open a separate weather app, a separate pollution app and a separate hike app.
-
-Our app allows users to choose what they can choose - length, elevation, difficulty; and be aware of things they can’t - temperature, humidity, wind speed, air quality.
-
-**_Elevator Speech_**  
-The number of hikers in the US has almost doubled from 2005-2020 and with the US having just passed the Great American Outdoors Act, the number will only increase. Trails are getting better funded & expanding. People are becoming more health conscious.
-
-Hikers want an easy one-in-all app where they can get their trail information, weather information and environment information instead of having to open a separate weather app, a separate pollution app and a separate hike app.
-
-Our app allows users to choose what they can choose - length, elevation, difficulty; and be aware of things they can’t - temperature, humidity, wind speed, air quality.
+We'd also add the ability for users to leave and view reviews of their hikes. We'd like to make the app more interactive so users can connect it to their health apps, connect to their friends via the app, view the average time to finish the hike, average calories burned per hike, whether the hike has public facilities and if dogs or bikes are allowed on the path. Our goal is to be a one stop app for users to find all their information for their hikes. 
 
 **_Links_**
 
