@@ -357,8 +357,8 @@ function forecast(lat, lon) {
           $("#1").append($("<img>").attr("src", iconURL));
           $("#1").append($("<div>").text("Temp: " + dailyTemp + " °F"));
           $("#1").append($("<div>").text("Humidity: " + dailyHumidity + "%"));
-          $("#1").append($("<div>").text("Sunrise: " + unixTimeSun(sunrise)));
-          $("#1").append($("<div>").text("Sunset: " + unixTimeSun(sunset)));
+          $("#1").append($("<div>").text("Sunrise: " + unixTimeSun(sunrise) + " (PT)"));
+          $("#1").append($("<div>").text("Sunset: " + unixTimeSun(sunset) + " (PT)"));
           break;
 
         case 2:
@@ -368,8 +368,8 @@ function forecast(lat, lon) {
           $("#2").append($("<img>").attr("src", iconURL));
           $("#2").append($("<div>").text("Temp: " + dailyTemp + " °F"));
           $("#2").append($("<div>").text("Humidity: " + dailyHumidity + "%"));
-          $("#2").append($("<div>").text("Sunrise: " + unixTimeSun(sunrise)));
-          $("#2").append($("<div>").text("Sunset: " + unixTimeSun(sunset)));
+          $("#2").append($("<div>").text("Sunrise: " + unixTimeSun(sunrise) + " (PT)"));
+          $("#2").append($("<div>").text("Sunset: " + unixTimeSun(sunset) + " (PT)"));
           break;
 
         case 3:
@@ -379,8 +379,8 @@ function forecast(lat, lon) {
           $("#3").append($("<img>").attr("src", iconURL));
           $("#3").append($("<div>").text("Temp: " + dailyTemp + " °F"));
           $("#3").append($("<div>").text("Humidity: " + dailyHumidity + "%"));
-          $("#3").append($("<div>").text("Sunrise: " + unixTimeSun(sunrise)));
-          $("#3").append($("<div>").text("Sunset: " + unixTimeSun(sunset)));
+          $("#3").append($("<div>").text("Sunrise: " + unixTimeSun(sunrise) + " (PT)"));
+          $("#3").append($("<div>").text("Sunset: " + unixTimeSun(sunset) + " (PT)"));
           break;
 
         case 4:
@@ -390,8 +390,8 @@ function forecast(lat, lon) {
           $("#4").append($("<img>").attr("src", iconURL));
           $("#4").append($("<div>").text("Temp: " + dailyTemp + " °F"));
           $("#4").append($("<div>").text("Humidity: " + dailyHumidity + "%"));
-          $("#4").append($("<div>").text("Sunrise: " + unixTimeSun(sunrise)));
-          $("#4").append($("<div>").text("Sunset: " + unixTimeSun(sunset)));
+          $("#4").append($("<div>").text("Sunrise: " + unixTimeSun(sunrise) + " (PT)"));
+          $("#4").append($("<div>").text("Sunset: " + unixTimeSun(sunset) + " (PT)"));
           break;
 
         case 5:
@@ -401,8 +401,8 @@ function forecast(lat, lon) {
           $("#5").append($("<img>").attr("src", iconURL));
           $("#5").append($("<div>").text("Temp: " + dailyTemp + " °F"));
           $("#5").append($("<div>").text("Humidity: " + dailyHumidity + "%"));
-          $("#5").append($("<div>").text("Sunrise: " + unixTimeSun(sunrise)));
-          $("#5").append($("<div>").text("Sunset: " + unixTimeSun(sunset)));
+          $("#5").append($("<div>").text("Sunrise: " + unixTimeSun(sunrise) + " (PT)"));
+          $("#5").append($("<div>").text("Sunset: " + unixTimeSun(sunset) + " (PT)"));
           break;
       }
 
