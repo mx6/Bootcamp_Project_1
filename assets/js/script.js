@@ -329,7 +329,13 @@ function forecast(lat, lon) {
   }).then(function (response) {
     // console.log(response);
 
+    // Reset elements
     $(".forecast").empty();
+    $("#1").css("background-color", "rgba(255, 255, 255, 0.3)");
+    $("#2").css("background-color", "rgba(255, 255, 255, 0.3)");
+    $("#3").css("background-color", "rgba(255, 255, 255, 0.3)");
+    $("#4").css("background-color", "rgba(255, 255, 255, 0.3)");
+    $("#5").css("background-color", "rgba(255, 255, 255, 0.3)"); 
 
     // See which weather conditons were selected by the user
     let selectedConditions = [];
@@ -420,24 +426,41 @@ function forecast(lat, lon) {
       else if (icon === "13d" || icon === "13n") {
         dailyIcon.push("snowy");
       }
-  
-      // Compare forecast conditions to user input condidtions
-      // If the day's conditions match one of the user's "selected" matches, higihlight the box!
-      for (var i=0; i <dailyIcon.length; i++) {
-        if (dailyIcon[i] === selectedConditions[0] || dailyIcon[i] === selectedConditions[1] || dailyIcon[i] === selectedConditions[2] || dailyIcon[i] === selectedConditions[3]) {
-          // highlight corresponding forecast day
-          // if ( $(".forecast").id() === i) {
-          //   $(this).css("background-color", "yellow"); 
-          // }
-          console.log("this day works!: " + i);
-        }
-        else {
-        }
-      }
-
 
     }
+
     console.log(dailyIcon);
+    // Compare forecast conditions to user input condidtions
+    // If the day's conditions match one of the user's "selected" matches, higihlight the box!
+    for (var i=0; i <dailyIcon.length; i++) {
+      if (dailyIcon[i] === selectedConditions[0] || dailyIcon[i] === selectedConditions[1] || dailyIcon[i] === selectedConditions[2] || dailyIcon[i] === selectedConditions[3]) {
+        // highlight corresponding forecast day
+        // if ( $(".forecast").id() === i) {
+        //   $(this).css("background-color", "yellow"); 
+        // }
+        console.log("highlight this day: " + i);
+
+        switch (i) {
+          case 0:
+            $("#1").css("background-color", "orange");
+            break;
+          case 1:
+            $("#2").css("background-color", "orange");
+            break;
+          case 2:
+            $("#3").css("background-color", "orange");
+            break;
+          case 3:
+            $("#4").css("background-color", "orange");
+            break;
+          case 4:
+            $("#5").css("background-color", "orange");
+            break;
+        }
+      }
+      
+    }
+  
   });
 }
 
