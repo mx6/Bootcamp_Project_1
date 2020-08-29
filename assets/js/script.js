@@ -505,7 +505,7 @@ function hikingAPI(
         picture: response.trails[i].imgSqSmall,
         url: response.trails[i].url
       };
-      // console.log(trailInfo.url);
+
       // Display list of 10 trails nearby w/ info
 
       // var newHike = $("<li>")
@@ -632,28 +632,6 @@ function sortHikes(trails, user, weather) {
       minTemp < temp &&
       temp < maxTemp
     ) {
-      // let newHike = $("<li>")
-      //   .attr("id", "trail-number-" + i)
-      //   .text(thisTrail.name);
-      // newHike.css("border", "1px solid black");
-      // let hikeSummary = $("<p>").text(thisTrail.summary);
-      // let hikeLength = $("<p>").text("Length: " + thisTrail.length + " miles");
-      // let hikeElevation = $("<p>").text(
-      //   "Elevation Gain: " + thisTrail.elevation + " feet"
-      // );
-      // let hikeDifficulty = $("<p>").text("Difficulty: " + thisTrail.difficulty);
-      // let hikePic = $("<img>").attr({
-      //   src: thisTrail.picture,
-      //   id: "trail-picture"
-      // });
-
-      // // Append
-      // $("#hikingList").append(newHike);
-      // newHike.append(hikeSummary, hikeLength, hikeElevation, hikeDifficulty);
-
-      // if (thisTrail.picture != "") {
-      //   newHike.append(hikePic);
-      // }
       return true;
     }
   });
