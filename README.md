@@ -52,7 +52,9 @@ With the sport growing in popularity and the ability to enjoy the outdoors year-
 4. Below map, scroll throw current weather forecast and list of hikes. 
 5. Bottom right corner holds an arrow button that will scroll back to the top of webpage.  
 
-**Code Example/How it Works**
+**Code Example/How it Works**  
+  
+  
 ![Code](./assets/images/codeExample.PNG)  
   
 **Tech/Framework Used/Tech Stack**
