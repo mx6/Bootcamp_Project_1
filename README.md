@@ -38,38 +38,33 @@ With the increase of hiking popularity and the stable funding of LWCF, we are su
 
 As Americans everyday are becoming more environmentally and health aware, we are proud to include an air quality index to allow users to consider pollutant amounts during their hike.
 
-##Tech/Framework Used/Tech Stack
 
-- item1
-- item2
 
-**How To Use/ Instruction**
-Is this needed??
+**How To Use**
 
-1. input text here
-2. input text here
-3. input text here
-
-4. input text here
-5. input text here
-6. input text here
-
-**About the Code**
-xxxxxxxxxx
+1. Input a minimum of City and State into the search bar on the left side of the web page.  
+2. Click on 'Lets Hike' button. 
+3. Right portion of webpage will display interactive map with cursors that point out hikes that meet search parameters. 
+4. Below map, scroll throw current weather forecast and list of hikes. 
+5. Bottom right corner holds an arrow button that will scroll back to the top of webpage.  
+  
 
 **Code Example/How it Works**
-_insert image of code example here_  
-explain code
+![Code](./assets/images/codeExample.PNG)  
+  
+**Tech/Framework Used/Tech Stack**
 
-**Notes/What could be done differently**
-_improvements that can be done_
+- HTML
+- CSS
+- JavaScript
+- Third Party APIs 
+- Web APIs
 
-**_Elevator Speech_**  
-The number of hikers in the US has almost doubled from 2005-2020 and with the US having just passed the Great American Outdoors Act, the number will only increase. Trails are getting better funded & expanding. People are becoming more health conscious.
 
-Hikers want an easy one-in-all app where they can get their trail information, weather information and environment information instead of having to open a separate weather app, a separate pollution app and a separate hike app.
+**Notes**
 
-Our app allows users to choose what they can choose - length, elevation, difficulty; and be aware of things they can’t - temperature, humidity, wind speed, air quality.
+In future versions we hope to add the ability for users to leave and view reviews of their hikes. We'd like to make the app more interactive so users can connect it to their health apps, connect to their friends via the app, view the average time to finish the hike, average calories burned per hike, whether the hike has public facilities and if dogs or bikes are allowed on the path. Our goal is to be a one stop app for users to find all their information for their hikes. 
+
 
 **_Elevator Speech_**  
 The number of hikers in the US has almost doubled from 2005-2020 and with the US having just passed the Great American Outdoors Act, the number will only increase. Trails are getting better funded & expanding. People are becoming more health conscious.
