@@ -93,7 +93,7 @@ function weatherAPI(city, state) {
       pollution: response.data.current.pollution.aqius,
       weatherIcon: response.data.current.weather.ic
     };
-    console.log(weatherInfo.weatherIcon);
+    // console.log(weatherInfo.weatherIcon);
     // Display weather data
     $("#weatherData").empty();
     $("#weatherData")
