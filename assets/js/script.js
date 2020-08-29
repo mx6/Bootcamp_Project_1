@@ -13,20 +13,13 @@ let weatherInfo;
 $(document).ready(function () {
   // Retrieve the city input by the user
   $("#hikeButton").on("click", function (event) {
-    // console.log(event.keyCode);
-    // Get the city the user input
-    // city = $("#startLocation").val().trim();
-    // if (event.keyCode === 13) {
-    //   weatherAPI(city); // call weather function w/ city input
-    //   $("#startLocation").val("");
-    // }
 
     // Store all input data in an object:
     userInputs = {
-      city: "Bend",
-      state: "Oregon",
-      // city: $("#startLocation").val().trim(),
-      // state: $("#state").val(),
+      // city: "Bend",
+      // state: "Oregon",
+      city: $("#startLocation").val().trim(),
+      state: $("#state").val(),
       minDistance: $("#hikeMin").val().trim(),
       maxDistance: $("#hikeMax").val().trim(),
       minElevation: $("#elevationMin").val().trim(),
