@@ -75,7 +75,7 @@ function weatherAPI(city, state) {
     url: queryURL,
     method: "GET"
   }).then(function (response) {
-    // console.log(response); // JSON return for Oregon, USA
+    console.log(response); // JSON return for Oregon, USA
 
     // Weather Data we want:
     // Lat/lon coordinates
