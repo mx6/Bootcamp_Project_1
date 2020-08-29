@@ -95,9 +95,9 @@ p {
   margin-left: 10px;
 }
 
-/* .firstForecast {
+.firstForecast {
   margin-left: 50px !important;
-} */
+} 
 
 .forecast {
   float: left;
