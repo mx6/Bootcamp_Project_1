@@ -334,9 +334,10 @@ function forecast(lat, lon) {
     // See which weather conditons were selected by the user
     let selectedConditions = [];
     $(".weatherCondition input:checked").each(function () {
-      selectedConditions.push($(this).data());
+      selectedConditions.push($(this).data().type);
     });
-    // console.log(selectedConditions); //display array of checked boxes for the weather
+    console.log(selectedConditions); //display array of checked boxes for the weather
+    let dailyIcon = []; // array of weather icon for each forecasted day
 
     // Get data for 5-day forecast
     for (var i = 1; i < 6; i++) {
@@ -347,16 +348,6 @@ function forecast(lat, lon) {
       let sunset = response.daily[i].sunset;
       let icon = response.daily[i].weather[0].icon;
       let iconURL = "http://openweathermap.org/img/wn/" + icon + "@2x.png";
-
-      // Compare forecast conditions to user input condidtions
-      // for (var i=0; i <selectedConditions.length; i++) {
-      //   if (selectedConditions[i] == ) {
-
-      //   }
-      //   else if() {
-
-      //   }
-      // }
 
       // Switch statement to display the 5-day forecast
       switch (i) {
@@ -415,7 +406,38 @@ function forecast(lat, lon) {
           $("#5").append($("<div>").text("Sunset: " + unixTimeSun(sunset)));
           break;
       }
+
+      // Assign icon #'s to sunny/cloudy/rainy/snowy
+      if (icon === "01d" || icon === "01n") {
+        dailyIcon.push("sunny");
+      }
+      else if (icon === "02d" || icon === "02n" || icon === "03d" || icon === "03n" || icon === "04d" || icon === "04n" ) {
+        dailyIcon.push("cloudy");
+      }
+      else if (icon === "09d" || icon === "09n" || icon === "10d" || icon === "10n" || icon === "11d" || icon === "11n" || icon === "50d" || icon === "50n") {
+        dailyIcon.push("rainy");
+      }
+      else if (icon === "13d" || icon === "13n") {
+        dailyIcon.push("snowy");
+      }
+  
+      // Compare forecast conditions to user input condidtions
+      // If the day's conditions match one of the user's "selected" matches, higihlight the box!
+      for (var i=0; i <dailyIcon.length; i++) {
+        if (dailyIcon[i] === selectedConditions[0] || dailyIcon[i] === selectedConditions[1] || dailyIcon[i] === selectedConditions[2] || dailyIcon[i] === selectedConditions[3]) {
+          // highlight corresponding forecast day
+          // if ( $(".forecast").id() === i) {
+          //   $(this).css("background-color", "yellow"); 
+          // }
+          console.log("this day works!: " + i);
+        }
+        else {
+        }
+      }
+
+
     }
+    console.log(dailyIcon);
   });
 }
 
