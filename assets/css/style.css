@@ -38,6 +38,10 @@ p {
   margin: 5px;
 }
 
+.w3-sidebar {
+  top: 0;
+}
+
 .w3-main {
   padding-left: 30px;
   padding-bottom: 50px;
@@ -45,6 +49,10 @@ p {
 
 .w3-check {
   margin: 5px;
+}
+
+.w3-col {
+  width: fit-content !important;
 }
 
 .checkbox {
@@ -102,8 +110,7 @@ p {
 .forecast {
   float: left;
   text-align: center;
-  margin: 5px;
-  margin-bottom: 10px;
+  margin: 10px;
   padding: 5px;
   /* margin-left: 10px; */
   font-size: 14px;
@@ -115,25 +122,25 @@ p {
 }
 
 #hikingInfo {
-  clear: left;
-  width: 75%;
+  clear: both;
+  /* width: 75%; */
   font-size: 20px;
   /* margin: 200px;  */
   /* border: 200px;  */
   /* padding: 200px;  */
 }
 
-#hikingList {
-  margin-left: 50px;
-  /* padding-left: 100px;  */
-  /* margin-left: 100px;  */
-}
+/* #hikingList {
+  /* margin-left: 50px; */
+/* padding-left: 100px;  */
+/* margin-left: 100px;  */
+*/
 
-#trail-picture {
+/* #trail-picture {
   width: 150px;
   height: 150px;
   /* float: right; */
-}
+ */
 
 #myBtn {
   display: none;
@@ -161,10 +168,22 @@ p {
 }
 
 li {
-  margin: 30px;
+  margin: 15px;
   font-weight: 800;
+  clear: both;
 }
 
 .w3-top {
   position: relative !important;
+}
+
+.hike {
+  float: left;
+  width: 75%;
+}
+
+.trail-picture {
+  float: left;
+  width: 150px;
+  margin: 15px;
 }
