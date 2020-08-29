@@ -49,7 +49,8 @@ As Americans everyday are becoming more environmentally and health aware, we are
 5. Bottom right corner holds an arrow button that will scroll back to the top of webpage.  
   
 
-**Code Example/How it Works**
+**Code Example/How it Works**  
+
 ![Code](./assets/images/codeExample.PNG)  
   
 **Tech/Framework Used/Tech Stack**
