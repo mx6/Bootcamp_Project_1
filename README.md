@@ -50,7 +50,8 @@ As Americans everyday are becoming more environmentally and health aware, we are
   
 
 **Code Example/How it Works**  
-
+  
+  
 ![Code](./assets/images/codeExample.PNG)  
   
 **Tech/Framework Used/Tech Stack**
