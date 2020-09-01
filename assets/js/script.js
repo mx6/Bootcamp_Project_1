@@ -9,6 +9,7 @@ var lat;
 let trails = [];
 let userInputs;
 let weatherInfo;
+let index;
 
 $(document).ready(function () {
   // Retrieve the city input by the user
@@ -698,7 +699,7 @@ function hikingTrails(trails) {
       class: "trail-picture"
     });
 
-    let directionModal = $("<button>")
+    let directionModal = $("<a>")
       .addClass("w3-button w3-black direction")
       .attr({ id: "hikeDirection-" + i, value: i })
       .text("Get Directions to Hike");
@@ -718,13 +719,11 @@ function hikingTrails(trails) {
       $("#hikingList").append(hikePic);
     }
   }
-  // $(".direction").on("click", function (event) {
-  //   let modal = $("<div>").addClass("w3-modal")
-  //   let modalContent = $("<div>").addClass()
-
-  //   let index = $(this).val();
-  //   console.log(trails[index]);
-  // });
+  $(".direction").on("click", function (event) {
+    index = $(this).val();
+    console.log(trails[index]);
+    location.href = "directionMap.html";
+  });
 }
 
 // scroll button
