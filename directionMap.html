@@ -34,14 +34,31 @@
       >
         <i class="fa fa-bars"></i> Menu
       </button>
-      <button onclick="location.href = 'index.html'" class="w3-bar-item w3-button"> Home </button>
+      <button
+        onclick="location.href = 'index.html'"
+        class="w3-bar-item w3-button"
+      >
+        Home
+      </button>
       <span class="w3-bar-item w3-right"
         >Team Awesome Group Project 1, August 2020</span
       >
     </div>
 
+    <div class="w3-main">
+      <h1>Direction</h1>
+      <input
+        class="w3-input w3-border w3-round"
+        type="text"
+        id="startLocation"
+        data-type="startLocation"
+        placeholder="Enter starting point"
+      />
+      <button class="w3-button w3-black filter" id="hikeDirection">
+        Let's Go
+      </button>
+      <div class="w3-container"></div>
     </div>
-
     <script>
       // Get the Sidebar
       var mySidebar = document.getElementById("mySidebar");
