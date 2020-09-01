@@ -208,3 +208,7 @@ li {
 #state {
   margin-bottom: 1.2rem;
 }
+
+#startLocation {
+  width: 300px !important;
+}

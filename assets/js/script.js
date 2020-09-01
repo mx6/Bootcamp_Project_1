@@ -10,6 +10,7 @@ let trails = [];
 let userInputs;
 let weatherInfo;
 let index;
+let hikeDestination;
 
 $(document).ready(function () {
   // Retrieve the city input by the user
@@ -18,7 +19,7 @@ $(document).ready(function () {
     userInputs = {
       city: "Bend",
       state: "Oregon",
-      // city: $("#startLocation").val().trim(),
+      // city: $("#city").val().trim(),
       // state: $("#state").val(),
       minDistance: $("#hikeMin").val().trim(),
       maxDistance: $("#hikeMax").val().trim(),
@@ -604,9 +605,6 @@ function maparea(lat, lon, trails) {
   }
 }
 
-// Direction API
-// function directionAPI(trails, user)
-
 // Sort output based on user input
 function sortHikes(trails, user, weather) {
   // // Making input into a value
@@ -699,7 +697,7 @@ function hikingTrails(trails) {
       class: "trail-picture"
     });
 
-    let directionModal = $("<a>")
+    let directionModal = $("<button>")
       .addClass("w3-button w3-black direction")
       .attr({ id: "hikeDirection-" + i, value: i })
       .text("Get Directions to Hike");
@@ -719,9 +717,16 @@ function hikingTrails(trails) {
       $("#hikingList").append(hikePic);
     }
   }
+
+  // Direction button directed to a new page
   $(".direction").on("click", function (event) {
-    index = $(this).val();
-    console.log(trails[index]);
+    index = {
+      name: trails[$(this).val()].name,
+      latitude: trails[$(this).val()].latitude,
+      longitude: trails[$(this).val()].longitude
+    };
+    // console.log(index);
+    localStorage.setItem("destination", JSON.stringify(index));
     location.href = "directionMap.html";
   });
 }
@@ -749,3 +754,46 @@ function topFunction() {
   document.body.scrollTop = 0;
   document.documentElement.scrollTop = 0;
 }
+
+// Get searched hike
+init();
+function init() {
+  let destination = JSON.parse(localStorage.getItem("destination"));
+
+  if (destination !== null) {
+    hikeDestination = destination;
+  }
+}
+
+// Direction API
+function directionAPI() {
+  const authKEY = "hVo9dYzXvu21iSyKZbnJiYJOdbtvRCDN";
+  let startLoc = $("#startLocation").val();
+  let endLat = hikeDestination.latitude;
+  let endLon = hikeDestination.longitude;
+  let mapquestURL =
+    "http://www.mapquestapi.com/directions/v2/route?key=" +
+    authKEY +
+    "&from=" +
+    startLoc +
+    "&to=" +
+    endLat +
+    "," +
+    endLon;
+
+  $.ajax({
+    url: mapquestURL,
+    method: "GET"
+  }).then(function (response) {
+    let maneuver = response.route.legs[0].maneuvers;
+    let totalDis = $("<div>").text(
+      "Total Distance: " + response.route.distance
+    );
+    console.log(response.route.legs[0].maneuvers.length);
+
+    $(".w3-container").append(totalDis);
+  });
+}
+$(document).ready(function () {
+  $("#hikeDirection").on("click", directionAPI);
+});
