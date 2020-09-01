@@ -129,94 +129,143 @@
           <option value="Wyoming">Wyoming</option>
         </select>
 
-        <h5>Hike Distance (miles)</h5>
-        <input
-          class="w3-input w3-border w3-round"
-          type="text"
-          id="hikeMin"
-          data-type="hikeMin"
-          placeholder="Min"
-        />
-        <input
-          class="w3-input w3-border w3-round"
-          type="text"
-          id="hikeMax"
-          data-type="hikeMax"
-          placeholder="Max"
-        />
+        <button
+          onclick="document.getElementById('distanceModal').style.display='block'"
+          class="w3-button w3-black filter"
+        >
+          Distance Filter
+        </button>
 
-        <h5>Elevation (feet)</h5>
-        <input
-          class="w3-input w3-border w3-round"
-          type="text"
-          id="elevationMin"
-          data-type="elevationMin"
-          placeholder="Min"
-        />
-        <input
-          class="w3-input w3-border w3-round"
-          type="text"
-          id="elevationMax"
-          data-type="elevationMax"
-          placeholder="Max"
-        />
+        <div id="distanceModal" class="w3-modal">
+          <div class="w3-modal-content">
+            <span
+              onclick="document.getElementById('distanceModal').style.display='none'"
+              class="w3-button w3-display-topright"
+              >&times;</span
+            >
 
-        <h5>Difficulty</h5>
+            <h5>Hike Distance (miles)</h5>
+            <input
+              class="w3-input w3-border w3-round"
+              type="text"
+              id="hikeMin"
+              data-type="hikeMin"
+              placeholder="Min (ex 0)"
+            />
+            <input
+              class="w3-input w3-border w3-round"
+              type="text"
+              id="hikeMax"
+              data-type="hikeMax"
+              placeholder="Max (ex 100)"
+            />
+          </div>
+        </div>
 
-        <p class="checkbox">
-          <input
-            class="w3-check"
-            type="checkbox"
-            id="green"
-            data-type="greenBox"
-            checked
-          /><label>Green</label>
-        </p>
-        <p class="checkbox">
-          <input
-            class="w3-check"
-            type="checkbox"
-            id="greenBlue"
-            data-type="greenBlueBox"
-            checked
-          /><label>Green Blue</label>
-        </p>
-        <p class="checkbox">
-          <input
-            class="w3-check"
-            type="checkbox"
-            id="blue"
-            data-type="blueBox"
-            checked
-          /><label>Blue</label>
-        </p>
-        <p class="checkbox">
-          <input
-            class="w3-check"
-            type="checkbox"
-            id="blueBlack"
-            data-type="blueBlackBox"
-            checked
-          /><label>Blue Black</label>
-        </p>
-        <p class="checkbox">
-          <input
-            class="w3-check"
-            type="checkbox"
-            id="black"
-            data-type="blackBox"
-            checked
-          /><label>Black</label>
-        </p>
-        <p class="checkbox">
-          <input
-            class="w3-check"
-            type="checkbox"
-            id="dblack"
-            data-type="dblackBox"
-            checked
-          /><label>Double Black</label>
-        </p>
+        <button
+          onclick="document.getElementById('elevationModal').style.display='block'"
+          class="w3-button w3-black filter"
+        >
+          Elevation Change Filter
+        </button>
+
+        <div id="elevationModal" class="w3-modal">
+          <div class="w3-modal-content">
+            <span
+              onclick="document.getElementById('elevationModal').style.display='none'"
+              class="w3-button w3-display-topright"
+              >&times;</span
+            >
+
+            <h5>Elevation Change (feet)</h5>
+            <input
+              class="w3-input w3-border w3-round"
+              type="text"
+              id="elevationMin"
+              data-type="elevationMin"
+              placeholder="Min (ex 0)"
+            />
+            <input
+              class="w3-input w3-border w3-round"
+              type="text"
+              id="elevationMax"
+              data-type="elevationMax"
+              placeholder="Max (ex 20000)"
+            />
+          </div>
+        </div>
+
+        <button
+          onclick="document.getElementById('difficultyModal').style.display='block'"
+          class="w3-button w3-black filter"
+        >
+          Difficulty Filter
+        </button>
+
+        <div id="difficultyModal" class="w3-modal">
+          <div class="w3-modal-content">
+            <span
+              onclick="document.getElementById('difficultyModal').style.display='none'"
+              class="w3-button w3-display-topright"
+              >&times;</span
+            >
+            <h5>Difficulty</h5>
+            <p class="checkbox">
+              <input
+                class="w3-check"
+                type="checkbox"
+                id="green"
+                data-type="greenBox"
+                checked
+              /><label>Green</label>
+            </p>
+            <p class="checkbox">
+              <input
+                class="w3-check"
+                type="checkbox"
+                id="greenBlue"
+                data-type="greenBlueBox"
+                checked
+              /><label>Green Blue</label>
+            </p>
+            <p class="checkbox">
+              <input
+                class="w3-check"
+                type="checkbox"
+                id="blue"
+                data-type="blueBox"
+                checked
+              /><label>Blue</label>
+            </p>
+            <p class="checkbox">
+              <input
+                class="w3-check"
+                type="checkbox"
+                id="blueBlack"
+                data-type="blueBlackBox"
+                checked
+              /><label>Blue Black</label>
+            </p>
+            <p class="checkbox">
+              <input
+                class="w3-check"
+                type="checkbox"
+                id="black"
+                data-type="blackBox"
+                checked
+              /><label>Black</label>
+            </p>
+            <p class="checkbox">
+              <input
+                class="w3-check"
+                type="checkbox"
+                id="dblack"
+                data-type="dblackBox"
+                checked
+              /><label>Double Black</label>
+            </p>
+          </div>
+        </div>
         <br />
 
         <!-- <select
@@ -276,59 +325,93 @@
             Double Black
           </opition>
         </select> -->
+        <button
+          onclick="document.getElementById('temperatureModal').style.display='block'"
+          class="w3-button w3-black filter"
+        >
+          Temperature Filter
+        </button>
 
-        <h5>Temperature</h5>
-        <input
-          class="w3-input w3-border w3-round"
-          type="text"
-          id="tempMin"
-          data-type="tempMin"
-          placeholder="Min"
-        />
-        <input
-          class="w3-input w3-border w3-round"
-          type="text"
-          id="tempMax"
-          data-type="tempMax"
-          placeholder="Max"
-        />
+        <div id="temperatureModal" class="w3-modal">
+          <div class="w3-modal-content">
+            <span
+              onclick="document.getElementById('temperatureModal').style.display='none'"
+              class="w3-button w3-display-topright"
+              >&times;</span
+            >
 
-        <p class="checkbox weatherCondition">
-          <input
-            class="w3-check"
-            type="checkbox"
-            id="sunnyBox"
-            val="sunny"
-            data-type="sunny"
-          /><label>Sunny</label>
-        </p>
-        <p class="checkbox weatherCondition">
-          <input
-            class="w3-check"
-            type="checkbox"
-            id="cloudyBox"
-            val="cloudy"
-            data-type="cloudy"
-          /><label>Cloudy</label>
-        </p>
-        <p class="checkbox weatherCondition">
-          <input
-            class="w3-check"
-            type="checkbox"
-            id="rainyBox"
-            val="rainy"
-            data-type="rainy"
-          /><label>Rainy</label>
-        </p>
-        <p class="checkbox weatherCondition">
-          <input
-            class="w3-check"
-            type="checkbox"
-            id="snowyBox"
-            val="snowy"
-            data-type="snowy"
-          /><label>Snowy</label>
-        </p>
+            <h5>Temperature (°F)</h5>
+            <input
+              class="w3-input w3-border w3-round"
+              type="text"
+              id="tempMin"
+              data-type="tempMin"
+              placeholder="Min (ex 0)"
+            />
+            <input
+              class="w3-input w3-border w3-round"
+              type="text"
+              id="tempMax"
+              data-type="tempMax"
+              placeholder="Max (ex 125)"
+            />
+          </div>
+        </div>
+
+        <button
+          onclick="document.getElementById('weatherModal').style.display='block'"
+          class="w3-button w3-black filter"
+        >
+          Weather Condition Filter
+        </button>
+
+        <div id="weatherModal" class="w3-modal">
+          <div class="w3-modal-content">
+            <span
+              onclick="document.getElementById('weatherModal').style.display='none'"
+              class="w3-button w3-display-topright"
+              >&times;</span
+            >
+
+            <h5>Weather Condition</h5>
+            <p class="checkbox weatherCondition">
+              <input
+                class="w3-check"
+                type="checkbox"
+                id="sunnyBox"
+                val="sunny"
+                data-type="sunny"
+              /><label>Sunny</label>
+            </p>
+            <p class="checkbox weatherCondition">
+              <input
+                class="w3-check"
+                type="checkbox"
+                id="cloudyBox"
+                val="cloudy"
+                data-type="cloudy"
+              /><label>Cloudy</label>
+            </p>
+            <p class="checkbox weatherCondition">
+              <input
+                class="w3-check"
+                type="checkbox"
+                id="rainyBox"
+                val="rainy"
+                data-type="rainy"
+              /><label>Rainy</label>
+            </p>
+            <p class="checkbox weatherCondition">
+              <input
+                class="w3-check"
+                type="checkbox"
+                id="snowyBox"
+                val="snowy"
+                data-type="snowy"
+              /><label>Snowy</label>
+            </p>
+          </div>
+        </div>
         <br />
         <p>
           <button
@@ -340,7 +423,7 @@
             Let's Hike
           </button>
         </p>
-        <br /><br /><br /><br /><br /><br /><br /><br />
+        <br /><br />
 
         <!-- <a href="#" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-users fa-fw"></i>  Overview</a>
             <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-eye fa-fw"></i>  Views</a>

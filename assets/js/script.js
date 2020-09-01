@@ -15,10 +15,10 @@ $(document).ready(function () {
   $("#hikeButton").on("click", function (event) {
     // Store all input data in an object:
     userInputs = {
-      // city: "Bend",
-      // state: "Oregon",
-      city: $("#startLocation").val().trim(),
-      state: $("#state").val(),
+      city: "Bend",
+      state: "Oregon",
+      // city: $("#startLocation").val().trim(),
+      // state: $("#state").val(),
       minDistance: $("#hikeMin").val().trim(),
       maxDistance: $("#hikeMax").val().trim(),
       minElevation: $("#elevationMin").val().trim(),
@@ -491,6 +491,7 @@ function forecast(lat, lon) {
   });
 }
 
+// Display Date from Epoch Time
 function unixTimestamp(t) {
   var date = new Date(t * 1000);
   var months_arr = [
@@ -515,6 +516,7 @@ function unixTimestamp(t) {
   return dateDisplay;
 }
 
+// Get Hour and Minute Time from Epoch Time
 function unixTimeSun(s) {
   // TimeStamp for sunrise and sunset
   var date = new Date(s * 1000);
@@ -527,6 +529,7 @@ function unixTimeSun(s) {
   return timeStamp;
 }
 
+// Hiking API
 function hikingAPI(lat, lon, maxDistance = 30, maxResults = 15) {
   const authKey = "200881533-cbba50330892ef7f2dd269f567c7d3dd";
   let queryURL =
@@ -564,30 +567,6 @@ function hikingAPI(lat, lon, maxDistance = 30, maxResults = 15) {
         url: response.trails[i].url
       };
 
-      // Display list of 10 trails nearby w/ info
-
-      // var newHike = $("<li>")
-      //   .attr("id", "trail-number-" + i)
-      //   .text(trailInfo.name);
-      // var hikeSummary = $("<p>").text(trailInfo.summary);
-      // var hikeLength = $("<p>").text("Length: " + trailInfo.length + " miles");
-      // var hikeElevation = $("<p>").text(
-      //   "Elevation Gain: " + trailInfo.elevation + " feet"
-      // );
-      // var hikeDifficulty = $("<p>").text("Difficulty: " + trailInfo.difficulty);
-      // let hikePic = $("<img>").attr({
-      //   src: trailInfo.picture,
-      //   id: "trail-picture"
-      // });
-
-      // // Append
-      // $("#hikingList").append(newHike);
-      // newHike.append(hikeSummary, hikeLength, hikeElevation, hikeDifficulty);
-
-      // if (trailInfo.picture != "") {
-      //   newHike.append(hikePic);
-      // }
-
       trails.push(trailInfo);
     }
     hikingTrails(sortHikes(trails, userInputs, weatherInfo));
@@ -596,6 +575,7 @@ function hikingAPI(lat, lon, maxDistance = 30, maxResults = 15) {
   });
 }
 
+// Map API, create the map and hike markers
 function maparea(lat, lon, trails) {
   mapboxgl.accessToken =
     "pk.eyJ1Ijoia3BlZ2VkZXIiLCJhIjoiY2tlNXk3ZHJzMTdodjJ1dWxlZ2VrNTA5MCJ9.aHGcdq3jxUrUvysKk66J3Q";
@@ -622,6 +602,9 @@ function maparea(lat, lon, trails) {
       .addTo(map);
   }
 }
+
+// Direction API
+// function directionAPI(trails, user)
 
 // Sort output based on user input
 function sortHikes(trails, user, weather) {
@@ -715,15 +698,33 @@ function hikingTrails(trails) {
       class: "trail-picture"
     });
 
+    let directionModal = $("<button>")
+      .addClass("w3-button w3-black direction")
+      .attr({ id: "hikeDirection-" + i, value: i })
+      .text("Get Directions to Hike");
+
     // Append
     newHike.append(hikeName);
     $("#hikingList").append(newHike);
-    newHike.append(hikeSummary, hikeLength, hikeElevation, hikeDifficulty);
+    newHike.append(
+      hikeSummary,
+      hikeLength,
+      hikeElevation,
+      hikeDifficulty,
+      directionModal
+    );
 
     if (trails[i].picture != "") {
       $("#hikingList").append(hikePic);
     }
   }
+  // $(".direction").on("click", function (event) {
+  //   let modal = $("<div>").addClass("w3-modal")
+  //   let modalContent = $("<div>").addClass()
+
+  //   let index = $(this).val();
+  //   console.log(trails[index]);
+  // });
 }
 
 // scroll button
@@ -737,7 +738,7 @@ window.onscroll = function () {
 };
 
 function scrollFunction() {
-  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+  if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
     mybutton.style.display = "block";
   } else {
     mybutton.style.display = "none";

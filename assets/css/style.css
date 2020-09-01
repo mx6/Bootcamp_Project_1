@@ -82,7 +82,7 @@ p {
 
 #mapData {
   font-size: 20px;
-  margin-left: 40px;
+  /* margin-left: 40px; */
 }
 
 #map {
@@ -184,4 +184,27 @@ li {
   float: left;
   width: 150px;
   margin: 15px;
+}
+
+#difficultyModal {
+  z-index: 4;
+}
+
+.w3-modal-content {
+  padding: 15px;
+  width: 200px;
+}
+
+.w3-modal {
+  padding-top: 200px;
+}
+
+.filter {
+  width: 200px;
+  margin-bottom: 1.2rem;
+  text-align: center;
+}
+
+#state {
+  margin-bottom: 1.2rem;
 }
