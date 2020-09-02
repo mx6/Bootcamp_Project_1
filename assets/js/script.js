@@ -767,6 +767,7 @@ function init() {
 
 // Direction API
 function directionAPI() {
+  $("#turn-by-turn").empty();
   const authKEY = "hVo9dYzXvu21iSyKZbnJiYJOdbtvRCDN";
   let startLoc = $("#startLocation").val();
   let endLat = hikeDestination.latitude;
@@ -781,50 +782,84 @@ function directionAPI() {
     "," +
     endLon;
 
-  console.log(mapquestURL);
+  // console.log(mapquestURL);
   $.ajax({
     url: mapquestURL,
     method: "GET"
   }).then(function (response) {
+    // Clear page
+    if ($("#totalDistance").text() != null) {
+      $("#tripInfo").empty();
+    }
+
+    // Variable to get to turns
     let maneuver = response.route.legs[0].maneuvers;
-    let totalDis = $("<div>").text(
-      "Total Distance: " + response.route.distance
+
+    // Populate page with trip info
+    let tripInfo = $("<div>").attr("id", "tripInfo").text("Trip Information");
+    let totalDis = $("<p>").text("Total Distance: " + response.route.distance);
+    let tripTime = $("<p>").text(
+      "Estimate Trip Time: " +
+        new Date(response.route.realTime * 1000).toISOString().substr(11, 8)
     );
-    let turnType = {
-      0: "straight",
-      1: "slight right",
-      2: "right",
-      3: "sharp right",
-      4: "reverse",
-      5: "sharp left",
-      6: "left",
-      7: "slight left",
-      8: "right u-turn",
-      9: "left u-turn",
-      10: "right merge",
-      11: "left merge",
-      12: "right on ramp",
-      13: "left on ramp",
-      14: "right off ramp",
-      15: "left off ramp",
-      16: "right fork",
-      17: "left fork",
-      18: "straight fork"
-    };
+    let mapDirection = $("<img>").attr({
+      src:
+        "https://www.mapquestapi.com/staticmap/v5/map?start=" +
+        response.route.locations[0].latLng.lat +
+        "," +
+        response.route.locations[0].latLng.lng +
+        "&end=" +
+        response.route.locations[1].latLng.lat +
+        "," +
+        response.route.locations[1].latLng.lng +
+        "&size=@2x&key=" +
+        authKEY
+    });
+
+    // Create turn by turn directions
     for (let i = 0; i < maneuver.length; i++) {
       let turnDirection = $("<li>").text(maneuver[i].narrative);
-      let travelDistance = $("<p>").text(
-        "Travel: " + maneuver[i].distance.toFixed(1) + " miles"
-      );
+      let travelDistance = $("<p>");
+      if (maneuver[i].distance > 0) {
+        travelDistance.text(
+          "Travel: " + maneuver[i].distance.toFixed(1) + " miles"
+        );
+      } else {
+        travelDistance.text("You Have Arrived!!!");
+      }
 
       turnDirection.append(travelDistance);
       $("#turn-by-turn").append(turnDirection);
       // console.log(turnDirection);
     }
-
-    $(".w3-container").prepend(totalDis);
+    tripInfo.append(totalDis, tripTime, mapDirection);
+    $(".w3-container").prepend(tripInfo);
   });
 }
+
+// Direction for hike button
 $(document).ready(function () {
   $("#hikeDirection").on("click", directionAPI);
 });
+
+// let turnType = {
+//       0: "straight",
+//       1: "slight right",
+//       2: "right",
+//       3: "sharp right",
+//       4: "reverse",
+//       5: "sharp left",
+//       6: "left",
+//       7: "slight left",
+//       8: "right u-turn",
+//       9: "left u-turn",
+//       10: "right merge",
+//       11: "left merge",
+//       12: "right on ramp",
+//       13: "left on ramp",
+//       14: "right off ramp",
+//       15: "left off ramp",
+//       16: "right fork",
+//       17: "left fork",
+//       18: "straight fork"
+//     };
