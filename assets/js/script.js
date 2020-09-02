@@ -804,7 +804,7 @@ function directionAPI() {
     );
     let mapDirection = $("<img>").attr({
       src:
-        "https://www.mapquestapi.com/staticmap/v5/map?start=" +
+        "http://www.mapquestapi.com/staticmap/v5/map?start=" +
         response.route.locations[0].latLng.lat +
         "," +
         response.route.locations[0].latLng.lng +
