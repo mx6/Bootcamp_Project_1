@@ -781,6 +781,7 @@ function directionAPI() {
     "," +
     endLon;
 
+  console.log(mapquestURL);
   $.ajax({
     url: mapquestURL,
     method: "GET"
@@ -789,9 +790,39 @@ function directionAPI() {
     let totalDis = $("<div>").text(
       "Total Distance: " + response.route.distance
     );
-    console.log(response.route.legs[0].maneuvers.length);
+    let turnType = {
+      0: "straight",
+      1: "slight right",
+      2: "right",
+      3: "sharp right",
+      4: "reverse",
+      5: "sharp left",
+      6: "left",
+      7: "slight left",
+      8: "right u-turn",
+      9: "left u-turn",
+      10: "right merge",
+      11: "left merge",
+      12: "right on ramp",
+      13: "left on ramp",
+      14: "right off ramp",
+      15: "left off ramp",
+      16: "right fork",
+      17: "left fork",
+      18: "straight fork"
+    };
+    for (let i = 0; i < maneuver.length; i++) {
+      let turnDirection = $("<li>").text(maneuver[i].narrative);
+      let travelDistance = $("<p>").text(
+        "Travel: " + maneuver[i].distance.toFixed(1) + " miles"
+      );
 
-    $(".w3-container").append(totalDis);
+      turnDirection.append(travelDistance);
+      $("#turn-by-turn").append(turnDirection);
+      // console.log(turnDirection);
+    }
+
+    $(".w3-container").prepend(totalDis);
   });
 }
 $(document).ready(function () {

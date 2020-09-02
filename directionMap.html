@@ -57,8 +57,18 @@
       <button class="w3-button w3-black filter" id="hikeDirection">
         Let's Go
       </button>
-      <div class="w3-container"></div>
+      <div class="w3-container">
+        <ol id="turn-by-turn"></ol>
+      </div>
     </div>
+    <button
+      onclick="topFunction()"
+      class="w3-button w3-amber w3-hover-yellow w3-round-large"
+      id="myBtn"
+      title="to-the-map"
+    >
+      <i class="fas fa-chevron-circle-up fa-2x"></i>
+    </button>
     <script>
       // Get the Sidebar
       var mySidebar = document.getElementById("mySidebar");
