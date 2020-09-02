@@ -773,7 +773,7 @@ function directionAPI() {
   let endLat = hikeDestination.latitude;
   let endLon = hikeDestination.longitude;
   let mapquestURL =
-    "http://www.mapquestapi.com/directions/v2/route?key=" +
+    "https://www.mapquestapi.com/directions/v2/route?key=" +
     authKEY +
     "&from=" +
     startLoc +
@@ -804,7 +804,7 @@ function directionAPI() {
     );
     let mapDirection = $("<img>").attr({
       src:
-        "http://www.mapquestapi.com/staticmap/v5/map?start=" +
+        "https://www.mapquestapi.com/staticmap/v5/map?start=" +
         response.route.locations[0].latLng.lat +
         "," +
         response.route.locations[0].latLng.lng +
