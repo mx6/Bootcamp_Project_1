@@ -235,11 +235,16 @@ li {
   width: 300px !important;
 }
 
-#tripInfo {
+#tripInfo, .directionItems {
   font-size: 18px;
   margin-top: 20px;
   text-shadow: 1px 1px 5px black;
   color: white;
+}
+
+li.directionItems {
+  line-height: 10px;
+  padding-top: 20px;
 }
 
 .mapQuestImg {

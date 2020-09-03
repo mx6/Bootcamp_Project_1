@@ -827,8 +827,8 @@ function directionAPI() {
 
     // Create turn by turn directions
     for (let i = 0; i < maneuver.length; i++) {
-      let turnDirection = $("<li>").text(maneuver[i].narrative);
-      let travelDistance = $("<p>");
+      let turnDirection = $("<li>").text(maneuver[i].narrative).addClass("directionItems");
+      let travelDistance = $("<p>").addClass("directionItems");
       if (maneuver[i].distance > 0) {
         travelDistance.text(
           "Travel: " + maneuver[i].distance.toFixed(1) + " miles"
