@@ -30,7 +30,6 @@ $(document).ready(function () {
       maxTemp: $("#tempMax").val().trim()
       // weatherConditions: $().val(),
     };
-    // console.log(userInputs.difficulty);
 
     // Checking if a city and state were entered
     if (userInputs.city == "") {
@@ -76,7 +75,7 @@ function weatherAPI(city, state) {
     url: queryURL,
     method: "GET"
   }).then(function (response) {
-    console.log(response); // JSON return for Oregon, USA
+    // console.log(response); // JSON return for Oregon, USA
 
     // Weather Data we want:
     // Lat/lon coordinates
@@ -315,14 +314,11 @@ function forecast(lat, lon) {
     "&lon=" +
     lon +
     "&exclude=hourly,minutely&appid=e68a6c498567148d8870611b117efac1&units=imperial";
-  //https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude=daily&appid=e68a6c498567148d8870611b117efac1&units=imperial
 
   $.ajax({
     url: queryURL,
     method: "GET"
   }).then(function (response) {
-    // console.log(response);
-
     // Reset elements
     $(".forecast").empty();
     $("#1").css("background-color", "rgba(255, 255, 255, 0.3)");
@@ -336,7 +332,7 @@ function forecast(lat, lon) {
     $(".weatherCondition input:checked").each(function () {
       selectedConditions.push($(this).data().type);
     });
-    console.log(selectedConditions); //display array of checked boxes for the weather
+    // console.log(selectedConditions); //display array of checked boxes for the weather
     let dailyIcon = []; // array of weather icon for each forecasted day
 
     // Get data for 5-day forecast
@@ -347,7 +343,7 @@ function forecast(lat, lon) {
       let sunrise = response.daily[i].sunrise;
       let sunset = response.daily[i].sunset;
       let icon = response.daily[i].weather[0].icon;
-      let iconURL = "http://openweathermap.org/img/wn/" + icon + "@2x.png";
+      let iconURL = "https://openweathermap.org/img/wn/" + icon + "@2x.png";
 
       // Switch statement to display the 5-day forecast
       switch (i) {
@@ -469,7 +465,7 @@ function forecast(lat, lon) {
         // if ( $(".forecast").id() === i) {
         //   $(this).css("background-color", "yellow");
         // }
-        console.log("highlight this day: " + i);
+        // console.log("highlight this day: " + i);
 
         switch (i) {
           case 0:
@@ -554,6 +550,36 @@ function hikingAPI(lat, lon, maxDistance = 30, maxResults = 15) {
 
     $("#hikingList").empty(); // clear screen for new info
     trails = []; // clear trail list
+
+    // Making input into a value
+    let minDist = parseFloat(userInputs.minDistance);
+    let maxDist = parseFloat(userInputs.maxDistance);
+    let minElev = parseFloat(userInputs.minElevation);
+    let maxElev = parseFloat(userInputs.maxElevation);
+    let minTemp = parseFloat(userInputs.minTemp);
+    let maxTemp = parseFloat(userInputs.maxTemp);
+    let temp = weatherInfo.minTemp;
+
+    // Checking if input is a number
+    if (isNaN(minDist) === true) {
+      minDist = 0;
+    }
+    if (isNaN(maxDist) === true) {
+      maxDist = 200;
+    }
+    if (isNaN(maxElev) === true) {
+      maxElev = 20000;
+    }
+    if (isNaN(minElev) === true) {
+      minElev = 0;
+    }
+    if (isNaN(minTemp) === true) {
+      minTemp = 0;
+    }
+    if (isNaN(maxTemp) === true) {
+      maxTemp = 125;
+    }
+
     // Data from API
     for (var i = 0; i < response.trails.length; i++) {
       // Trail info objects
@@ -569,11 +595,20 @@ function hikingAPI(lat, lon, maxDistance = 30, maxResults = 15) {
         url: response.trails[i].url
       };
 
-      trails.push(trailInfo);
+      if (
+        trailInfo.length > minDist &&
+        trailInfo.length < maxDist &&
+        minElev < trailInfo.elevation &&
+        trailInfo.elevation < maxElev &&
+        minTemp < temp &&
+        temp < maxTemp
+      ) {
+        trails.push(trailInfo);
+      }
     }
-    hikingTrails(sortHikes(trails, userInputs, weatherInfo));
+    hikingTrails(sortHikes(trails));
 
-    maparea(lat, lon, sortHikes(trails, userInputs, weatherInfo));
+    maparea(lat, lon, sortHikes(trails));
   });
 }
 
@@ -606,38 +641,9 @@ function maparea(lat, lon, trails) {
 }
 
 // Sort output based on user input
-function sortHikes(trails, user, weather) {
-  // // Making input into a value
-  let minDist = parseFloat(user.minDistance);
-  let maxDist = parseFloat(user.maxDistance);
-  let minElev = parseFloat(user.minElevation);
-  let maxElev = parseFloat(user.maxElevation);
-  let minTemp = parseFloat(user.minTemp);
-  let maxTemp = parseFloat(user.maxTemp);
-  let temp = weather.minTemp;
-
-  // Checking if input is a number
-  if (isNaN(minDist) === true) {
-    minDist = 0;
-  }
-  if (isNaN(maxDist) === true) {
-    maxDist = 200;
-  }
-  if (isNaN(maxElev) === true) {
-    maxElev = 20000;
-  }
-  if (isNaN(minElev) === true) {
-    minElev = 0;
-  }
-  if (isNaN(minTemp) === true) {
-    minTemp = 0;
-  }
-  if (isNaN(maxTemp) === true) {
-    maxTemp = 125;
-  }
-
+function sortHikes(trails) {
   // Filter out trails based on user input
-  trails = trails.filter(function (thisTrail) {
+  return trails.filter(function (thisTrail) {
     if ($("#green").prop("checked") && thisTrail.difficulty == "green") {
       return true;
     } else if (
@@ -657,19 +663,6 @@ function sortHikes(trails, user, weather) {
     } else if (
       $("#dblack").prop("checked") &&
       thisTrail.difficulty == "dblack"
-    ) {
-      return true;
-    }
-  });
-
-  return trails.filter(function (thisTrail) {
-    if (
-      thisTrail.length > minDist &&
-      thisTrail.length < maxDist &&
-      minElev < thisTrail.elevation &&
-      thisTrail.elevation < maxElev &&
-      minTemp < temp &&
-      temp < maxTemp
     ) {
       return true;
     }
@@ -725,7 +718,8 @@ function hikingTrails(trails) {
       latitude: trails[$(this).val()].latitude,
       longitude: trails[$(this).val()].longitude
     };
-    // console.log(index);
+
+    // Store in hike info for directions
     localStorage.setItem("destination", JSON.stringify(index));
     location.href = "directionMap.html";
   });
@@ -767,7 +761,13 @@ function init() {
 
 // Direction API
 function directionAPI() {
+  // Clear page
   $("#turn-by-turn").empty();
+
+  if ($("#totalDistance").text() != null) {
+    $("#tripInfo").empty();
+  }
+
   const authKEY = "hVo9dYzXvu21iSyKZbnJiYJOdbtvRCDN";
   let startLoc = $("#startLocation").val();
   let endLat = hikeDestination.latitude;
@@ -787,11 +787,6 @@ function directionAPI() {
     url: mapquestURL,
     method: "GET"
   }).then(function (response) {
-    // Clear page
-    if ($("#totalDistance").text() != null) {
-      $("#tripInfo").empty();
-    }
-
     // Variable to get to turns
     let maneuver = response.route.legs[0].maneuvers;
 
