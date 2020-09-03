@@ -17,10 +17,8 @@ body {
   background-image: url(../images/map_bkgrnd_grey.gif);
 }
 
-#title {
-  text-align: center;
-  font-weight: 800;
-  font-size: 50px;
+#mapData {
+  color: white;
 }
 
 p {
@@ -74,27 +72,36 @@ p {
   outline: none;
 }
 
-#mapTitle {
+#mapTitle, #directionsTitle {
   color: white;
-  font-size: 36px;
-  margin-top: 30px;
+  font-size: 50px;
+  margin-top: 20px;
+  text-shadow: 1px 1px 5px black;
 }
 
 #mapData {
   font-size: 20px;
+  text-shadow: 1px 1px 5px black;
   /* margin-left: 40px; */
 }
 
 #map {
   width: 95%;
   height: 450px;
+  margin-top: 40px;
+  margin-bottom: 80px;
+  border-radius: 8px;
   /* margin-left: 50px; */
   /* display: block;  */
 }
 
 #weatherData {
   margin-left: 50px;
+  margin-right: 50px;
   font-size: 18px;
+  text-shadow: 1px 1px 5px black;
+  margin-bottom: 30px;
+  float: left;
 }
 
 .weatherIcon {
@@ -110,11 +117,13 @@ p {
 .forecast {
   float: left;
   text-align: center;
-  margin: 10px;
+  margin: 5px;
   padding: 5px;
   /* margin-left: 10px; */
   font-size: 14px;
-  background-color: rgba(255, 255, 255, 0.3);
+  /* background-color: rgba(255, 255, 255, 0.3); */
+  background-color: rgba(255, 255, 255, 0.719);
+  border-radius: 8px;
 }
 
 .forecastDate {
@@ -123,22 +132,38 @@ p {
 
 #hikingInfo {
   clear: both;
-  /* width: 75%; */
-  font-size: 20px;
-  /* margin: 200px;  */
-  /* border: 200px;  */
-  /* padding: 200px;  */
+  font-size: 18px;
+  margin-top: 300px;
+  text-shadow: 1px 1px 5px black;
+  color: white;
 }
 
-/* #hikingList {
-  /* margin-left: 50px; */
-/* padding-left: 100px;  */
-/* margin-left: 100px;  */
+li.hike {
+  padding-top: 100px;
+}
 
-/* #trail-picture {
-  width: 150px;
-  height: 150px;
-  /* float: right; */
+.hikeName {
+  font-size: 30px;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.hikeFacts {
+  line-height: 8px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  float: clear;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* .trail-picture {
+    width: 600px;
+    height: 150px;
+    float: right;
+} */
 
 #myBtn {
   display: none;
@@ -167,7 +192,6 @@ p {
 
 li {
   margin: 15px;
-  font-weight: 800;
   clear: both;
 }
 
@@ -175,10 +199,6 @@ li {
   position: relative !important;
 }
 
-.hike {
-  float: left;
-  width: 75%;
-}
 
 .trail-picture {
   float: left;
@@ -203,12 +223,29 @@ li {
   width: 200px;
   margin-bottom: 1.2rem;
   text-align: center;
+  border-radius: 4px;
 }
 
 #state {
   margin-bottom: 1.2rem;
+  border-radius: 4px;
 }
 
 #startLocation {
   width: 300px !important;
+}
+
+#tripInfo {
+  font-size: 18px;
+  margin-top: 20px;
+  text-shadow: 1px 1px 5px black;
+  color: white;
+}
+
+.mapQuestImg {
+  margin: 10px auto 100px auto;
+  display: block;
+  width: 50%;
+  height: auto;
+  border-radius: 4px;
 }

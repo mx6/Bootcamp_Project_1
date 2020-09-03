@@ -323,13 +323,13 @@ function forecast(lat, lon) {
   }).then(function (response) {
     // console.log(response);
 
-    // Reset elements
+    // Reset elements+
     $(".forecast").empty();
-    $("#1").css("background-color", "rgba(255, 255, 255, 0.3)");
-    $("#2").css("background-color", "rgba(255, 255, 255, 0.3)");
-    $("#3").css("background-color", "rgba(255, 255, 255, 0.3)");
-    $("#4").css("background-color", "rgba(255, 255, 255, 0.3)");
-    $("#5").css("background-color", "rgba(255, 255, 255, 0.3)");
+    $("#1").css("background-color", "rgba(255, 255, 255, 0.719)");
+    $("#2").css("background-color", "rgba(255, 255, 255, 0.719)");
+    $("#3").css("background-color", "rgba(255, 255, 255, 0.719)");
+    $("#4").css("background-color", "rgba(255, 255, 255, 0.719)");
+    $("#5").css("background-color", "rgba(255, 255, 255, 0.719)");
 
     // See which weather conditons were selected by the user
     let selectedConditions = [];
@@ -683,15 +683,19 @@ function hikingTrails(trails) {
     let hikeName = $("<a>")
       .attr({
         href: trails[i].url,
-        target: "_blank"
+        target: "_blank",
+        class: "hikeName",
       })
-      .text(trails[i].name);
+      .text(trails[i].name)
+      .css("margin-top", "100px");
+
+    let hikeFacts = $("<ul>").attr({class: "hikeFacts"});
     let hikeSummary = $("<p>").text(trails[i].summary);
-    let hikeLength = $("<p>").text("Length: " + trails[i].length + " miles");
-    let hikeElevation = $("<p>").text(
+    let hikeLength = $("<li>").text("Length: " + trails[i].length + " miles");
+    let hikeElevation = $("<li>").text(
       "Elevation Gain: " + trails[i].elevation + " feet"
     );
-    let hikeDifficulty = $("<p>").text("Difficulty: " + trails[i].difficulty);
+    let hikeDifficulty = $("<li>").text("Difficulty: " + trails[i].difficulty);
     let hikePic = $("<img>").attr({
       src: trails[i].picture,
       class: "trail-picture"
@@ -700,17 +704,21 @@ function hikingTrails(trails) {
     let directionModal = $("<button>")
       .addClass("w3-button w3-black direction")
       .attr({ id: "hikeDirection-" + i, value: i })
-      .text("Get Directions to Hike");
+      .text("Get Directions to Hike")
+      .css({"border-radius":"4px", "float":"right"});
 
     // Append
-    newHike.append(hikeName);
     $("#hikingList").append(newHike);
     newHike.append(
+      hikeName,
+      directionModal,
       hikeSummary,
+      hikeFacts
+      );
+    hikeFacts.append(
       hikeLength,
       hikeElevation,
       hikeDifficulty,
-      directionModal
     );
 
     if (trails[i].picture != "") {
@@ -796,13 +804,14 @@ function directionAPI() {
     let maneuver = response.route.legs[0].maneuvers;
 
     // Populate page with trip info
-    let tripInfo = $("<div>").attr("id", "tripInfo").text("Trip Information");
+    // let tripInfo = $("<div>").attr("id", "tripInfo").text("Trip Information");
+    let tripInfo = $("<div>").attr("id", "tripInfo").append(  $("<h2>").text("Trip Information")  );
     let totalDis = $("<p>").text("Total Distance: " + response.route.distance);
     let tripTime = $("<p>").text(
       "Estimate Trip Time: " +
         new Date(response.route.realTime * 1000).toISOString().substr(11, 8)
     );
-    let mapDirection = $("<img>").attr({
+    let mapDirection = $("<img>").addClass("mapQuestImg").attr({
       src:
         "https://www.mapquestapi.com/staticmap/v5/map?start=" +
         response.route.locations[0].latLng.lat +
