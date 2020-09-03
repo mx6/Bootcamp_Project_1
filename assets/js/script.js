@@ -17,10 +17,10 @@ $(document).ready(function () {
   $("#hikeButton").on("click", function (event) {
     // Store all input data in an object:
     userInputs = {
-      city: "Bend",
-      state: "Oregon",
-      // city: $("#city").val().trim(),
-      // state: $("#state").val(),
+      // city: "Bend",
+      // state: "Oregon",
+      city: $("#city").val().trim(),
+      state: $("#state").val(),
       minDistance: $("#hikeMin").val().trim(),
       maxDistance: $("#hikeMax").val().trim(),
       minElevation: $("#elevationMin").val().trim(),
@@ -319,7 +319,6 @@ function forecast(lat, lon) {
     url: queryURL,
     method: "GET"
   }).then(function (response) {
-
     // Reset elements
     $(".forecast").empty();
     $("#1").css("background-color", "rgba(255, 255, 255, 0.719)");
@@ -678,12 +677,12 @@ function hikingTrails(trails) {
       .attr({
         href: trails[i].url,
         target: "_blank",
-        class: "hikeName",
+        class: "hikeName"
       })
       .text(trails[i].name)
       .css("margin-top", "100px");
 
-    let hikeFacts = $("<ul>").attr({class: "hikeFacts"});
+    let hikeFacts = $("<ul>").attr({ class: "hikeFacts" });
     let hikeSummary = $("<p>").text(trails[i].summary);
     let hikeLength = $("<li>").text("Length: " + trails[i].length + " miles");
     let hikeElevation = $("<li>").text(
@@ -699,21 +698,12 @@ function hikingTrails(trails) {
       .addClass("w3-button w3-black direction")
       .attr({ id: "hikeDirection-" + i, value: i })
       .text("Get Directions to Hike")
-      .css({"border-radius":"4px", "float":"right"});
+      .css({ "border-radius": "4px", float: "right" });
 
     // Append
     $("#hikingList").append(newHike);
-    newHike.append(
-      hikeName,
-      directionModal,
-      hikeSummary,
-      hikeFacts
-      );
-    hikeFacts.append(
-      hikeLength,
-      hikeElevation,
-      hikeDifficulty,
-    );
+    newHike.append(hikeName, directionModal, hikeSummary, hikeFacts);
+    hikeFacts.append(hikeLength, hikeElevation, hikeDifficulty);
 
     if (trails[i].picture != "") {
       $("#hikingList").append(hikePic);
@@ -801,29 +791,35 @@ function directionAPI() {
 
     // Populate page with trip info
     // let tripInfo = $("<div>").attr("id", "tripInfo").text("Trip Information");
-    let tripInfo = $("<div>").attr("id", "tripInfo").append(  $("<h2>").text("Trip Information")  );
+    let tripInfo = $("<div>")
+      .attr("id", "tripInfo")
+      .append($("<h2>").text("Trip Information"));
     let totalDis = $("<p>").text("Total Distance: " + response.route.distance);
     let tripTime = $("<p>").text(
       "Estimate Trip Time: " +
         new Date(response.route.realTime * 1000).toISOString().substr(11, 8)
     );
-    let mapDirection = $("<img>").addClass("mapQuestImg").attr({
-      src:
-        "https://www.mapquestapi.com/staticmap/v5/map?start=" +
-        response.route.locations[0].latLng.lat +
-        "," +
-        response.route.locations[0].latLng.lng +
-        "&end=" +
-        response.route.locations[1].latLng.lat +
-        "," +
-        response.route.locations[1].latLng.lng +
-        "&size=@2x&key=" +
-        authKEY
-    });
+    let mapDirection = $("<img>")
+      .addClass("mapQuestImg")
+      .attr({
+        src:
+          "https://www.mapquestapi.com/staticmap/v5/map?start=" +
+          response.route.locations[0].latLng.lat +
+          "," +
+          response.route.locations[0].latLng.lng +
+          "&end=" +
+          response.route.locations[1].latLng.lat +
+          "," +
+          response.route.locations[1].latLng.lng +
+          "&size=@2x&key=" +
+          authKEY
+      });
 
     // Create turn by turn directions
     for (let i = 0; i < maneuver.length; i++) {
-      let turnDirection = $("<li>").text(maneuver[i].narrative).addClass("directionItems");
+      let turnDirection = $("<li>")
+        .text(maneuver[i].narrative)
+        .addClass("directionItems");
       let travelDistance = $("<p>").addClass("directionItems");
       if (maneuver[i].distance > 0) {
         travelDistance.text(
@@ -844,6 +840,7 @@ function directionAPI() {
 
 // Direction for hike button
 $(document).ready(function () {
+  $("#directionsTitle").text("Directions to " + hikeDestination.name);
   $("#hikeDirection").on("click", directionAPI);
 });
 
