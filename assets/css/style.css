@@ -38,11 +38,25 @@ p {
 
 .w3-sidebar {
   top: 0;
+  text-align: center;
+}
+
+.w3-bar-block {
+  margin-top: 40px;
 }
 
 .w3-main {
   padding-left: 30px;
   padding-bottom: 50px;
+}
+
+.closeMenu {
+  border-radius: 4px;
+  text-align: center;
+}
+
+i.xclose {
+  padding-left: 20px;
 }
 
 .w3-check {
