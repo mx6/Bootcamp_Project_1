@@ -1,5 +1,11 @@
 # Bootcamp_Project_1
 
+**_Links_**
+
+Deployed URL: https://mx6.github.io/Bootcamp_Project_1/
+
+Github Code URL: https://github.com/mx6/Bootcamp_Project_1 
+
 # AirWalk
 
 An app in which user can choose critera and find corresponding hikes in given area.
@@ -71,8 +77,4 @@ In future versions we hope to add more map information showing directions on how
 
 We'd also add the ability for users to leave and view reviews of their hikes. We'd like to make the app more interactive so users can connect it to their health apps, connect to their friends via the app, view the average time to finish the hike, average calories burned per hike, whether the hike has public facilities and if dogs or bikes are allowed on the path. Our goal is to be a one stop app for users to find all their information for their hikes. 
 
-**_Links_**
 
-Deployed URL: https://mx6.github.io/Bootcamp_Project_1/
-
-Github Code URL: https://github.com/mx6/Bootcamp_Project_1 
