@@ -257,14 +257,15 @@ li {
 }
 
 li.directionItems {
-  line-height: 10px;
+  line-height: 18px;
   padding-top: 20px;
+  padding-left: 20px;
 }
 
 .mapQuestImg {
   margin: 10px auto 100px auto;
   display: block;
-  width: 50%;
+  width: 60%;
   height: auto;
   border-radius: 4px;
 }
