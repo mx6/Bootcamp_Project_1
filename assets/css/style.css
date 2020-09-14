@@ -86,7 +86,8 @@ i.xclose {
   outline: none;
 }
 
-#mapTitle, #directionsTitle {
+#mapTitle,
+#directionsTitle {
   color: white;
   font-size: 50px;
   margin-top: 20px;
@@ -212,7 +213,6 @@ li {
   position: relative !important;
 }
 
-
 .trail-picture {
   float: left;
   width: 150px;
@@ -248,7 +248,8 @@ li {
   width: 300px !important;
 }
 
-#tripInfo, .directionItems {
+#tripInfo,
+.directionItems {
   font-size: 18px;
   margin-top: 20px;
   text-shadow: 1px 1px 5px black;
@@ -267,4 +268,10 @@ li.directionItems {
   width: 60%;
   height: auto;
   border-radius: 4px;
+}
+
+.turnIcon {
+  float: right;
+  margin: 5px;
+  width: 40px;
 }

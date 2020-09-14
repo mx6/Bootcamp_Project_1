@@ -821,6 +821,9 @@ function directionAPI() {
         .text(maneuver[i].narrative)
         .addClass("directionItems");
       let travelDistance = $("<p>").addClass("directionItems");
+      let turnIcon = $("<img>")
+        .addClass("turnIcon")
+        .attr("src", maneuver[i].iconUrl);
       if (maneuver[i].distance > 0) {
         travelDistance.text(
           "Travel: " + maneuver[i].distance.toFixed(1) + " miles"
@@ -829,9 +832,8 @@ function directionAPI() {
         travelDistance.text("You Have Arrived!!!");
       }
 
-      turnDirection.append(travelDistance);
+      turnDirection.append(turnIcon, travelDistance);
       $("#turn-by-turn").append(turnDirection);
-      // console.log(turnDirection);
     }
     tripInfo.append(totalDis, tripTime, mapDirection);
     $(".w3-container").prepend(tripInfo);
@@ -843,25 +845,3 @@ $(document).ready(function () {
   $("#directionsTitle").text("Directions to " + hikeDestination.name);
   $("#hikeDirection").on("click", directionAPI);
 });
-
-// let turnType = {
-//       0: "straight",
-//       1: "slight right",
-//       2: "right",
-//       3: "sharp right",
-//       4: "reverse",
-//       5: "sharp left",
-//       6: "left",
-//       7: "slight left",
-//       8: "right u-turn",
-//       9: "left u-turn",
-//       10: "right merge",
-//       11: "left merge",
-//       12: "right on ramp",
-//       13: "left on ramp",
-//       14: "right off ramp",
-//       15: "left off ramp",
-//       16: "right fork",
-//       17: "left fork",
-//       18: "straight fork"
-//     };
