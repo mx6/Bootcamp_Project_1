@@ -790,7 +790,6 @@ function directionAPI() {
     let maneuver = response.route.legs[0].maneuvers;
 
     // Populate page with trip info
-    // let tripInfo = $("<div>").attr("id", "tripInfo").text("Trip Information");
     let tripInfo = $("<div>")
       .attr("id", "tripInfo")
       .append($("<h2>").text("Trip Information"));
